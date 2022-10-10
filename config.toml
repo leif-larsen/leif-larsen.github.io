@@ -1,0 +1,36 @@
+baseURL = "https://www.leiflarsen.org/"
+languageCode = "en-us"
+title = "Leif Larsen"
+theme = "m10c"
+
+[menu]
+    [[menu.main]]
+        identifier = "1home"
+        name = "Home"
+        url = "/"
+    [[menu.main]]
+        identifier = "about"
+        name = "About"
+        url = "/about/"
+
+[params]
+    author  = "Leif"
+    description = "My journey in tech"
+    avatar = "/images/leif_larsen.jpg"
+    menu_item_separator = "-"
+    [[params.social]]
+        icon = "github"
+        name = "My Github"
+        url = "https://github.com/leif-larsen"
+    [[params.social]]
+        icon = "linkedin"
+        name = "LinkedIn"
+        url = "https://www.linkedin.com/in/leifhlarsen/"
+    [[params.social]]
+        icon = "twitter"
+        name = "Twitter"
+        url = "https://twitter.com/leif_larsen"
+    [[params.social]]
+        icon = "instagram"
+        name = "Instagram"
+        url = "https://www.instagram.com/leif_larsen/"
