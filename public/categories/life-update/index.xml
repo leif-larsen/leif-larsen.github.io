@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>life-update on Leif Larsen</title>
+    <link>https://www.leiflarsen.org/categories/life-update/</link>
+    <description>Recent content in life-update on Leif Larsen</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 19 Mar 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.leiflarsen.org/categories/life-update/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>On Burning the Candle From All Sides</title>
+      <link>https://www.leiflarsen.org/posts/on-burning-the-candle-from-all-sides/</link>
+      <pubDate>Tue, 19 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.leiflarsen.org/posts/on-burning-the-candle-from-all-sides/</guid>
+      <description>At the time of writing, it&amp;rsquo;s been 2 years, 3 months and 25 days since my last blog post. Since that, I have released a book, released the follow-up version, and even a third edition. I have moved four times, including to a new city. I changed my job and joined a startup. I&amp;rsquo;ve met my significant other, and we just had our first child.
+ TLDR: Worked hard, both with full time job and side projects.</description>
+    </item>
+    
+  </channel>
+</rss>

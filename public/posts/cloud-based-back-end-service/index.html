@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>Cloud based back end service // Leif Larsen</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.68.3" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Leif" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://www.leiflarsen.org/css/main.min.0fb49e70a30412f97ddfc418e18fefef1d9fcdebe45f634dbbba768b00fe1eec.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Cloud based back end service"/>
+<meta name="twitter:description" content="When working with mobile applications (or applications in general) there is often a need to store and retrieve data. For informational apps you could simply have a local database, with all data present. However when developing apps for smart phones (and tablets) you need to consider the size of the app. You don’t want to store a lot of data, when the user might need only a subset of it. Naturally this is dependent on how much data you have to store, but for this post I’ll focus on apps that stores a greater amount of data."/>
+
+    <meta property="og:title" content="Cloud based back end service" />
+<meta property="og:description" content="When working with mobile applications (or applications in general) there is often a need to store and retrieve data. For informational apps you could simply have a local database, with all data present. However when developing apps for smart phones (and tablets) you need to consider the size of the app. You don’t want to store a lot of data, when the user might need only a subset of it. Naturally this is dependent on how much data you have to store, but for this post I’ll focus on apps that stores a greater amount of data." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.leiflarsen.org/posts/cloud-based-back-end-service/" />
+<meta property="article:published_time" content="2015-10-04T00:00:00+00:00" />
+<meta property="article:modified_time" content="2015-10-04T00:00:00+00:00" />
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://www.leiflarsen.org/"><img class="app-header-avatar" src="/images/leif_larsen.jpg" alt="Leif" /></a>
+      <span class="app-header-title">Leif Larsen</span>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/about/">About</a>
+            -
+          
+          <a class="app-header-menu-item" href="/">Home</a>
+      </nav>
+      <p>My journey in tech</p>
+      <div class="app-header-social">
+        
+          <a href="https://github.com/leif-larsen" target="_blank" rel="noreferrer noopener me">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>My Github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg>
+          </a>
+        
+          <a href="https://www.linkedin.com/in/leifhlarsen/" target="_blank" rel="noreferrer noopener me">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-linkedin">
+  <title>LinkedIn</title>
+  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle>
+</svg>
+          </a>
+        
+          <a href="https://twitter.com/leif_larsen" target="_blank" rel="noreferrer noopener me">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>Twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg>
+          </a>
+        
+          <a href="https://www.instagram.com/leif_larsen/" target="_blank" rel="noreferrer noopener me">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-instagram">
+  <title>Instagram</title>
+  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+</svg>
+          </a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Cloud based back end service</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Oct 4, 2015
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          4 min read
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <p>When working with mobile applications (or applications in general) there is often a need to store and retrieve data. For informational apps you could simply have a local database, with all data present. However when developing apps for smart phones (and tablets) you need to consider the size of the app. You don’t want to store a lot of data, when the user might need only a subset of it. Naturally this is dependent on how much data you have to store, but for this post I’ll focus on apps that stores a greater amount of data. I’ll talk a bit about storing data in the cloud, my go-to back end service (<a href="http://www.parse.com">Parse</a>) and I’ll mention some of the other, big competitors in this field.</p>
+<p>Cloud based storage has grown a lot over the last years, and more and more apps and services take advantage of the technology. One of the big advantages with cloud based storing is that data is easily available everywhere. By this I mean both in terms of location (everywhere where you can connect to the internet), and also in terms of different platforms. An app can be created for smart phones, tablets, desktop, web etc., and the data is available on all platforms. By using cross platform development you also get the added benefit of developing access to data once.</p>
+<p>One of the biggest drawbacks of cloud storage is that you don’t have the complete control over your data (unless you setup your own cloud service). This can be a problem, specially if you develop enterprise level applications, but also if you store a lot of personal data. I guess it all depends on whether or not you trust the service provider. They spend a lot of time convincing customers that they are safe, and I believe that if you use a serious provider that it is ok. Do spend some time considering this though when choosing a cloud service provider.</p>
+<p>Cloud based back end services does not only provide storage. Several offers possibilities to schedule recurring tasks, using targeted push notifications and also add app analytics. Using a cloud based service it is simple to scale if you need to. I don’t have much experience using the cloud, but I used it for my app <a href="http://www.parkergratis.no">Parker Gratis</a>, where users can add entries, and fetch data based on location. For this I used Parse, which I will also be using for my next app.</p>
+<p>Parse have three main areas they focus on, which is Core, Push and Analytics.</p>
+<p>Core is where you store and retrieve data. This is where you schedule background jobs and where you can manage your global app settings with Config.</p>
+<p>With Push you can increase user engagement (at least that’s their selling point!), by sending push notifications across devices and platforms.</p>
+<p>Analytics is a great feature, where you can track events or data points in your app in real time. This is brilliant to understand how users interact with your app, and to analyze crashes.</p>
+<p>Parse sets out to minimize the time you use for infrastructure work, and maximize the time you spend on user experience. They have SDKs for a wide variety of languages, and they have starter projects in cases where you start a new project. I have leveraged these possibilities to create cross platform applications using Xamarin with C# and .NET, and also web based application using HTML and JavaScript. Other languages include PHP, Objective-C, Swift and Java. A new SDK they recently added, which is highly relevant today, is for IoT using Embedded C. The pricing model is also fair. You have a certain limit for free, and when/if the need to upscale comes you pay for what you need, on a monthly basis.</p>
+<p><strong>Note! I have no affiliation to Parse, I just like their service.</strong></p>
+<p>There are plenty of other cloud services on the market as well. Another I have tried is <a href="http://www.azure.com">Microsoft Azure</a>. They offer many products on the side of storage and analytics. Amongst others I want to mention virtual machines, CDN (Content Delivery Network), media services and load balancing. Another big one is <a href="https://cloud.google.com/">Google Cloud Platform</a>, which also seems to have some nice features as well. The last I want to mention is <a href="https://aws.amazon.com/">Amazon Web Services</a>, which I think was quite early with cloud based services. They offer many products, and might be worth looking into.</p>
+<p>There’s a lot I haven’t covered in regards to cloud services, but I hope this can spark an interest. Possibly you are already using cloud services, in which case I would like to know more on how you use it. And please do share other providers if you know of any.</p>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

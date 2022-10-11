@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>Creating a mobile app with web technology // Leif Larsen</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.68.3" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Leif" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://www.leiflarsen.org/css/main.min.0fb49e70a30412f97ddfc418e18fefef1d9fcdebe45f634dbbba768b00fe1eec.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Creating a mobile app with web technology"/>
+<meta name="twitter:description" content="In this post I will go through my first-impression of using HTML/CSS/JavaScript for mobile app development. The background for doing so is that I’ve been spending quite a lot of time at FreeCodeCamp lately, and now feel comfortable enough to try to do some comparing with Xamarin and C#. To be able to see some similarities, I have chosen to create an app similar to one I have done with Xamarin, a map application."/>
+
+    <meta property="og:title" content="Creating a mobile app with web technology" />
+<meta property="og:description" content="In this post I will go through my first-impression of using HTML/CSS/JavaScript for mobile app development. The background for doing so is that I’ve been spending quite a lot of time at FreeCodeCamp lately, and now feel comfortable enough to try to do some comparing with Xamarin and C#. To be able to see some similarities, I have chosen to create an app similar to one I have done with Xamarin, a map application." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.leiflarsen.org/posts/creating-a-mobile-app-with-web-technology/" />
+<meta property="article:published_time" content="2016-03-13T00:00:00+00:00" />
+<meta property="article:modified_time" content="2016-03-13T00:00:00+00:00" />
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://www.leiflarsen.org/"><img class="app-header-avatar" src="/images/leif_larsen.jpg" alt="Leif" /></a>
+      <span class="app-header-title">Leif Larsen</span>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/about/">About</a>
+            -
+          
+          <a class="app-header-menu-item" href="/">Home</a>
+      </nav>
+      <p>My journey in tech</p>
+      <div class="app-header-social">
+        
+          <a href="https://github.com/leif-larsen" target="_blank" rel="noreferrer noopener me">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>My Github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg>
+          </a>
+        
+          <a href="https://www.linkedin.com/in/leifhlarsen/" target="_blank" rel="noreferrer noopener me">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-linkedin">
+  <title>LinkedIn</title>
+  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle>
+</svg>
+          </a>
+        
+          <a href="https://twitter.com/leif_larsen" target="_blank" rel="noreferrer noopener me">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>Twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg>
+          </a>
+        
+          <a href="https://www.instagram.com/leif_larsen/" target="_blank" rel="noreferrer noopener me">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-instagram">
+  <title>Instagram</title>
+  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+</svg>
+          </a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Creating a mobile app with web technology</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Mar 13, 2016
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          6 min read
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <p>In this post I will go through my first-impression of using HTML/CSS/JavaScript for mobile app development. The background for doing so is that I’ve been spending quite a lot of time at <a href="http://freecodecamp.com">FreeCodeCamp</a> lately, and now feel comfortable enough to try to do some comparing with Xamarin and C#. To be able to see some similarities, I have chosen to create an app similar to one I have done with Xamarin, a map application. I did a tutorial on this for Xamarin last year, which you can find <a href="http://leiflarsen.org/?s=mapkit">here</a>.</p>
+<p>For the purpose of this post I’ll be using Visual Studio to do the development. Microsoft have created a template to get up and running easily with <a href="https://cordova.apache.org/">Cordova</a>, which I have chosen as my tool. Alternatively, one can install Cordova and create a project through npm, but I took the slightly easier route this time. All the code I’ve written for this can be found at <a href="https://github.com/leif-larsen/Mobile-HTML-Test-App">GitHub</a>.</p>
+<p>The end result of the app is like this:<br>
+<a href="/img/2016/03/droidresult.png"><img src="/img/2016/03/droidresult.png?fit=384%2C706" alt="Mobile app with Cordova end result"></a></p>
+<h2 id="mobile-app-creation">Mobile App Creation</h2>
+<p>The first thing I did was to create a new project in Visual Studio, where I selected “Other Languages” and chose Cordova as the project template. I named it, and the project was created with some default files. I was able to run the app with the default content, using the Ripple Emulator in Google Chrome. So far so good.<a href="/img/2016/03/NewProject.png"><img src="/img/2016/03/NewProject-300x208.png?fit=300%2C208" alt="Create new Cordova project in Visual Studio"></a></p>
+<p>Next I read that the initial version of Cordova might not be the latest, so I went into “config.xml” and fixed this. In Visual Studio they provide a neat editor for this file, where I could go to the tab called “Platform” and select the latest version from the dropdown list. I figured I might as well do this immediately instead of risking errors later.<br>
+<a href="/img/2016/03/LatestVersion.png"><img src="/img/2016/03/LatestVersion-300x52.png?fit=300%2C52" alt="Update to latest Cordova Version"></a></p>
+<p>To be able to use different device specific features I found I could add plugins. As I have understood these are basically bindings between a phones hardware and the app itself, provided either by Cordova as core plugins, or by third-party contributors. For this example, I added the geolocation and notification plugins. Other core plugins worth mentioning are Azure connection, splash screen, device information, file systems and others. After the plugins had been added I built the app again, and it was still running as expected.</p>
+<h2 id="code--but-no-code">Code – But No Code</h2>
+<p>For the code needed it wasn’t really that much. I can count one input field and one div in the HTML itself, which is for search bar and the map canvas. I didn’t bother to put the JavaScript needed into its own file, as I just wanted a quick result. Also I want to emphasize that the way it’s done in my example is by no means best practice, as you can read in <a href="https://codingwithspike.wordpress.com/2014/08/13/loading-google-maps-in-cordova-the-right-way/">this</a> blog post.</p>
+<p>As this isn’t a tutorial I won’t share any code details here, but refer you to GitHub. The fun stuff happens in “index.html” in the “www” folder. Just note that you need to add your own API key for Google Maps for it to work!</p>
+<h2 id="comparison">Comparison</h2>
+<p>So how does this compare to Xamarin? For starters I can definitely say that this was less of a hassle to get up and running. I don’t think I spent more than a couple of hours to finish this example app, making it work as I wanted to. Using Cordova, I believe more people are able to create mobile apps, where a lot of HTML/CSS/JavaScript probably can be reused for associated web sites.</p>
+<p>Another great benefit is off course that there is no monthly/yearly recurring cost to using Cordova, as there is with Xamarin (note! I have not looked into the release process, so there might be some costs there. Can anyone shed a light on that?). To me, as a developer with no real income on my apps, this is a great argument to use Cordova over Xamarin.</p>
+<p>As for cons I have not really seen any yet, but I imagine there might be some negative effects in terms of performance. I will need to do some more research on this, so if anyone happen to have some links focusing on this aspect, please share!</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Will I be using Cordova in the future? Well, I will be testing it more over the next few weeks. I don’t think I am ready to make the move completely yet, and I guess what I use will be dependent on what kind of app I am creating anyway.</p>
+<p>This is it for this post. Not a very scientific comparison between Xamarin and Cordova, but more of a first-impression from my point of view. Have you had experience with either? I am curious to hear what others think of these, especially Cordova!</p>
+<h2 id="edit">Edit</h2>
+<p>As requested in the comments, I want to make an addition to this post, to show some of the code used.</p>
+<p>There are two files which needs to be referenced for Cordova to work. These are “cordova.js” and “platformOverrides.js”. Both files should be created when creating the project, and already included in the “index.html” which is created at creation. The first file is, quite obviously, Cordova itself, while the second one is where you can tell the app what it should do on startup, resume, shutdown etc. For this particular example I also included a reference to Google Maps API and its corresponding CSS file.</p>
+<p>The first lines I want to show off particularly is the lines which actually uses device features. The following lines uses the plugins for geolocation and notification to find your position, and popup a notification if a marker is clicked:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">markerClicked</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">title</span>) { 
+<span style="color:#a6e22e">navigator</span>.<span style="color:#a6e22e">notification</span>.<span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#34;You clicked the &#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">title</span>.<span style="color:#a6e22e">title</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; marker!&#34;</span>, <span style="color:#66d9ef">function</span> () {});} 
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">getPosition</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> () { <span style="color:#a6e22e">navigator</span>.<span style="color:#a6e22e">geolocation</span>.<span style="color:#a6e22e">getCurrentPosition</span>(<span style="color:#a6e22e">showMap</span>); }
+</code></pre></div><p>Also to show how to use the position you get, this is the callback function from getPosition:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">showMap</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">position</span>) { <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">mapOptions</span> <span style="color:#f92672">=</span> { <span style="color:#a6e22e">zoom</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">13</span>, <span style="color:#a6e22e">center</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">google</span>.<span style="color:#a6e22e">maps</span>.<span style="color:#a6e22e">LatLng</span>(<span style="color:#a6e22e">position</span>.<span style="color:#a6e22e">coords</span>.<span style="color:#a6e22e">latitude</span>, <span style="color:#a6e22e">position</span>.<span style="color:#a6e22e">coords</span>.<span style="color:#a6e22e">longitude</span>), <span style="color:#a6e22e">mapTypeId</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">google</span>.<span style="color:#a6e22e">maps</span>.<span style="color:#a6e22e">MapTypeId</span>.<span style="color:#a6e22e">ROADMAP</span>, <span style="color:#a6e22e">mapTypeControl</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span> } <span style="color:#a6e22e">map</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">google</span>.<span style="color:#a6e22e">maps</span>.<span style="color:#a6e22e">Map</span>(document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#34;map_canvas&#34;</span>), <span style="color:#a6e22e">mapOptions</span>); <span style="color:#a6e22e">addMarkers</span>(); <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">input</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#34;pac-input&#34;</span>); <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">searchBox</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">google</span>.<span style="color:#a6e22e">maps</span>.<span style="color:#a6e22e">places</span>.<span style="color:#a6e22e">SearchBox</span>(<span style="color:#a6e22e">input</span>); <span style="color:#a6e22e">map</span>.<span style="color:#a6e22e">controls</span>[<span style="color:#a6e22e">google</span>.<span style="color:#a6e22e">maps</span>.<span style="color:#a6e22e">ControlPosition</span>.<span style="color:#a6e22e">TOP_CENTER</span>].<span style="color:#a6e22e">push</span>(<span style="color:#a6e22e">input</span>); <span style="color:#a6e22e">map</span>.<span style="color:#a6e22e">addListener</span>(<span style="color:#e6db74">&#39;bounds_changed&#39;</span>, <span style="color:#66d9ef">function</span> () { <span style="color:#a6e22e">searchBox</span>.<span style="color:#a6e22e">setBounds</span>(<span style="color:#a6e22e">map</span>.<span style="color:#a6e22e">getBounds</span>()); }); <span style="color:#a6e22e">searchBox</span>.<span style="color:#a6e22e">addListener</span>(<span style="color:#e6db74">&#39;places_changed&#39;</span>, <span style="color:#66d9ef">function</span> () { <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">places</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">searchBox</span>.<span style="color:#a6e22e">getPlaces</span>(); <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">places</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) { <span style="color:#66d9ef">return</span>; } <span style="color:#a6e22e">map</span>.<span style="color:#a6e22e">setCenter</span>(<span style="color:#a6e22e">places</span>[<span style="color:#ae81ff">0</span>].<span style="color:#a6e22e">geometry</span>.<span style="color:#a6e22e">location</span>); }); }
+</code></pre></div><p>Basically we use the position to create a new Google Map, centered on our location, and place this map into a div we have in the HTML. We also create a searchbox, where we can search for places, where we will move the map to the location of the place that was searched for.</p>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>Getting started with Microsoft Cognitive Services   Face API // Leif Larsen</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.68.3" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Leif" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://www.leiflarsen.org/css/main.min.0fb49e70a30412f97ddfc418e18fefef1d9fcdebe45f634dbbba768b00fe1eec.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Getting started with Microsoft Cognitive Services   Face API"/>
+<meta name="twitter:description" content="As the world gets increasingly more data power, we are enabled to do more things (in the lack of better words). One of those things is to make computers and applications more intelligent, and Microsoft have created a series of API&rsquo;s to help doing so. Using Microsoft Cognitive Services you&rsquo;re able to do use a whole bunch of API&rsquo;s, ranging from translation, searching, language-based and facial recognition. I find a lot of them interesting, especially the Face API, which I&rsquo;ll spend some time taking a closer look at."/>
+
+    <meta property="og:title" content="Getting started with Microsoft Cognitive Services   Face API" />
+<meta property="og:description" content="As the world gets increasingly more data power, we are enabled to do more things (in the lack of better words). One of those things is to make computers and applications more intelligent, and Microsoft have created a series of API&rsquo;s to help doing so. Using Microsoft Cognitive Services you&rsquo;re able to do use a whole bunch of API&rsquo;s, ranging from translation, searching, language-based and facial recognition. I find a lot of them interesting, especially the Face API, which I&rsquo;ll spend some time taking a closer look at." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.leiflarsen.org/posts/getting-started-with-microsoft-cognitive-services-face-api/" />
+<meta property="article:published_time" content="2016-07-20T00:00:00+00:00" />
+<meta property="article:modified_time" content="2016-07-20T00:00:00+00:00" />
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://www.leiflarsen.org/"><img class="app-header-avatar" src="/images/leif_larsen.jpg" alt="Leif" /></a>
+      <span class="app-header-title">Leif Larsen</span>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/about/">About</a>
+            -
+          
+          <a class="app-header-menu-item" href="/">Home</a>
+      </nav>
+      <p>My journey in tech</p>
+      <div class="app-header-social">
+        
+          <a href="https://github.com/leif-larsen" target="_blank" rel="noreferrer noopener me">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>My Github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg>
+          </a>
+        
+          <a href="https://www.linkedin.com/in/leifhlarsen/" target="_blank" rel="noreferrer noopener me">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-linkedin">
+  <title>LinkedIn</title>
+  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle>
+</svg>
+          </a>
+        
+          <a href="https://twitter.com/leif_larsen" target="_blank" rel="noreferrer noopener me">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>Twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg>
+          </a>
+        
+          <a href="https://www.instagram.com/leif_larsen/" target="_blank" rel="noreferrer noopener me">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-instagram">
+  <title>Instagram</title>
+  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+</svg>
+          </a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Getting started with Microsoft Cognitive Services   Face API</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Jul 20, 2016
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          7 min read
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <p>As the world gets increasingly more data power, we are enabled to do more things (in the lack of better words). One of those things is to make computers and applications more intelligent, and Microsoft have created a series of API&rsquo;s to help doing so. Using Microsoft Cognitive Services you&rsquo;re able to do use a whole bunch of API&rsquo;s, ranging from translation, searching, language-based and facial recognition. I find a lot of them interesting, especially the Face API, which I&rsquo;ll spend some time taking a closer look at.</p>
+<p>This post is the first post, in a series of posts, where the ultimate goal is to achieve enough knowledge of the Face API to use it for a IoT smart home project. In this post I will cover some basic glossary, with terms that may be defined in other ways than we&rsquo;re used to. I&rsquo;ll touch on how to sign up for a free preview of the API, the basics of our app and at last I&rsquo;ll show you how to identify faces in images.</p>
+<p>A quick note on the language selection. Throughout this series all my examples will be coded in C#, as there is a nice client library for C#. However, the services are simply a cloud API, which can be invoked through HTTPS request, which in turn returns a response in JSON. There you&rsquo;re able to use any language you&rsquo;d like; however, I won&rsquo;t be going into details on the deeper level API calls required.</p>
+<p>##Face API Glossary</p>
+<p>Before I can show you the Face API there are several terms which requires additional description, for the rest of this post to make any sense. The following list describes those words:</p>
+<ul>
+<li>
+<p>__Attributes__<br>
+Attributes is values which can be a part of the detection result. Attributes gives extra information on faces, such as age, gender, head pose, facial hair and smiling.</p>
+</li>
+<li>
+<p>__Face__<br>
+Face is a term used to describe the detected face derived from the Face API. At the very basic a <em>face</em> consists of a unified identity (Face ID), as well as a defined region in an image (Face Rectangle). A <em>face</em> can also contain attributes.</p>
+</li>
+<li>
+<p>__Groups__<br>
+A <em>group</em> contains a collection of similar faces, identified by their Face ID. Groups is derived from Face Grouping, which is a collection of faces according to facial similarity. Faces that is not similar to others is placed in a group called <em>messy group</em>.</p>
+</li>
+<li>
+<p>__Identification__<br>
+Identification is the process of identifying one or more faces in a person group. If there is more faces in a request all will be identified separately.</p>
+</li>
+<li>
+<p>__Person__<br>
+<em>Person</em> is a data structure containing an ID, a name, a collection of Face IDs and user data.</p>
+</li>
+<li>
+<p>__Person Group__<br>
+A <em>person group</em> is a collection of <em>persons</em>, and a unit of identification. It contains an ID, a name and user data.</p>
+</li>
+<li>
+<p>__Status__<br>
+<em>Status</em> is a string describing the procedure of <em>train</em>.</p>
+</li>
+<li>
+<p>__Train__<br>
+<em>Train</em> is the process needed to facilitate identification. You train a specific person group.</p>
+</li>
+<li>
+<p>__Verification__<br>
+<em>Verification</em> is the process used to determine if two faces are the same or not.</p>
+</li>
+</ul>
+<p>For a more extensive glossary you should visit <a href="https://www.microsoft.com/cognitive-services/en-us/face-api/documentation/glossary">Microsoft&rsquo;s documentation</a>.</p>
+<p>##The basics of our cognitive app The end goal of this series is to have an app that is able to utilize a web camera to get an image of a person, identify the person and show the name of the person on screen. In the end this will be deployed to a Raspberry Pi, however this is not required to follow along this series.</p>
+<p>We need to create an app, capable of running on an IoT device. This app should be able to process a stream from a web camera and grab an image of a person. This should be identified using the Face API, and the name should be given back. Throughout the code I have tried to keep the focus on the usage of the Face API, and as such everything may not be <a href="http://blog.leiflarsen.org/summing-up-my-week-with-net-best-practices-and-design-patterns/">best practice</a>.</p>
+<p>All the code for this post can be found at <a href="https://github.com/leif-larsen/CogServiceFaceTest">GitHub</a>.</p>
+<p>##Getting API keys The first thing you want to do is to sign up for the service, which you can do over at <a href="https://www.microsoft.com/cognitive-services/en-us/sign-up">Microsoft&rsquo;s site</a>. It should be a free subscription there, and the steps you need to do is explained in the link. Once you&rsquo;ve signed up, you can request trials for the different API&rsquo;s included, and you&rsquo;ll want to select &ldquo;Face&rdquo;.</p>
+<p>When this is done, you should take a note of the subscription keys, as shown in the image below. <img src="/images/Keys.PNG" alt="API Keys"></p>
+<p>You can also purchase the same subscription on Azure, by clicking the button to the right. I guess that ultimately Microsoft wants everybody to move over there, but for now this preview works. As for pricing in Azure, it costs $1,50 per 1,000 transactions, and as you may see this preview allows for 30,000 transactions a month, so the value is great.</p>
+<p>##Marking a face For the app you&rsquo;ll want to create a new UWP app. Two additional NuGet packages is needed; Newtonsoft.JSON and Microsoft.ProjectOxford.Face, so go on to add those to the app. We&rsquo;ll create everything we need in this example in the MainPage.xaml, and the code-behind file, MainPage.xaml.cs. The UI will be rather simple, just a canvas for our image, two buttons and a status label. Add the following to MainPage.xaml:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">&lt;Grid.RowDefinitions&gt;
+    &lt;RowDefinition Height=<span style="color:#e6db74">&#34;*&#34;</span> /&gt;
+    &lt;RowDefinition Height=<span style="color:#e6db74">&#34;50&#34;</span> /&gt;
+&lt;/Grid.RowDefinitions&gt;
+&lt;Grid.ColumnDefinitions&gt;
+    &lt;ColumnDefinition Width=<span style="color:#e6db74">&#34;120&#34;</span> /&gt;
+    &lt;ColumnDefinition Width=<span style="color:#e6db74">&#34;120&#34;</span> /&gt;
+    &lt;ColumnDefinition Width=<span style="color:#e6db74">&#34;*&#34;</span> /&gt;
+&lt;/Grid.ColumnDefinitions&gt;
+&lt;Canvas x_Name=<span style="color:#e6db74">&#34;FaceCanvas&#34;</span> Visibility=<span style="color:#e6db74">&#34;Visible&#34;</span> Grid.Row=<span style="color:#e6db74">&#34;0&#34;</span> Grid.ColumnSpan=<span style="color:#e6db74">&#34;3&#34;</span> Grid.Column=<span style="color:#e6db74">&#34;0&#34;</span> /&gt;
+
+&lt;Button x_Name=<span style="color:#e6db74">&#34;BrowseButton&#34;</span> Content=<span style="color:#e6db74">&#34;Browse...&#34;</span> Click=<span style="color:#e6db74">&#34;BrowseButton_Click&#34;</span> Grid.Row=<span style="color:#e6db74">&#34;1&#34;</span> Grid.Column=<span style="color:#e6db74">&#34;0&#34;</span> Width=<span style="color:#e6db74">&#34;100&#34;</span> HorizontalAlignment=<span style="color:#e6db74">&#34;Center&#34;</span> /&gt;
+&lt;Button x_Name=<span style="color:#e6db74">&#34;FindFaceButton&#34;</span> Content=<span style="color:#e6db74">&#34;Find face...&#34;</span> Click=<span style="color:#e6db74">&#34;FindFaceButton_Click&#34;</span> Grid.Row=<span style="color:#e6db74">&#34;1&#34;</span> Grid.Column=<span style="color:#e6db74">&#34;1&#34;</span> Width=<span style="color:#e6db74">&#34;100&#34;</span> HorizontalAlignment=<span style="color:#e6db74">&#34;Center&#34;</span> /&gt;
+&lt;TextBlock x_Name=<span style="color:#e6db74">&#34;StatusField&#34;</span> Text=<span style="color:#e6db74">&#34;Status: waiting...&#34;</span> Grid.Row=<span style="color:#e6db74">&#34;1&#34;</span> Grid.Column=<span style="color:#e6db74">&#34;2&#34;</span> VerticalAlignment=<span style="color:#e6db74">&#34;Center&#34;</span> /&gt;
+</code></pre></div><p>The browse button simply finds an image and loads it to the view. Clicking &ldquo;Find face&hellip;&rdquo; will make a call to the <em>Face API</em> and when the result is returned, put a green square around the face, if there is any.</p>
+<p>In the code behind the first thing needed is to add an object for the face service client. Do that like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">readonly</span> IFaceServiceClient _faceServiceClient = <span style="color:#66d9ef">new</span> FaceServiceClient(<span style="color:#e6db74">&#34;YOUR_API_KEY&#34;</span>);
+</code></pre></div><p>Make sure you have added reference and using statement for Microsoft.ProjectOxford.Face and Microsoft.ProjectOxford.Face.Contract.</p>
+<p>For the browse button, I have shamelessly copied example code for a file picker from Suresh-m, found <a href="https://code.msdn.microsoft.com/File-Picker-in-Windows-10-846c2116">here</a>. It looks like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#66d9ef">private</span> StorageFile _imageFile;
+
+<span style="color:#66d9ef">private</span> <span style="color:#66d9ef">async</span> <span style="color:#66d9ef">void</span> BrowseButton_Click(<span style="color:#66d9ef">object</span> sender, RoutedEventArgs e)
+{
+   <span style="color:#75715e">// Thanks to Suresh-M at https://code.msdn.microsoft.com/File-Picker-in-Windows-10-846c2116
+</span><span style="color:#75715e"></span>   <span style="color:#75715e">// for filepicker code.
+</span><span style="color:#75715e"></span>   FileOpenPicker openPicker = <span style="color:#66d9ef">new</span> FileOpenPicker();
+   openPicker.ViewMode = PickerViewMode.Thumbnail;
+
+   openPicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
+
+   openPicker.FileTypeFilter.Add(<span style="color:#e6db74">&#34;.jpg&#34;</span>);
+   openPicker.FileTypeFilter.Add(<span style="color:#e6db74">&#34;.png&#34;</span>);
+
+   _imageFile = <span style="color:#66d9ef">await</span> openPicker.PickSingleFileAsync();
+
+   <span style="color:#66d9ef">if</span> (_imageFile == <span style="color:#66d9ef">null</span>)
+   {
+      StatusField.Text = <span style="color:#e6db74">&#34;Status: Image failed to load&#34;</span>;
+      <span style="color:#66d9ef">return</span>;
+   }
+
+   FaceCanvas.Children.Clear();
+
+   <span style="color:#66d9ef">var</span> stream = <span style="color:#66d9ef">await</span> _imageFile.OpenAsync(FileAccessMode.Read);
+   BitmapDecoder decoder = <span style="color:#66d9ef">await</span> BitmapDecoder.CreateAsync(stream);
+
+   BitmapTransform transform = <span style="color:#66d9ef">new</span> BitmapTransform();
+   <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">float</span> sourceImageHeightLimit = <span style="color:#ae81ff">1280</span>;
+
+   <span style="color:#66d9ef">if</span> (decoder.PixelHeight &gt; sourceImageHeightLimit)
+   {
+      <span style="color:#66d9ef">float</span> scalingFactor = (<span style="color:#66d9ef">float</span>)sourceImageHeightLimit / (<span style="color:#66d9ef">float</span>)decoder.PixelHeight;
+      transform.ScaledWidth = (<span style="color:#66d9ef">uint</span>)Math.Floor(decoder.PixelWidth * scalingFactor);
+      transform.ScaledHeight = (<span style="color:#66d9ef">uint</span>)Math.Floor(decoder.PixelHeight * scalingFactor);
+   }
+
+   _bitmapSource = <span style="color:#66d9ef">await</span> decoder.GetSoftwareBitmapAsync(decoder.BitmapPixelFormat, BitmapAlphaMode.Premultiplied, transform, ExifOrientationMode.IgnoreExifOrientation, ColorManagementMode.DoNotColorManage);
+
+   ImageBrush brush = <span style="color:#66d9ef">new</span> ImageBrush();
+   SoftwareBitmapSource bitmapSource = <span style="color:#66d9ef">new</span> SoftwareBitmapSource();
+   <span style="color:#66d9ef">await</span> bitmapSource.SetBitmapAsync(_bitmapSource);
+   brush.ImageSource = bitmapSource;
+   brush.Stretch = Stretch.Uniform;
+   FaceCanvas.Background = brush;
+
+   StatusField.Text = <span style="color:#e6db74">&#34;Status: Image loaded&#34;</span>;
+}
+</code></pre></div><p>Now, on to the fun part. We need to make a call to the <em>Face API</em> to send the image to the service, and retrieve a result with a <em>face</em> back, if it exists. The code to do this is like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">async</span> <span style="color:#66d9ef">void</span> FindFaceButton_Click(<span style="color:#66d9ef">object</span> sender, RoutedEventArgs e)
+{
+    FaceRectangle[] faceRects = <span style="color:#66d9ef">await</span> UploadAndDetectFaces();
+    StatusField.Text = <span style="color:#e6db74">$&#34;Detection Finished. {faceRects.Length} face(s) detected&#34;</span>;
+
+    <span style="color:#66d9ef">if</span> (faceRects.Length &gt; <span style="color:#ae81ff">0</span>)
+    {
+        MarkFaces(faceRects);
+    }
+}
+
+<span style="color:#66d9ef">private</span> <span style="color:#66d9ef">async</span> Task&lt;FaceRectangle[]&gt; UploadAndDetectFaces()
+{
+    <span style="color:#66d9ef">try</span>
+    {
+        StatusField.Text = <span style="color:#e6db74">&#34;Status: Detecting...&#34;</span>;
+        <span style="color:#66d9ef">using</span> (Stream imageFileStream = <span style="color:#66d9ef">await</span> _imageFile.OpenStreamForReadAsync())
+        {
+            <span style="color:#66d9ef">var</span> faces = <span style="color:#66d9ef">await</span> _faceServiceClient.DetectAsync(imageFileStream);
+            <span style="color:#66d9ef">var</span> faceRects = faces.Select(face =&gt; face.FaceRectangle);
+
+            <span style="color:#66d9ef">return</span> faceRects.ToArray();
+        }
+    }
+    <span style="color:#66d9ef">catch</span> (Exception ex)
+    {
+        StatusField.Text = <span style="color:#e6db74">$&#34;Status: {ex.Message}&#34;</span>;
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> FaceRectangle[<span style="color:#ae81ff">0</span>];
+    }
+}
+</code></pre></div><p>As you may see it is not very complex. It is a method triggered on button click, which calls another method, UploadAndDetectFaces. This method in turn opens a stream for the image, and calls the <em>Face API</em> client, which detects <em>face(s)</em> in the image. This is returned to the click handler, which calls on the next method to draw a green rectangle around the <em>face(s)</em>. I won&rsquo;t bother to post that part of the code, as it is not interesting for what we&rsquo;re trying to achieve here, other than the fact that we use the result from our detect faces query to position the rectangle(s).</p>
+<p>The end result looks like this: <img src="/images/ImageLoaded.PNG" alt="Face before detection"></p>
+<p><img src="/images/FoundFace.PNG" alt="Face detected"></p>
+<p><img src="/images/NoImageDetected.PNG" alt="Face not detected"></p>
+<p>##Summary In this post we&rsquo;ve looked into the basics of Face API from Microsoft Cognitive Services. We&rsquo;ve seen how to get connected to the API by signing up. Further on we&rsquo;ve talked about how our app will turn out in the end, and we started working with the Face API with a very basic example for marking a face in an image.</p>
+<p>The next post in this series will move into training a person group and do facial verification. I&rsquo;ll see you then!</p>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

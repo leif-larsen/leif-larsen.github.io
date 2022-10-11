@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>24 Days of Hello World   Haskell // Leif Larsen</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.68.3" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Leif" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://www.leiflarsen.org/css/main.min.0fb49e70a30412f97ddfc418e18fefef1d9fcdebe45f634dbbba768b00fe1eec.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="24 Days of Hello World   Haskell"/>
+<meta name="twitter:description" content="For the eight hatch of 24 Days of Hello World I look into Haskell. Haskell is a language I merely have heard of before, so it is definitely interesting to see what it is and what it can be applied to.
+Haskell is a general-purpose purely functional language, using strong static typing and non-strict semantics. It is as an open-source product, which allows rapid development of what it claims to be robust and concise software."/>
+
+    <meta property="og:title" content="24 Days of Hello World   Haskell" />
+<meta property="og:description" content="For the eight hatch of 24 Days of Hello World I look into Haskell. Haskell is a language I merely have heard of before, so it is definitely interesting to see what it is and what it can be applied to.
+Haskell is a general-purpose purely functional language, using strong static typing and non-strict semantics. It is as an open-source product, which allows rapid development of what it claims to be robust and concise software." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.leiflarsen.org/posts/24-days-of-hello-world-haskell/" />
+<meta property="article:published_time" content="2015-12-07T00:00:00+00:00" />
+<meta property="article:modified_time" content="2015-12-07T00:00:00+00:00" />
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://www.leiflarsen.org/"><img class="app-header-avatar" src="/images/leif_larsen.jpg" alt="Leif" /></a>
+      <span class="app-header-title">Leif Larsen</span>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/about/">About</a>
+            -
+          
+          <a class="app-header-menu-item" href="/">Home</a>
+      </nav>
+      <p>My journey in tech</p>
+      <div class="app-header-social">
+        
+          <a href="https://github.com/leif-larsen" target="_blank" rel="noreferrer noopener me">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>My Github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg>
+          </a>
+        
+          <a href="https://www.linkedin.com/in/leifhlarsen/" target="_blank" rel="noreferrer noopener me">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-linkedin">
+  <title>LinkedIn</title>
+  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle>
+</svg>
+          </a>
+        
+          <a href="https://twitter.com/leif_larsen" target="_blank" rel="noreferrer noopener me">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>Twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg>
+          </a>
+        
+          <a href="https://www.instagram.com/leif_larsen/" target="_blank" rel="noreferrer noopener me">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-instagram">
+  <title>Instagram</title>
+  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+</svg>
+          </a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">24 Days of Hello World   Haskell</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Dec 7, 2015
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          3 min read
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <p>For the eight hatch of 24 Days of Hello World I look into Haskell. Haskell is a language I merely have heard of before, so it is definitely interesting to see what it is and what it can be applied to.</p>
+<p>Haskell is a general-purpose purely functional language, using strong static typing and non-strict semantics. It is as an open-source product, which allows rapid development of what it claims to be robust and concise software. It has support for integration with other languages, built-in concurrency and parallelism, rich libraries and an active community.</p>
+<p><strong>History</strong></p>
+<p>The background for Haskell was the release of a proprietary language, called Miranda. This was a functional language, released in 1985, which resulted in a growth of interest in functional languages. In 1987 there was a strong consensus that a committee should be formed, to define an open standard for functional languages. Their aim was to consolidate existing functional languages into a common one, and in 1990 the first version of Haskell was defined.</p>
+<p>The work of the committee resulted in a series of language definitions, and it ended in Haskell 98, which intended to specify a stable, minimal version of the language. It was to be a base for future extensions, and the committee welcomed extensions and other variants of Haskell 98, through addition and incorporation of experimental features.</p>
+<p>This standard was released early 1998, and in 2003 it was revised. The language evolved quickly, and Glasgow Haskell Compiler became the standard. In 2006 the work to define a successor to this standard began, and in mid 2010 Haskell 2010 was published. One of the major features added to this version was the foreign function interface (FFI), which allowed bindings to other programming languages.</p>
+<p>As of today a preview release of the next version, called Haskell 2014 has been released.</p>
+<p><strong>Typical uses</strong></p>
+<p>There is a large number of companies that is using Haskell today. To give you an idea of how it can be used, I’m going to list some of them.</p>
+<ol>
+<li>Facebook – Used for internal tools, such as programmatically manipulating a PHP code base</li>
+<li>Google – Used for internal projects, such as the open-source project called Ganeti. This is a tool for managing clusters of virtual servers</li>
+<li>The New York Times – Used Haskell for processing of images, utilizing the parallel array library</li>
+<li>Wagon – Uses Haskell and JavaScript for their modern SQL editor. <strong>Example Hello World</strong></li>
+</ol>
+<p>For the example code we will need to install the Haskell compiler. You can find what you need at <a href="https://www.haskell.org/downloads">haskell.org</a>. I chose to download and install the minimal installers, which provides the GHC (Glasgow Haswell Compiler) and core libraries needed for the platform. Like always I am doing this on a Windows 10, so that is the platform I chose as well.</p>
+<p>Installation was done with default settings, which should add the compiler to the PATH variable. It took some time to install, but once its done you can verify that it finished successfully by running</p>
+<p>ghc -v</p>
+<p>In a command prompt. That should give you the version, as well as some other information.</p>
+<p>Next we move on to create a file, called “HelloWorld.hs”. Add the following to the file:</p>
+<p>module Main where import System.Environment main :: IO () main = do putStrLn(&ldquo;Hello, World!&quot;)</p>
+<p>You can find some description on how the code works <a href="https://en.wikibooks.org/wiki/Write_Yourself_a_Scheme_in_48_Hours/First_Steps">here</a>.</p>
+<p>In a command line window, run the following command:</p>
+<p>ghc -o HelloWorld &ndash;make HelloWorld.hs</p>
+<p>This will tell the compiler to compile the “HelloWorld.hs” file we just created into an executable called “HelloWorld.exe”. The “-o” parameter specifies the name of the executable.</p>
+<p>Run the newly compiled application by typing “HelloWorld.exe” in the command line, and as always you should see “Hello, World!” printed to the console window.</p>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

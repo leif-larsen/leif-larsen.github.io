@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>24 Days of Hello World   R // Leif Larsen</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.68.3" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Leif" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://www.leiflarsen.org/css/main.min.0fb49e70a30412f97ddfc418e18fefef1d9fcdebe45f634dbbba768b00fe1eec.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="24 Days of Hello World   R"/>
+<meta name="twitter:description" content="In todays post of 24 Days of Hello World, I look into a language and environment for statistical computing and graphics, called R. This language is an implementation of the language “S”, combined with lexical scoping.
+The software environment is primarily written in C, Fortran and R. While there are graphical front-ends available, R have a command line interface as a default.
+History
+Created by Ross Ihaka and Robert Gentleman, R was named based on the first letters in the first names of its authors."/>
+
+    <meta property="og:title" content="24 Days of Hello World   R" />
+<meta property="og:description" content="In todays post of 24 Days of Hello World, I look into a language and environment for statistical computing and graphics, called R. This language is an implementation of the language “S”, combined with lexical scoping.
+The software environment is primarily written in C, Fortran and R. While there are graphical front-ends available, R have a command line interface as a default.
+History
+Created by Ross Ihaka and Robert Gentleman, R was named based on the first letters in the first names of its authors." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.leiflarsen.org/posts/24-days-of-hello-world-r/" />
+<meta property="article:published_time" content="2015-12-08T00:00:00+00:00" />
+<meta property="article:modified_time" content="2015-12-08T00:00:00+00:00" />
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://www.leiflarsen.org/"><img class="app-header-avatar" src="/images/leif_larsen.jpg" alt="Leif" /></a>
+      <span class="app-header-title">Leif Larsen</span>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/about/">About</a>
+            -
+          
+          <a class="app-header-menu-item" href="/">Home</a>
+      </nav>
+      <p>My journey in tech</p>
+      <div class="app-header-social">
+        
+          <a href="https://github.com/leif-larsen" target="_blank" rel="noreferrer noopener me">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>My Github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg>
+          </a>
+        
+          <a href="https://www.linkedin.com/in/leifhlarsen/" target="_blank" rel="noreferrer noopener me">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-linkedin">
+  <title>LinkedIn</title>
+  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle>
+</svg>
+          </a>
+        
+          <a href="https://twitter.com/leif_larsen" target="_blank" rel="noreferrer noopener me">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>Twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg>
+          </a>
+        
+          <a href="https://www.instagram.com/leif_larsen/" target="_blank" rel="noreferrer noopener me">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-instagram">
+  <title>Instagram</title>
+  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+</svg>
+          </a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">24 Days of Hello World   R</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Dec 8, 2015
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          2 min read
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <p>In todays post of 24 Days of Hello World, I look into a language and environment for statistical computing and graphics, called R. This language is an implementation of the language “S”, combined with <a href="https://en.wikipedia.org/wiki/Scope_(computer_science)#Lexical_scoping">lexical scoping</a>.</p>
+<p>The software environment is primarily written in C, Fortran and R. While there are graphical front-ends available, R have a command line interface as a default.</p>
+<p><strong>History</strong></p>
+<p>Created by Ross Ihaka and Robert Gentleman, R was named based on the first letters in the first names of its authors. It was created in 1993. After that, it has been further developed, with releases quite often, up til the latest release 3.2.2, which was released a few months back.</p>
+<p>In 2007 a company called Revolution Analytics was founded to provide commercial support for R. They also added several components developed by themselves. Earlier this year, Microsoft aquired Revolution Analytics.</p>
+<p><strong>Typical uses</strong></p>
+<p>Typical places where you could use R is in financial companies, where you could be using it for quantitative analysis. Also it can be used to compute trading and risks models, as well as data manipulation-</p>
+<p><strong>Example Hello World</strong></p>
+<p>You can download the binaries or source code for the compiler at <a href="https://cran.r-project.org/mirrors.html">r-project.org</a>. Just select the mirror closes to you, and choose what you would like to download. I chose precompiled binaries for Windows, and I went for the base package, as I’ll just create a “Hello World” application. The installation was fairly quick, and when you are done, you can verify that it is installed by opening “R” which should have been installed.</p>
+<p>Now create a file called “HelloWorld.r”, and enter the following into it:</p>
+<p>cat (&lsquo;Hello, World!')</p>
+<p>And simply save it. With “R” opened, run the following command to run the application:</p>
+<p>source(&lsquo;PATH/TO/FILE/HelloWorld.r&rsquo;)</p>
+<p>Note that the slashes needs to be forward slashes (at least on a Windows system). I used backward slashes, and the command failed. Anyway, if you have done it correctly, “Hello, World!” should be printed to the output window.</p>
+<p>Seeing as R is the language it is, I believe it is highly unlikely that I will ever learn to use it, and I won’t spend much more time than that to finish this post.</p>
+<p>Check back tomorrow for the next language in 24 Days of Hello World!</p>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

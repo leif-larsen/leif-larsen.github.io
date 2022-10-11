@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>Put a name to the face   Microsoft Cognitive Services // Leif Larsen</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.68.3" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Leif" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://www.leiflarsen.org/css/main.min.0fb49e70a30412f97ddfc418e18fefef1d9fcdebe45f634dbbba768b00fe1eec.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Put a name to the face   Microsoft Cognitive Services"/>
+<meta name="twitter:description" content="This is the second post in a series of posts, where we&rsquo;ll look into Microsoft Cognitive Services. More specifically we&rsquo;re looking at the Face API, and what that can do for us in terms of identifying people. The end goal is to connect a web camera to a Raspberry Pi, grab an image of a person, identify that person and show the name on a screen.
+In the first post we described some basic terms one should know and we looked at how you could get API keys for the Face API."/>
+
+    <meta property="og:title" content="Put a name to the face   Microsoft Cognitive Services" />
+<meta property="og:description" content="This is the second post in a series of posts, where we&rsquo;ll look into Microsoft Cognitive Services. More specifically we&rsquo;re looking at the Face API, and what that can do for us in terms of identifying people. The end goal is to connect a web camera to a Raspberry Pi, grab an image of a person, identify that person and show the name on a screen.
+In the first post we described some basic terms one should know and we looked at how you could get API keys for the Face API." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.leiflarsen.org/posts/put-a-name-to-the-face-microsoft-cognitive-services/" />
+<meta property="article:published_time" content="2016-07-27T00:00:00+00:00" />
+<meta property="article:modified_time" content="2016-07-27T00:00:00+00:00" />
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://www.leiflarsen.org/"><img class="app-header-avatar" src="/images/leif_larsen.jpg" alt="Leif" /></a>
+      <span class="app-header-title">Leif Larsen</span>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/about/">About</a>
+            -
+          
+          <a class="app-header-menu-item" href="/">Home</a>
+      </nav>
+      <p>My journey in tech</p>
+      <div class="app-header-social">
+        
+          <a href="https://github.com/leif-larsen" target="_blank" rel="noreferrer noopener me">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>My Github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg>
+          </a>
+        
+          <a href="https://www.linkedin.com/in/leifhlarsen/" target="_blank" rel="noreferrer noopener me">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-linkedin">
+  <title>LinkedIn</title>
+  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle>
+</svg>
+          </a>
+        
+          <a href="https://twitter.com/leif_larsen" target="_blank" rel="noreferrer noopener me">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>Twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg>
+          </a>
+        
+          <a href="https://www.instagram.com/leif_larsen/" target="_blank" rel="noreferrer noopener me">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-instagram">
+  <title>Instagram</title>
+  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+</svg>
+          </a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Put a name to the face   Microsoft Cognitive Services</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Jul 27, 2016
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          7 min read
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <p>This is the second post in a series of posts, where we&rsquo;ll look into Microsoft Cognitive Services. More specifically we&rsquo;re looking at the <em>Face API</em>, and what that can do for us in terms of identifying people. The end goal is to connect a web camera to a Raspberry Pi, grab an image of a person, identify that person and show the name on a screen.</p>
+<p>In the <a href="http://blog.leiflarsen.org/getting-started-with-microsoft-cognitive-services-face-api/">first post</a> we described some basic terms one should know and we looked at how you could get API keys for the <em>Face API</em>. We also looked into detecting faces in an image, where we marked a face with a square. If this is the first post you&rsquo;re reading in this series, I highly suggest you read the <a href="http://blog.leiflarsen.org/getting-started-with-microsoft-cognitive-services-face-api/">first post</a>, as we&rsquo;ll continue building on the app we started on there.</p>
+<p>All the source code used in this post can be found over at <a href="https://github.com/leif-larsen/CogServiceFaceTest">GitHub</a>, and you are free to use it however you want.</p>
+<h2 id="updating-the-app">Updating the app</h2>
+<p>In the previous post we created a simple UI for our app. It consisted of a canvas, two buttons and a status field. To extend the functionality we&rsquo;re going to add a few elements to that app; Three buttons and a new text field. To achieve this, you&rsquo;ll want to add two new rows to your grid, and add the following XAML for the new elements:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">&lt;Button x_Name=<span style="color:#e6db74">&#34;GeneratePersonGroupButton&#34;</span> Content=<span style="color:#e6db74">&#34;Generate group&#34;</span> Grid.Row=<span style="color:#e6db74">&#34;2&#34;</span> Grid.Column=<span style="color:#e6db74">&#34;0&#34;</span> Width=<span style="color:#e6db74">&#34;130&#34;</span> HorizontalAlignment=<span style="color:#e6db74">&#34;Center&#34;</span> Click=<span style="color:#e6db74">&#34;GeneratePersonGroupButton_Click&#34;</span> /&gt;
+&lt;Button x_Name=<span style="color:#e6db74">&#34;TrainGroupButton&#34;</span> Content=<span style="color:#e6db74">&#34;Train group&#34;</span> Grid.Row=<span style="color:#e6db74">&#34;2&#34;</span> Grid.Column=<span style="color:#e6db74">&#34;1&#34;</span> Width=<span style="color:#e6db74">&#34;100&#34;</span> HorizontalAlignment=<span style="color:#e6db74">&#34;Center&#34;</span> Click=<span style="color:#e6db74">&#34;TrainGroupButton_Click&#34;</span> /&gt;
+&lt;Button x_Name=<span style="color:#e6db74">&#34;IdentifyFace&#34;</span> Content=<span style="color:#e6db74">&#34;Identify&#34;</span> Click=<span style="color:#e6db74">&#34;IdentifyFace_Click&#34;</span> Grid.Row=<span style="color:#e6db74">&#34;2&#34;</span> Grid.Column=<span style="color:#e6db74">&#34;2&#34;</span> Width=<span style="color:#e6db74">&#34;100&#34;</span> HorizontalAlignment=<span style="color:#e6db74">&#34;Left&#34;</span> /&gt;
+
+&lt;TextBlock x_Name=<span style="color:#e6db74">&#34;NameField&#34;</span> Text=<span style="color:#e6db74">&#34;Unknown face...&#34;</span> Grid.Row=<span style="color:#e6db74">&#34;3&#34;</span> Grid.Column=<span style="color:#e6db74">&#34;0&#34;</span> Grid.ColumnSpan=<span style="color:#e6db74">&#34;3&#34;</span> VerticalAlignment=<span style="color:#e6db74">&#34;Center&#34;</span> /&gt;
+</code></pre></div><p>The buttons describe what we&rsquo;re going to do, to be able to identify a face. The first step is to generate a person group, and add persons to that group. Next we need to train the person group, so when we upload a photo for identification, the service can identify it. The last step is to run the identification process. The text field just describes the status of the step we&rsquo;re currently at.</p>
+<h2 id="create-persons">Create persons</h2>
+<p>One of the key components to be able to identify a person is to have a person group with persons in it. For this example, we&rsquo;ll create one person group. To do this you&rsquo;ll need a variable for the <em>FaceServiceClient</em> (as we created last time), and you&rsquo;ll also need to define a string with the person group id. So to create the person group you&rsquo;ll need to do the following:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">readonly</span> IFaceServiceClient _faceServiceClient = <span style="color:#66d9ef">new</span> FaceServiceClient(<span style="color:#e6db74">&#34;API_KEY_HERE&#34;</span>);
+<span style="color:#66d9ef">private</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">string</span> _personGroupId = <span style="color:#e6db74">&#34;family3&#34;</span>;
+
+<span style="color:#66d9ef">await</span> _faceServiceClient.CreatePersonGroupAsync(_personGroupId, <span style="color:#e6db74">&#34;Family 3&#34;</span>);
+</code></pre></div><p>As you may see, the two first lines is at class level, while the last line is within the click handler for the &ldquo;GeneratePersonGroupButton&rdquo;.</p>
+<p>== A quick note on the person group id. The id can consist of numbers, &lsquo;-', &lsquo;_&rsquo; and lower case, English letters. ==</p>
+<p>In the source code, you&rsquo;ll notice I am doing some checking to check if the person group exist or not. This is simply since you can&rsquo;t have two groups with the same person group id.</p>
+<p>Moving on you&rsquo;ll need to create the persons that should be in that group. This can be done like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#66d9ef">var</span> lady3 = <span style="color:#66d9ef">await</span> _faceServiceClient.CreatePersonAsync(_personGroupId, <span style="color:#e6db74">&#34;Lily&#34;</span>);
+</code></pre></div><p>When a person has been created in a given person group, it is time to associate some images with that person. First off you need to get hold of the sample photos to use. They are present in the repository for this project, but if you&rsquo;re following along with your own project, they can be found <a href="https://github.com/Microsoft/Cognitive-Face-Windows/tree/master/Data">here</a>. In this example we&rsquo;ll just hardcode the path for the images needed, and the association between images and persons, but you&rsquo;ll get the idea behind it from the following code:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#66d9ef">string</span> lady3ImageDir = <span style="color:#e6db74">@&#34;./PersonGroup/Family3-Lady/&#34;</span>;
+
+<span style="color:#66d9ef">foreach</span>(<span style="color:#66d9ef">var</span> path <span style="color:#66d9ef">in</span> Directory.GetFiles(lady3ImageDir, <span style="color:#e6db74">&#34;*.jpg&#34;</span>))
+{
+    <span style="color:#66d9ef">using</span> (Stream s = File.OpenRead(path))
+    {
+        <span style="color:#66d9ef">await</span> _faceServiceClient.AddPersonFaceAsync(_personGroupId, lady3.PersonId, s);
+    }
+}
+</code></pre></div><p>When all the necessary persons have been added to a person group it is time to train the person group, which we&rsquo;ll do next.</p>
+<h2 id="train-the-person-group">Train the person group</h2>
+<p>Training a person group is important to be able to perform an identification on that person group. This step is required if you add new persons, if you remove persons or edit the face of any persons registered. To train a person group you need to add one line of code. However, we&rsquo;ll add some more code, so we&rsquo;re able to determine if the training process is done or not. Add the following to the click event of the button named &ldquo;TrainGroupButton&rdquo;:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#66d9ef">await</span> _faceServiceClient.TrainPersonGroupAsync(_personGroupId);
+
+TrainingStatus status = <span style="color:#66d9ef">null</span>;
+
+<span style="color:#66d9ef">while</span>(<span style="color:#66d9ef">true</span>)
+{
+    status = <span style="color:#66d9ef">await</span> _faceServiceClient.GetPersonGroupTrainingStatusAsync(_personGroupId);
+
+    <span style="color:#66d9ef">if</span>(status.Status.ToString() != <span style="color:#e6db74">&#34;running&#34;</span>)
+    {
+        NameField.Text = <span style="color:#e6db74">&#34;Person group training complete&#34;</span>;
+        IdentifyFace.IsEnabled = <span style="color:#66d9ef">true</span>;
+        <span style="color:#66d9ef">break</span>;
+    }
+
+    <span style="color:#66d9ef">await</span> Task.Delay(<span style="color:#ae81ff">1000</span>);
+}
+</code></pre></div><p>The training status field is actually an enum, which can be &ldquo;Succeeded&rdquo;, &ldquo;Failed&rdquo; or &ldquo;Running&rdquo;. In the API documentation it is marked as a string, so it is not yet updated. Obviously it would be better to report back the actual status, and deal with it if the training has failed, but we&rsquo;re taking the quick way for now.</p>
+<h2 id="identify-a-face">Identify a face</h2>
+<p>The last step is to write the code required to identify faces. The steps required to this is as follows: 1. Open an image and load it to a stream 2. Detect faces in image 3. From the faces detected generate an array with Face IDs 4. Use the generated array to identify persons 5. Map the results to a person in the person group</p>
+<p>In our example we&rsquo;ll go through these steps, and print the names of identified persons to the text field we added to the UI. Add the following code to the &ldquo;IdentifyFace&rdquo; button&rsquo;s click handler:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#66d9ef">using</span> (Stream s = <span style="color:#66d9ef">await</span> _imageFile.OpenStreamForReadAsync())
+{
+    <span style="color:#66d9ef">var</span> faces = <span style="color:#66d9ef">await</span> _faceServiceClient.DetectAsync(s);
+    <span style="color:#66d9ef">var</span> faceIds = faces.Select(face =&gt; face.FaceId).ToArray();
+
+    StringBuilder resultText = <span style="color:#66d9ef">new</span> StringBuilder();
+
+    <span style="color:#66d9ef">var</span> results = <span style="color:#66d9ef">await</span> _faceServiceClient.IdentifyAsync(_personGroupId, faceIds);
+
+    <span style="color:#66d9ef">if</span> (results.Length &gt; <span style="color:#ae81ff">0</span>)
+        resultText.Append(<span style="color:#e6db74">$&#34;{results.Length} face(s) detected! t&#34;</span>);
+
+    <span style="color:#66d9ef">foreach</span>(<span style="color:#66d9ef">var</span> identityResult <span style="color:#66d9ef">in</span> results)
+    {
+        <span style="color:#66d9ef">if</span> (identityResult.Candidates.Length != <span style="color:#ae81ff">0</span>)
+        { 
+            <span style="color:#66d9ef">var</span> candidateId = identityResult.Candidates[<span style="color:#ae81ff">0</span>].PersonId; 
+            <span style="color:#66d9ef">var</span> person = <span style="color:#66d9ef">await</span> _faceServiceClient.GetPersonAsync(_personGroupId, candidateId);
+            resultText.Append(<span style="color:#e6db74">$&#34;Detected: {person.Name}t&#34;</span>);
+        }
+    }
+
+    <span style="color:#66d9ef">if</span> (resultText.Length == <span style="color:#ae81ff">0</span>)
+        resultText.Append(<span style="color:#e6db74">&#34;No persons identified&#34;</span>);
+
+    NameField.Text = resultText.ToString();
+}
+</code></pre></div><p>What you see is that the results from our identification process can contain several hits, which basically is the faces from the image. These faces contain candidates of who they may be. The array with candidates is sorted by confidence of how certain the service is of the result. Assuming the first entry is the correct one, we use that to get a person, which contains the name and other information of that person. This is then shown in the text field below the buttons.</p>
+<p>The final result of the app, so far, looks like this: <img src="/images/IdentifiedPersons.PNG" alt="Successfully identified two persons"></p>
+<p><img src="/images/NoIdentifiedPersons.PNG" alt="Failed to identify any persons"></p>
+<p>To improve this, you may want to add a square around each face, and a label for each face, stating their name. We won&rsquo;t be doing that here, but I&rsquo;ll leave that as a challenge for you to extend the app with!</p>
+<h2 id="summary">Summary</h2>
+<p>In this post we have looked at what is needed to identify a person from an image. We updated the app from our previous post to have the required UI. We learned to create a person group and add persons to it, and we also saw how to associate images to each person. We looked into the process of training a person group, and finally we looked through the steps needed to identify a face in an image.</p>
+<p>In the next post we will look into another API from Microsoft Cognitive Service to be able to detect people on a web cam, grab a snapshot and identify that person. I hope to see you around then as well!</p>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

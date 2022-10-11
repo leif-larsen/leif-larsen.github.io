@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>Securing your Wordpress installation // Leif Larsen</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.68.3" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Leif" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://www.leiflarsen.org/css/main.min.0fb49e70a30412f97ddfc418e18fefef1d9fcdebe45f634dbbba768b00fe1eec.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Securing your Wordpress installation"/>
+<meta name="twitter:description" content="I am using WordPress as my blog platform, as I find it to have all the features I need. As I have seen some increase in traffic over the past few months, I have also seen an increase in the number of brute-force attempts (if you want to know what a brute-force attack is, you can read up on it at Wikipedia). As a result, I thought I share a few tips on how you could be securing your WordPress installation."/>
+
+    <meta property="og:title" content="Securing your Wordpress installation" />
+<meta property="og:description" content="I am using WordPress as my blog platform, as I find it to have all the features I need. As I have seen some increase in traffic over the past few months, I have also seen an increase in the number of brute-force attempts (if you want to know what a brute-force attack is, you can read up on it at Wikipedia). As a result, I thought I share a few tips on how you could be securing your WordPress installation." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.leiflarsen.org/posts/securing-your-wordpress-installation/" />
+<meta property="article:published_time" content="2015-09-20T00:00:00+00:00" />
+<meta property="article:modified_time" content="2015-09-20T00:00:00+00:00" />
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://www.leiflarsen.org/"><img class="app-header-avatar" src="/images/leif_larsen.jpg" alt="Leif" /></a>
+      <span class="app-header-title">Leif Larsen</span>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/about/">About</a>
+            -
+          
+          <a class="app-header-menu-item" href="/">Home</a>
+      </nav>
+      <p>My journey in tech</p>
+      <div class="app-header-social">
+        
+          <a href="https://github.com/leif-larsen" target="_blank" rel="noreferrer noopener me">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>My Github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg>
+          </a>
+        
+          <a href="https://www.linkedin.com/in/leifhlarsen/" target="_blank" rel="noreferrer noopener me">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-linkedin">
+  <title>LinkedIn</title>
+  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle>
+</svg>
+          </a>
+        
+          <a href="https://twitter.com/leif_larsen" target="_blank" rel="noreferrer noopener me">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>Twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg>
+          </a>
+        
+          <a href="https://www.instagram.com/leif_larsen/" target="_blank" rel="noreferrer noopener me">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-instagram">
+  <title>Instagram</title>
+  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+</svg>
+          </a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Securing your Wordpress installation</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Sep 20, 2015
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          4 min read
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <p>I am using WordPress as my blog platform, as I find it to have all the features I need. As I have seen some increase in traffic over the past few months, I have also seen an increase in the number of brute-force attempts (if you want to know what a brute-force attack is, you can read up on it at <a href="https://en.wikipedia.org/wiki/Brute-force_attack">Wikipedia</a>). As a result, I thought I share a few tips on how you could be securing your WordPress installation.</p>
+<p><strong>Backup</strong></p>
+<p>The first, and maybe most important thing to do is to have a working backup system. I am using a plugin called “<a href="https://wordpress.org/plugins/wordpress-backup-to-dropbox/">WordPress Backup to Dropbox</a>“, which connects to your dropbox account, and generates a backup of all your files and the database. You set it up so it creates a backup periodically. It is quite easy to setup, and the provided installation guide gets you up and running in no time. Just make sure you have enough available space on your dropbox account!<br>
+You can find a list of other backup plugins at <a href="http://www.wpbeginner.com/plugins/7-best-wordpress-backup-plugins-compared-pros-and-cons/">wpbeginner</a>, although I cannot say how any of those works.</p>
+<p><strong>WordPress security</strong></p>
+<p>A tool I use for security is <a href="https://wordpress.org/plugins/wordfence/">Wordfence</a>. This is a great tool, which provides you with blocking features, login security, security scanning, WordPress firewall, monitoring, caching and several more. It comes with a free edition, as well as a premium edition. For my use, the free edition is enough, but I am considering upgrading, as I see several premium features I would like to try.</p>
+<p>Amongst the stuff I have set it up to, is to give me security reports. So if someone tries to log on to my site, but fails, I will be notified. In addition when upgrades is available for plugins or WordPress I get notified.</p>
+<p>There are a lot of settings for this plugin, so I won’t go into detail on them. I highly recommend trying Wordfence to see all the possibilities.</p>
+<p><strong>Securing WP-Admin</strong></p>
+<p>Another step to secure your WordPress installation is to put your administration files (usually the folder called WP-Admin) under password protection. This means creating a .htaccess file, with a corresponding .htpasswd file. This can be done manually, or if your web host use CPanel, you could use the features of CPanel to do it. There are several guides online, on how you do this, so I won’t go into much details on this. I’ve used the guide from <a href="http://www.wpbeginner.com/wp-tutorials/how-to-password-protect-your-wordpress-admin-wp-admin-directory/">wpbeginner</a> with success. This guide also describes some errors that may occur while setting this up.</p>
+<p>While we’re talking about password protection, it might also be an idea to password protect the wp-login page. This is the page that loads when you need to login in to the administration panel, and it is located outside the WP-Admin folder. I did not really see a decrease in the number of brute-force attempts until I put password protection of this file. From the WordPress codex I added the following lines to the .htaccess file under the WordPress root folder.</p>
+<pre><code class="language-language" data-lang="language"># Stop Apache from serving .ht* files 
+&lt;Files ~ &quot;^.ht&quot;&gt; 
+   Order allow,deny Deny from all 
+&lt;/Files&gt; 
+
+# Protect wp-login 
+&lt;Files wp-login.php&gt; 
+   AuthUserFile ~/.htpasswd 
+   AuthName &quot;Private access&quot; 
+   AuthType Basic 
+   require user mysecretuser 
+&lt;/Files&gt;
+</code></pre><p>Replace AuthUserFile with the correct filepath for your .htpasswd file.</p>
+<p><strong>IP whitelist</strong></p>
+<p>The last step in securing your WordPress installation might be a disadvantage. It involves creating a whitelist of IP addresses that are allowed to access your administration panel. In my case I only have a couple of places I access my WordPress, so it’s ok for me. Others may access the administration panel from new locations every day, which will mean they would need to update their .htaccess often. Others again may have dynamic IP from their ISP, so this could be a disadvantage in that case.</p>
+<p>To create the IP whitelist you need to edit the .htaccess file, located in the WP-Admin folder. In this file you should add the following snippet:</p>
+<pre><code class="language-language" data-lang="language">&lt;LIMIT GET&gt; 
+   order deny,allow deny from all 
+   # whitelist Syed's IP address    
+   allow from xx.xx.xx.xxx 
+   # whitelist David's IP address 
+   allow from xx.xx.xx.xxx 
+   # whitelist Amanda's IP address 
+   allow from xx.xx.xx.xxx 
+   # whitelist Muhammad's IP address 
+   allow from xx.xx.xx.xxx 
+   # whitelist Work IP address 
+   allow from xx.xx.xx.xxx 
+&lt;/LIMIT&gt;
+</code></pre><p>It should be fairly easy to see what needs to be changed there.</p>
+<p>So thats my few cents on how to secure your WordPress installation. Feel free to share any other stuff I haven’t mentioned. More resources on the subject can be found at the WordPress Codex, and wpbeginner, which I have linked to several times through the article.</p>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

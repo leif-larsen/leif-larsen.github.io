@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>Releasing an app   Android // Leif Larsen</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.68.3" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Leif" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://www.leiflarsen.org/css/main.min.0fb49e70a30412f97ddfc418e18fefef1d9fcdebe45f634dbbba768b00fe1eec.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Releasing an app   Android"/>
+<meta name="twitter:description" content="Last week I wrote the first post in the “Releasing an app” series, on Windows Phone. Originally this week was to be about iOS, however due to some technical trouble, I have temporarily lost all the screen shots I had prepared. Therefore, I will do this week’s post on releasing an app, developed with Xamarin Forms, for Android.
+As you will see through this post, the release process for Android is, at least in my opinion, the easiest of the three."/>
+
+    <meta property="og:title" content="Releasing an app   Android" />
+<meta property="og:description" content="Last week I wrote the first post in the “Releasing an app” series, on Windows Phone. Originally this week was to be about iOS, however due to some technical trouble, I have temporarily lost all the screen shots I had prepared. Therefore, I will do this week’s post on releasing an app, developed with Xamarin Forms, for Android.
+As you will see through this post, the release process for Android is, at least in my opinion, the easiest of the three." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.leiflarsen.org/posts/releasing-an-app-android/" />
+<meta property="article:published_time" content="2016-01-31T00:00:00+00:00" />
+<meta property="article:modified_time" content="2016-01-31T00:00:00+00:00" />
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://www.leiflarsen.org/"><img class="app-header-avatar" src="/images/leif_larsen.jpg" alt="Leif" /></a>
+      <span class="app-header-title">Leif Larsen</span>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/about/">About</a>
+            -
+          
+          <a class="app-header-menu-item" href="/">Home</a>
+      </nav>
+      <p>My journey in tech</p>
+      <div class="app-header-social">
+        
+          <a href="https://github.com/leif-larsen" target="_blank" rel="noreferrer noopener me">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>My Github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg>
+          </a>
+        
+          <a href="https://www.linkedin.com/in/leifhlarsen/" target="_blank" rel="noreferrer noopener me">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-linkedin">
+  <title>LinkedIn</title>
+  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle>
+</svg>
+          </a>
+        
+          <a href="https://twitter.com/leif_larsen" target="_blank" rel="noreferrer noopener me">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>Twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg>
+          </a>
+        
+          <a href="https://www.instagram.com/leif_larsen/" target="_blank" rel="noreferrer noopener me">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-instagram">
+  <title>Instagram</title>
+  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+</svg>
+          </a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Releasing an app   Android</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Jan 31, 2016
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          8 min read
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <p>Last week I wrote the first post in the “Releasing an app” series, <a href="http://blog.leiflarsen.org/releasing-an-app-windows-phone">on Windows Phone</a>. Originally this week was to be about iOS, however due to some technical trouble, I have temporarily lost all the screen shots I had prepared. Therefore, I will do this week’s post on releasing an app, developed with Xamarin Forms, for Android.</p>
+<p>As you will see through this post, the release process for Android is, at least in my opinion, the easiest of the three. It also has some nice features, which makes it really easy to go through test phases before production release. It is also the process that is the quickest, but this also have its disadvantages.</p>
+<p>Throughout this tutorial I will assume you already have setup a Google account. I’ll also assume you have registered for a publisher account. This costs $25, and can be done from <a href="https://play.google.com/apps/publish">Google Play Store</a>. Also a short apology; When I went through this process, and documenting it with screen shots, the language in Google Play Store were set to Norwegian, so all screen shots have Norwegian text. I have done my best to translate the important parts, so hopefully you will get what I mean!</p>
+<p>Now, like with all applications, it is important to test it before you release. I highly recommend that you test the app in both debug and release mode. Also you should test it on an actual device in release mode, you might find you miss some permissions. For instance, internet permissions are something that is automatically given in debug mode, however you need to explicitly ask for it, via the Android Manifest, in release. I learnt that the hard way.</p>
+<p>So your app is thoroughly tested and you’re ready to release it, what do you do? I suggest you head over to Google to prepare the app submission first, and focus on creating the app package later.</p>
+<p><img src="/img/2016/02/Skjermbilde-2016-01-16-kl.-12.58.10-300x166.png?fit=300%2C166" alt="Create new app listing in Google Play Store">Head over to <a href="https://play.google.com/apps/publish">Google Play Store</a> and click the “Add new app” in the top right corner. This will open a window for you to fill in the title of your app, and select the default language of the app. They also ask what you want to start to do, and you want to start with “Prepare app listing”.</p>
+<p>With this done you will see a few steps you need to execute before you can release the app. On the page that is open by default you need to fill in app title, a short description and a complete description. You need to upload at least two screenshots of your app, and a maximum of 8. You will also need to upload an icon and a promotion picture. You can also add more promotional pictures if you’d like. At last you need to select the type of app, the category and content rating. You will also need to fill in at least an e-mail you may be contacted on, as well as a link to some privacy policy if you have that.<br>
+<a href="/img/2016/02/AppListing1.png"><img src="/images/AppListing2.png" alt=""><img src="/images/AppListing3.png" alt=""><img src="/img/2016/02/AppListing3-150x150.png?resize=150%2C90" alt="App listing contact info and content rating"></a></p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p>As you may see you’ll need to complete a content rating, to set the appropriate age level for your app. When you start this process you need to give your e-mail, for communication related to the rating. Following this you need to choose the top level category your app falls under. Then you need to fill out the questionnaire, truthfully! With this done your app will be assigned with a age limit.</p>
+<p>The last step you need to do before uploading an app package (you can upload the package before, it just depends on your workflow) is to set pricing and availability. If the app is free you obviously don’t need to set a price. If the app cost something, you will need to set a base price. You will then go on the select the countries in which the app will be released to. For quite a few of the countries available you can set a different price than the default price. Further down on the same page you need to check some checkboxes if you have ads in your app, if it is for families/Google Work/Google Education, as well as agree to some terms and conditions and export laws from USA.</p>
+<p>Now that we have our app listing ready in the Play Store, you need to create the app package, also known as APK. First of all, you want to do add a conditional statement in Xamarin, so you turn off debug for the release build. You can do this by adding the following to your “AssemblyInfo.cs” file:</p>
+<p><code>#if DEBUG [assembly: Application(Debuggable=true)]</code> <code>#else [assembly: Application(Debuggable=false)] #endif</code></p>
+<p><a href="/img/2016/02/Skjermbilde-2016-01-16-kl.-12.53.05.png"><img src="/img/2016/02/Skjermbilde-2016-01-16-kl.-12.53.05.png?fit=266%2C258" alt="Archive for Publishing menu choice"></a>The next thing you need to do is build the app APK file, which is the file you will upload to Googles Play Store (I assume app icons etc. is in place already, as well as permissions in the AndroidManifest.xml). You can do this by selecting the Android project (in Xamarin Studio), go to the build menu, and select “Archive for Publishing”. When this process completes you are presented with a list of the archives available, where the platform, name of project, version, creation dates and optional comments is shown. In the comment field you may put in a comment, so you can easily identify the new features of the release, or other information you want, when you have a bigger list of archives.</p>
+<p><a href="/img/2016/02/Skjermbilde-2016-01-16-kl.-12.53.12.png"><img src="/img/2016/02/Skjermbilde-2016-01-16-kl.-12.53.12-300x136.png?fit=300%2C136" alt="Archive with all the release packages"></a></p>
+<p>The next step you need to do is to “Sign and Distribute” the app, but before we get to that, let us take a short detour to make sure we have registered what we need in <a href="https://play.google.com/apps/publish/#ApiAccessPlace">Google Developers Console</a>. This will take us to a page for API access. You’ll need to click on “Create a new project”, and then click on “Create OAuth-Client”. Fill in the information they ask for, and you will have a client ID available. If you click on the link next to it (something like “Watch in Google Developer Console”), you will be taken to a new page with your credentials. Click on the newly created OAuth client ID, and you will be taken to a page where your client ID and client secret is. Take a note of this, because you will need it later.<br>
+<a href="/img/2016/02/Skjermbilde-2016-01-16-kl.-13.20.24.png"><img src="/img/2016/02/Skjermbilde-2016-01-16-kl.-13.20.24-300x82.png?fit=300%2C82" alt="OAuth client id"></a></p>
+<p>Now it’s time to go back to Xamarin Studio, where we will go through the process of signing and distributing our app. Click on “Sign and Distribute” in the bottom right corner of the archive list view. In the first pop-up window you will need to enter the client id and secret you just created. Click “Register”, and if no typos were made, you should see that it succeeds, and you can move forward.</p>
+<p>In the next view you are able to choose which account you want to publish your app to, as well as which track to upload it to (Alpha/Beta/Production). I suggest rollout to one of the testing phases at first, even if you are the only one to test the app. Being able to test the app from Play Store can be valuable, in terms of finding bugs you haven’t encountered in the development environment. When you click “Next” you will be taken to the signing page. If you haven’t already created a key, you will need to create it by clicking the “Create a new key” button. This process should be fairly self-explanatory, just make sure you set the expiration date later than 2033.</p>
+<p>Now it’s time to upload the app package. The first time you upload the package you will need to manually upload the file. In that case you should select “Ad-Hoc” in the Distribution channel. The next uploads can be done by choosing “Google Play.</p>
+<p>To upload the app package manually you need to be in the app page in Google Developer Console, where you entered your app info. Click on “APK”, select the track you want to upload to, and click “Upload new APK”. If the upload succeeds you are ready to publish the app, to the track you uploaded it to. Do this by clicking “Publish app”, in the top right corner. If this is in any of the test phases, you will be given a link where you can reach the app, and any external testers will be sent an e-mail with the information they need. If this is the case, you can easily update the app to the next test phase or production, if all tests succeed. If not, it is on its way to the Play Store. Either way, it will take a few hours before it is ready and visible in the store, or for the testers.</p>
+<p>One disadvantage, at least in my opinion, compared to release of an iOS app is that it doesn’t go through any verification by Google employees. You have the responsibility to test the app, which is good, but you may have bugs you haven’t discovered in testing, which may occur in release (naturally you have tested your app well, so bugs doesn’t exist, right?) One can argue that because of this you should always go through at least a beta test phase, and that it is positive that the release is so quickly done. But it is something to think about.</p>
+<p>That is it for now, I hope this was understandable and usable. Next week I’ll be going through the release process for iOS, so make sure you don’t miss that!</p>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

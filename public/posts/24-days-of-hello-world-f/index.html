@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>24 Days of Hello World   F // Leif Larsen</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.68.3" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Leif" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://www.leiflarsen.org/css/main.min.0fb49e70a30412f97ddfc418e18fefef1d9fcdebe45f634dbbba768b00fe1eec.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="24 Days of Hello World   F"/>
+<meta name="twitter:description" content="Today I am looking into functional programming. More specifically I’ll look into F#, a strongly typed, multi-paradigm language. Often used as a cross-platform common language infrastructure language.
+It is developed by F# Software Foundation, Microsoft and open contributors. It is supported in Visual Studio and Xamarin Studio, and it has its own open source, cross-platform compiler.
+History
+F# was originally designed and implemented by Don Syme, from Microsoft Research, and it was first released in 2005, supporting ."/>
+
+    <meta property="og:title" content="24 Days of Hello World   F" />
+<meta property="og:description" content="Today I am looking into functional programming. More specifically I’ll look into F#, a strongly typed, multi-paradigm language. Often used as a cross-platform common language infrastructure language.
+It is developed by F# Software Foundation, Microsoft and open contributors. It is supported in Visual Studio and Xamarin Studio, and it has its own open source, cross-platform compiler.
+History
+F# was originally designed and implemented by Don Syme, from Microsoft Research, and it was first released in 2005, supporting ." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.leiflarsen.org/posts/24-days-of-hello-world-f/" />
+<meta property="article:published_time" content="2015-12-05T00:00:00+00:00" />
+<meta property="article:modified_time" content="2015-12-05T00:00:00+00:00" />
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://www.leiflarsen.org/"><img class="app-header-avatar" src="/images/leif_larsen.jpg" alt="Leif" /></a>
+      <span class="app-header-title">Leif Larsen</span>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/about/">About</a>
+            -
+          
+          <a class="app-header-menu-item" href="/">Home</a>
+      </nav>
+      <p>My journey in tech</p>
+      <div class="app-header-social">
+        
+          <a href="https://github.com/leif-larsen" target="_blank" rel="noreferrer noopener me">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>My Github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg>
+          </a>
+        
+          <a href="https://www.linkedin.com/in/leifhlarsen/" target="_blank" rel="noreferrer noopener me">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-linkedin">
+  <title>LinkedIn</title>
+  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle>
+</svg>
+          </a>
+        
+          <a href="https://twitter.com/leif_larsen" target="_blank" rel="noreferrer noopener me">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>Twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg>
+          </a>
+        
+          <a href="https://www.instagram.com/leif_larsen/" target="_blank" rel="noreferrer noopener me">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-instagram">
+  <title>Instagram</title>
+  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+</svg>
+          </a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">24 Days of Hello World   F</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Dec 5, 2015
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          3 min read
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <p>Today I am looking into functional programming. More specifically I’ll look into F#, a strongly typed, multi-paradigm language. Often used as a cross-platform common language infrastructure language.</p>
+<p>It is developed by F# Software Foundation, Microsoft and open contributors. It is supported in Visual Studio and Xamarin Studio, and it has its own open source, cross-platform compiler.</p>
+<p><strong>History</strong></p>
+<p>F# was originally designed and implemented by Don Syme, from Microsoft Research, and it was first released in 2005, supporting .NET 1.0 – 3.5, and the Windows platform. Features included functional programming, records, tuples, pattern matching, structs, scripting files, modules and .NET interoperability, to mention a few.</p>
+<p>It took about 5 years until the next version was released. This did support Linux and OS X as well, and .NET 2.0 – 4.0 as well as Mono. New features was added, such as asynchronous programming, agent programming, extension members, named arguments and array slicing.</p>
+<p>Version 3.0 supported also supported .NET 4.5, as well as GPU and JavaScript platforms. Features like LINQ, auto-properties and type providers were added.</p>
+<p>The latest version is F# 4.0, released earlier this year, with the introduction of Visual Studio 2015. Some of the features included is extension property initializers, class names as functions, non-null provided types and optional type args.</p>
+<p><strong>Typical uses</strong></p>
+<p>This is not a language with a wide variety of applications where it is used. It is a central part of <a href="http://websharper.com/">WebSharper</a>, where you use F# as .NET code on the server, and JavaScript on the front end.</p>
+<p>Another place it is used is for analytical programming. It has been positioned as an optimized alternative to C#, and is used for quantitative finance programming, energy trading and portfolio optimization, machine learning and business intelligence.</p>
+<p><strong>Example Hello World</strong></p>
+<p>So for this example you will need a compiler for F#, naturally. There are a few ways to compile code on Windows (5 actually), which you can read about on <a href="http://fsharp.org/use/windows/">fsharp.org</a>.</p>
+<p>Assuming you have everything you need to compile some code, lets create a file called HelloWorld.fs. The code should look something like this:</p>
+<p>open System [] let main argv = printfn &ldquo;Hello, World!&rdquo; 0</p>
+<p>A big warning here! Do not let there be TABs, unless you specify an “#indent “off”” option. My first attempt to compile the code above, <em>with</em> TABs failed. When I removed the TABs and just used whitespace, it compiled fine.</p>
+<p>Anyway, compile this file by running the following:</p>
+<p>fsc HelloWorld.cs</p>
+<p>And given that the compilation succeeded, run the program by running:</p>
+<p>HelloWorld.exe</p>
+<p>If everything has been done as it should, you should see the all familiar “Hello, World!” printed to the console.</p>
+<p>Although I haven’t spent too much time on F#, I imagine I’ll spend some time diving into it sometime next year. It is compatible with many Microsoft products, uses .NET framework, and is being used for machine learning, a topic I’m interested in learning more on later.</p>
+<p>That’s it for now, be sure to check back tomorrow for the next part!</p>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

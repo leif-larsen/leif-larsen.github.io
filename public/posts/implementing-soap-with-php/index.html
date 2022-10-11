@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>Implementing SOAP with PHP // Leif Larsen</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.68.3" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Leif" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://www.leiflarsen.org/css/main.min.0fb49e70a30412f97ddfc418e18fefef1d9fcdebe45f634dbbba768b00fe1eec.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Implementing SOAP with PHP"/>
+<meta name="twitter:description" content="Recently I have been working with a project requiring the use of SOAP. Beforehand my knowledge of SOAP was not great, but I had the basic idea of it. This project was therefore quite fun to do, because it caused a few challenges, and I learned a lot.
+The idea was fairly simple; a customer should give some information (name, birthdate and zip number) to initiate an order form. This information was to be sent to a service called NUBIX, which would use this information to fetch more information about the customer."/>
+
+    <meta property="og:title" content="Implementing SOAP with PHP" />
+<meta property="og:description" content="Recently I have been working with a project requiring the use of SOAP. Beforehand my knowledge of SOAP was not great, but I had the basic idea of it. This project was therefore quite fun to do, because it caused a few challenges, and I learned a lot.
+The idea was fairly simple; a customer should give some information (name, birthdate and zip number) to initiate an order form. This information was to be sent to a service called NUBIX, which would use this information to fetch more information about the customer." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.leiflarsen.org/posts/implementing-soap-with-php/" />
+<meta property="article:published_time" content="2012-08-30T00:00:00+00:00" />
+<meta property="article:modified_time" content="2012-08-30T00:00:00+00:00" />
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://www.leiflarsen.org/"><img class="app-header-avatar" src="/images/leif_larsen.jpg" alt="Leif" /></a>
+      <span class="app-header-title">Leif Larsen</span>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/about/">About</a>
+            -
+          
+          <a class="app-header-menu-item" href="/">Home</a>
+      </nav>
+      <p>My journey in tech</p>
+      <div class="app-header-social">
+        
+          <a href="https://github.com/leif-larsen" target="_blank" rel="noreferrer noopener me">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>My Github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg>
+          </a>
+        
+          <a href="https://www.linkedin.com/in/leifhlarsen/" target="_blank" rel="noreferrer noopener me">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-linkedin">
+  <title>LinkedIn</title>
+  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle>
+</svg>
+          </a>
+        
+          <a href="https://twitter.com/leif_larsen" target="_blank" rel="noreferrer noopener me">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>Twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg>
+          </a>
+        
+          <a href="https://www.instagram.com/leif_larsen/" target="_blank" rel="noreferrer noopener me">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-instagram">
+  <title>Instagram</title>
+  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+</svg>
+          </a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Implementing SOAP with PHP</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Aug 30, 2012
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          4 min read
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <p>Recently I have been working with a project requiring the use of SOAP. Beforehand my knowledge of SOAP was not great, but I had the basic idea of it. This project was therefore quite fun to do, because it caused a few challenges, and I learned a lot.</p>
+<p>The idea was fairly simple; a customer should give some information (name, birthdate and zip number) to initiate an order form. This information was to be sent to a service called NUBIX, which would use this information to fetch more information about the customer. This extended information would then be returned, and the needed fields for an order would be automatically be filled in.</p>
+<p>To fill you out with some background information, NUBIX is a web service which is central for power suppliers in Norway. Power suppliers can use this in their web pages to get basic information like address, place etc., but also more information regarding measuring point IDs etc (used to identify fuse boxes). This service is run on a IIS server, and as far as my research showed, no other power suppliers had implemented this with PHP. Also the people in control of NUBIX did not have any examples of implementation with PHP.</p>
+<p>Anyhow, my first instinct was obviously to try the native PHP SOAP library. NUBIX uses WSDL, and the requests and responses is pretty much straight forwards. It turned out that it wasn’t as easy as first expected. I thought it might be just that I didn’t understand how SOAP worked properly, so I stumbled across this brilliant explanation of it (check it out <a href="http://stackoverflow.com/questions/10511478/php-soap-client-for-uk-mail-webservice-api">here</a>). Basically I tried to solve it this way, but I had no luck this way either. I could connect to the service, but all I got back was “The user ‘Unknown User’ is not verified” (loosely translated from Norwegian).</p>
+<p>My next try was to go ahead and use Nusoap, which is a SOAP library developed before the native library. I hesitated to use this library, seeing as it is not in development anymore, and the only real reason to use it is legacy reasons. But I was on a deadline, so I gave it a shot and with got some progress. I managed to get passed the first error message I had received, but now I got some other error. I have to admit I can’t remember what it was, but it had to do with the request I sent. This puzzled me, seeing as the request I sent resembled the example request I got from the people in control of NUBIX.</p>
+<p>My last try was to send in raw XML, to make sure that the request was correct, down to the smallest whitespace. This time the response was that the verb in the request (POST in this case) was not allowed. I modified the code, so I could send the request as a GET request, but this did not work, since I were not able to pass any data.</p>
+<p>So, how did I solve this? Well, after quite some time googling around, I came across another link to the NUBIX service, but in another format. The previous link was “https://ws.nubix.no/Schemas/2011/Requestor/NubixService.wsdl”, but the new one were “https://ws.nubix.no/Nubix.asmx?WSDL”. Suddenly I was able to send raw XML as a POST request, and get a positive response back! Success at last.</p>
+<p>I won’t be going in detail about all the code I wrote here, because it was a lot. The code below is a modified function to show how to send raw XML with nusoap. As you might see the function takes three parameters, last name, zip code and birth date (the format which it needs to be is 1990-10-15). Also you need to make sure that nusoap uses UTF-8.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getNUBIX</span>($name, $zip, $bdate) { 
+   $client <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">nusoap_client</span>(<span style="color:#e6db74">&#39;https://ws.nubix.no/Nubix.asmx?WSDL&#39;</span>, <span style="color:#e6db74">&#39;wsdl&#39;</span>); 
+   $client<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">soap_defencoding</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;UTF-8&#39;</span>; 
+   $client<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">decode_utf8</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>; 
+   $id <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;2345212453234&#34;</span>; 
+   $xmlbody <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;
+</span><span style="color:#e6db74">   &lt;soap_Envelope xmlns_xsi=&#34;http://www.w3.org/2001/XMLSchema-instance&#34; xmlns_xsd=&#34;http://www.w3.org/2001/XMLSchema&#34; xmlns_soap=&#34;http://schemas.xmlsoap.org/soap/envelope/&#34;&gt;
+</span><span style="color:#e6db74">      &lt;soap_Header&gt; 
+</span><span style="color:#e6db74">         &lt;credentialsHeader &gt; 
+</span><span style="color:#e6db74">            &lt;Username &gt;*******&lt;/Username&gt; 
+</span><span style="color:#e6db74">            &lt;Password &gt;*******&lt;/Password&gt;
+</span><span style="color:#e6db74">         &lt;/credentialsHeader&gt; 
+</span><span style="color:#e6db74">      &lt;/soap_Header&gt; 
+</span><span style="color:#e6db74">      &lt;soap_Body&gt; 
+</span><span style="color:#e6db74">         &lt;MeteringPointIdRequest &gt; 
+</span><span style="color:#e6db74">            &lt;RequestId &gt;&#39;</span><span style="color:#f92672">.</span>$id<span style="color:#f92672">.</span><span style="color:#e6db74">&#39;&lt;/RequestId&gt; 
+</span><span style="color:#e6db74">            &lt;Requestor &gt; 
+</span><span style="color:#e6db74">               &lt;GLN&gt;***********&lt;/GLN&gt; 
+</span><span style="color:#e6db74">            &lt;/Requestor&gt; 
+</span><span style="color:#e6db74">            &lt;Customers &gt; 
+</span><span style="color:#e6db74">               &lt;DomesticCustomer &gt;
+</span><span style="color:#e6db74">                  &lt;LastName&gt;&#39;</span><span style="color:#f92672">.</span>$name<span style="color:#f92672">.</span><span style="color:#e6db74">&#39;&lt;/LastName&gt;
+</span><span style="color:#e6db74">                  &lt;BirthDate&gt;&#39;</span><span style="color:#f92672">.</span>$date<span style="color:#f92672">.</span><span style="color:#e6db74">&#39;&lt;/BirthDate&gt;
+</span><span style="color:#e6db74">                  &lt;Addresses&gt; 
+</span><span style="color:#e6db74">                     &lt;Address&gt;
+</span><span style="color:#e6db74">                        &lt;PostCode&gt;&#39;</span><span style="color:#f92672">.</span>$zip<span style="color:#f92672">.</span><span style="color:#e6db74">&#39;&lt;/PostCode&gt;
+</span><span style="color:#e6db74">                        &lt;CountryCode&gt;NO&lt;/CountryCode&gt; 
+</span><span style="color:#e6db74">                     &lt;/Address&gt; 
+</span><span style="color:#e6db74">                  &lt;/Addresses&gt; 
+</span><span style="color:#e6db74">               &lt;/DomesticCustomer&gt; 
+</span><span style="color:#e6db74">            &lt;/Customers&gt; 
+</span><span style="color:#e6db74">         &lt;/MeteringPointIdRequest&gt; 
+</span><span style="color:#e6db74">      &lt;/soap_Body&gt; 
+</span><span style="color:#e6db74">   &lt;/soap_Envelope&gt;&#39;</span>; 
+   $endpoint <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;http://www.ediel.no/schemas/public/nubix/:GetMeteringPointIdRequest&#34;</span>; 
+   $result <span style="color:#f92672">=</span> $client<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">send</span>($xmlbody, $endpoint);
+   <span style="color:#75715e">//print_r($client-&gt;request); 
+</span><span style="color:#75715e"></span>   <span style="color:#75715e">//print_r($client-&gt;response); 
+</span><span style="color:#75715e"></span>   <span style="color:#66d9ef">return</span> $result; 
+} <span style="color:#75715e">// End getNubix ?&gt;
+</span></code></pre></div><p>If I was to do this again I would probably try to find a way to send raw XML with the native SOAP library. Unfortunately I did not have time to do this now, but I should definitely do it as an update to the project. I do believe that because of how the NUBIX service works it is not possible to send requests the “simple” way. However, if anyone has examples that might resemble this one, and have a solution, feel free to share it!</p>
+<p>As far as SOAP as a protocol my impression is that it is quite good, but maybe not that developed in PHP. As far as I could find, there was not that many resources around, but then again, I might have worked towards a special web service?</p>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>
