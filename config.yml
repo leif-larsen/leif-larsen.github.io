@@ -1,0 +1,111 @@
+baseURL: "https://www.leiflarsen.org/"
+title: "Leif Larsen"
+copyright: "© 2025 - Leif Larsen"
+pagination: 
+  pagerSize: 5
+theme: [hugo-PaperMod]
+
+enableInlineShortcodes: true
+enableRobotsTXT: false
+buildDrafts: false
+buildFuture: false
+buildExpired: false
+enableEmoji: true
+pygmentsUseClasses: true
+mainsections: ["posts", "papermod"]
+#searchHidden: true
+
+minify:
+  disableXML: true
+  #minifyOutput: true
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+
+languages:
+  en:
+    languageName: "English"
+    weight: 1
+    taxonomies:
+      category: categories
+      tag: tags
+      series: series
+    menu:
+      main:
+        - name: Archive
+          url: archives
+          weight: 5
+        - name: Search
+          url: search/
+          weight: 10
+        - name: Public Talks and Publications
+          url: public/
+          weight: 10
+        - name: About
+          url: about/
+          weight: 15
+
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON
+          
+params:
+  env: production
+  title: "Leif Larsen | Code & Curiosity"
+  description: "Exploring languages, tools, and engineering craft."
+  author: "Leif Larsen"
+
+  defaultTheme: auto
+  ShowShareButtons: true
+  ShowReadingTime: true
+  displayFullLangName: true
+  ShowPostNavLinks: true
+  ShowBreadCrumbs: true
+  ShowCodeCopyButtons: true
+  ShowRssButtonInSectionTermList: true
+  ShowAllPagesInArchive: true
+  ShowPageNums: false
+  ShowToc: true
+  # comments: true
+  images: ["images/papermod-cover.png"]
+
+  # profileMode:
+  #   enabled: false
+  #   title: PaperMod
+  #   imageUrl: "#"
+  #   imageTitle: my image
+  #   # imageWidth: 120
+  #   # imageHeight: 120
+  #   buttons:
+  #     - name: Archives
+  #       url: archives
+  #     - name: Tags
+  #       url: tags
+
+  homeInfoParams:
+    Title: "Leif Larsen | Code & Curiosity"
+    Content: |-
+      👋 Welcome to my blog!
+      <br><br>
+      Here, I share my thoughts on technology, productivity, and the lessons I’ve picked up along the way.
+      <br><br>
+      As a developer and problem-solver, I’m always exploring new tools, experimenting with ideas, and reflecting on what works (and what doesn’t). 
+      Whether it’s a deep dive into a technical topic, a practical tip to make life a little easier, or just a personal take on navigating work and creativity, you’ll find it here.
+      <br><br>
+      I write about the things that interest me—sometimes technical, sometimes practical, and occasionally just observations from everyday life. 
+      If you enjoy learning, improving workflows, or thinking about how technology shapes the way we work, I hope you’ll find something useful.
+
+  socialIcons:
+      - name: linkedin
+        title: Connect on LinkedIn
+        url: "https://www.linkedin.com/in/leifhlarsen/"
+      - name: github
+        title: View Source on Github
+        url: "https://github.com/leif-larsen"
+      - name: buymeacoffee
+        title: Buy Me a Coffee :)
+        url: "https://buymeacoffee.com/leiflarsen"

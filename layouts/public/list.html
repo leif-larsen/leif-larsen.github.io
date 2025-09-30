@@ -1,0 +1,58 @@
+{{ define "main" }}
+<article class="public-archive">
+  <h1>{{ .Title }}</h1>
+  {{ with .Content }}<div class="page-intro">{{ . | markdownify }}</div>{{ end }}
+
+  {{/* Collect and merge items from data files */}}
+  {{ $items := slice }}
+  {{ with site.Data.speaking }}
+    {{ range . }}
+      {{ $items = $items | append (dict "kind" "speaking" "title" .title "url" .url "description" .description "date" .date) }}
+    {{ end }}
+  {{ end }}
+  {{ with site.Data.publications }}
+    {{ range . }}
+      {{ $items = $items | append (dict "kind" "publication" "title" .title "url" .url "description" .description "date" .date) }}
+    {{ end }}
+  {{ end }}
+
+  {{/* Sort descending by date (string YYYY-MM-DD works lexicographically) */}}
+  {{ $sorted := sort $items "date" "desc" }}
+
+  <div class="public-table-wrapper">
+    <table class="public-table">
+      <thead>
+        <tr>
+          <th style="white-space:nowrap;">Date</th>
+          <th>Title</th>
+          <th>Description</th>
+          <th style="white-space:nowrap;">Type</th>
+        </tr>
+      </thead>
+      <tbody>
+      {{ range $sorted }}
+        <tr>
+          <td>{{ with .date }}{{ dateFormat "Jan 2006" (time .) }}{{ end }}</td>
+          <td>
+            {{ if .url }}<a href="{{ .url }}" target="_blank" rel="noopener">{{ .title }}</a>{{ else }}{{ .title }}{{ end }}
+          </td>
+          <td>{{ .description }}</td>
+          <td>{{ cond (eq .kind "speaking") "Talk" "Publication" }}</td>
+        </tr>
+      {{ end }}
+      </tbody>
+    </table>
+  </div>
+</article>
+
+<style>
+  .public-table-wrapper { overflow-x:auto; margin-top:2rem; margin-bottom:2rem; }
+  .public-table { width:100%; border-collapse:collapse; font-size:0.95rem; }
+  .public-table th, .public-table td { padding:0.5rem 0.6rem; border-bottom:1px solid var(--border-color, #ccc); vertical-align:top; }
+  .public-table th { text-align:left; }
+  .public-table tbody tr:hover { background:rgba(0,0,0,0.03); }
+  .speaking-list, .publications-list { line-height:1.4; }
+  .speaking-list li, .publications-list li { margin-bottom:0.4rem; }
+  @media (max-width:700px){ .public-table td:nth-child(3){ font-size:0.85rem; } }
+</style>
+{{ end }}

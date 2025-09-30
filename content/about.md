@@ -1,14 +1,21 @@
 ---
 title: "About me"
-date: "2021-03-09"
+layout: "post"
+#date: "2021-03-09"
 ---
 
-Leif is a senior software consultant, focusing on .NET development. He has about 10 years experience in the IT field, and has worked both in-house and as a consultant.
+👋 Hi! 
 
-He prefers to work on the backend of systems, but is not afraid to work with frontend technologies.
+![Leif Larsen portrait](/images/me.jpg "Leif Larsen")
 
-Over the years, his curiosity has led him to build a couple of mobile applications, using cross-platform technologies. He has also written a book (in three editions) on how to get started with Azure Cognitive Services.
+I’m a technology advisor with over 14 years of experience in software development and cloud architecture. I help organizations design and build scalable, secure, and efficient solutions — always with a focus on creating real business value.
 
-When not working, or exploring different aspects of technology, Leif spends a lot of his time with his son and significant other. He also has a passion for music, and occasionally finds the time to play some tunes on the guitar.
+In recent years, I worked as a Cloud Solution Architect at Microsoft, where I supported customers in delivering large-scale digital transformation projects and building resilient solutions on the Azure platform. Before that, I led the development and architecture of mission-critical systems for organizations such as NHO, focusing on cloud-native solutions and enterprise transformation.
 
-If you'd like to get in touch, please feel free to reach out on [Twitter](https://twitter.com/leif_larsen) or [LinkedIn](https://www.linkedin.com/in/lhlarsen/).
+My journey began in the industrial sector, developing control systems for offshore vessels, before moving on to modern cloud platforms and cutting-edge technologies. This breadth of experience gives me a unique perspective: I understand both the technical details and how technology can enable strategic business goals.
+
+I’m also passionate about developer well-being and sustainable engineering practices. Through public speaking and knowledge sharing, I highlight how we can balance delivery speed with long-term quality — and how to thrive as a technologist in the process.
+
+Today, I work as an advisor, tech lead, and solutions architect — dedicated to bridging the gap between technical innovation and business strategy.
+
+If you'd like to get in touch, please feel free to reach out on [LinkedIn](https://www.linkedin.com/in/leifhlarsen/).

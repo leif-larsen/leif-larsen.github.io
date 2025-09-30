@@ -1,0 +1,18 @@
+# Speaking engagements data
+# Add new entries at the bottom. Date must be full ISO (YYYY-MM-01) so we can format Month Year.
+# Fields:
+# - title (string, required)
+# - date (YYYY-MM-01, required)
+# - description (short text, required)
+# - url (optional)
+
+- title: "From 100 applications to 1 platform - TDC 2024"
+  date: "2024-10-01"
+  description: "Talk at TDC 2024 about consolidating numerous applications into a unified platform to enhance maintainability and user experience."
+  url: "https://www.youtube.com/watch?v=J6-exfl_C2s&t=2s"
+
+- title: "Keeping our tech skills & mental health up-to-date - JavaZone 2022"
+  date: "2022-09-01"
+  description: "Talk at JavaZone 2022 about the importance of keeping your mental health in check while working in tech."
+  url: "https://vimeo.com/748031641?share=copy"
+
