@@ -15,6 +15,9 @@ pygmentsUseClasses: true
 mainsections: ["posts", "papermod"]
 #searchHidden: true
 
+# Google Analytics
+googleAnalytics: "G-C9NCPVK9NB"  # Replace with your actual GA4 measurement ID
+
 minify:
   disableXML: true
   #minifyOutput: true
@@ -46,6 +49,9 @@ languages:
         - name: About
           url: about/
           weight: 15
+        - name: Privacy
+          url: privacy/
+          weight: 20
 
 outputs:
   home:
@@ -58,6 +64,7 @@ params:
   title: "Leif Larsen | Code & Curiosity"
   description: "Exploring languages, tools, and engineering craft."
   author: "Leif Larsen"
+  googleAnalytics: "G-C9NCPVK9NB"  # Google Analytics measurement ID
 
   defaultTheme: auto
   ShowShareButtons: true
