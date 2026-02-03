@@ -1,12 +1,12 @@
 ---
 title: "About me"
-layout: "post"
-#date: "2021-03-09"
+date: "2021-03-09"
+layout: "about"
+description: "Technology advisor with 14+ years of experience in software development and cloud architecture."
+subtitle: "Technology advisor, cloud architect, and writer"
+intro_heading: "Hi, I'm Leif 👋"
+avatar: "/images/me.jpg"
 ---
-
-👋 Hi! 
-
-![Leif Larsen portrait](/images/me.jpg "Leif Larsen")
 
 I’m a technology advisor with over 14 years of experience in software development and cloud architecture. I help organizations design and build scalable, secure, and efficient solutions — always with a focus on creating real business value.
 

@@ -103,6 +103,35 @@ params:
       I write about the things that interest me—sometimes technical, sometimes practical, and occasionally just observations from everyday life. 
       If you enjoy learning, improving workflows, or thinking about how technology shapes the way we work, I hope you’ll find something useful.
 
+  about:
+    subtitle: "Technology advisor, cloud architect, and writer"
+    introHeading: "Hi, I'm Leif 👋"
+    expertiseTitle: "Areas of Expertise"
+    expertise:
+      - title: "Cloud Architecture"
+        description: "Designing scalable, secure platforms and cloud-native systems for mission-critical workloads."
+        icon: code
+      - title: "Technical Writing"
+        description: "Translating complex concepts into practical guidance, tutorials, and strategy docs."
+        icon: writing
+      - title: "Mentorship"
+        description: "Helping teams build sustainable engineering practices and grow their technical leadership."
+        icon: mentorship
+    technologiesTitle: "Technologies I Work With"
+    technologies:
+      - Azure
+      - Kubernetes
+      - Terraform
+      - TypeScript
+      - Go
+      - Python
+      - Docker
+      - PostgreSQL
+      - GitHub Actions
+      - Observability
+    connectTitle: "Let's Connect"
+    connectText: "I'm always happy to chat about technology, collaborate on projects, or help with technical challenges. Feel free to reach out!"
+
   socialIcons:
       - name: linkedin
         title: Connect on LinkedIn
@@ -110,6 +139,9 @@ params:
       - name: github
         title: View Source on Github
         url: "https://github.com/leif-larsen"
+      - name: mail
+        title: Email Leif
+        url: "mailto:me@leiflarsen.org"
       - name: buymeacoffee
         title: Buy Me a Coffee :)
         url: "https://buymeacoffee.com/leiflarsen"

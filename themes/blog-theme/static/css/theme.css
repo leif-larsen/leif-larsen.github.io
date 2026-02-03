@@ -568,6 +568,193 @@ img {
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+.about-page {
+  padding: 2rem 0 4rem;
+}
+
+.about-inner {
+  max-width: 920px;
+}
+
+.about-hero {
+  text-align: center;
+  padding: 1rem 0 2.5rem;
+}
+
+.about-avatar {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 1.2rem;
+  padding: 6px;
+  border-radius: 50%;
+  background: linear-gradient(160deg, rgba(120, 213, 255, 0.25), rgba(255, 255, 255, 0.08));
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 18px 35px rgba(0, 0, 0, 0.4);
+}
+
+.about-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.about-title {
+  font-family: "Space Grotesk", "Manrope", sans-serif;
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  margin: 0.4rem 0 0.6rem;
+}
+
+.about-subtitle {
+  max-width: 560px;
+  margin: 0 auto;
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+
+.about-section {
+  margin-top: 2.8rem;
+}
+
+.about-section-title {
+  font-family: "Space Grotesk", "Manrope", sans-serif;
+  font-size: 1.2rem;
+  margin-bottom: 1.2rem;
+}
+
+.about-intro .about-section-title {
+  margin-bottom: 0.6rem;
+}
+
+.about-text {
+  color: #dfe3ea;
+  font-size: 1rem;
+}
+
+.about-text p {
+  margin: 1rem 0;
+}
+
+.about-text a {
+  color: var(--accent);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.2rem;
+}
+
+.about-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.4rem;
+  min-height: 100%;
+  transition: transform 0.2s ease, border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.about-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(120, 213, 255, 0.35);
+  box-shadow: var(--shadow);
+}
+
+.about-card-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  margin-bottom: 0.9rem;
+}
+
+.about-card-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.about-card-title {
+  margin: 0 0 0.4rem;
+  font-size: 1.05rem;
+}
+
+.about-card-text {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.about-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.about-tag {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.about-connect {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius);
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.35);
+}
+
+.about-connect-title {
+  margin: 0 0 0.6rem;
+  font-size: 1.3rem;
+}
+
+.about-connect-text {
+  margin: 0;
+  color: var(--muted);
+}
+
+.about-socials {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 1.2rem;
+  flex-wrap: wrap;
+}
+
+.about-social {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text);
+  transition: transform 0.2s ease, border 0.2s ease;
+}
+
+.about-social svg {
+  width: 20px;
+  height: 20px;
+}
+
+.about-social:hover {
+  transform: translateY(-1px);
+  border-color: rgba(120, 213, 255, 0.4);
+}
+
 .action-button {
   display: inline-flex;
   align-items: center;
@@ -819,6 +1006,15 @@ img {
   .search-button {
     width: 100%;
   }
+
+  .about-avatar {
+    width: 96px;
+    height: 96px;
+  }
+
+  .about-connect {
+    padding: 1.5rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -845,5 +1041,9 @@ img {
 
   .brand-text {
     font-size: 0.9rem;
+  }
+
+  .about-title {
+    font-size: clamp(2rem, 8vw, 2.4rem);
   }
 }
