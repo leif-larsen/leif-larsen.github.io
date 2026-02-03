@@ -1,8 +1,9 @@
 ---
-title: "Public Talks & Publications"
-description: "Archive of speaking engagements and published work."
+title: "Talks & Publications"
+description: "Public speaking engagements, workshops, and published work."
+date: "2026-02-03"
+cta_title: "Interested in Having Me Speak?"
+cta_text: "I'm available for conference talks, workshops, and corporate training sessions. Topics include web development, React, TypeScript, and software architecture."
+cta_button_label: "Contact for Speaking Engagements"
+cta_button_url: "mailto:me@leiflarsen.org"
 ---
-
-Below you will find a combined chronological table, followed by separate lists for speaking engagements and publications.
-
-To suggest a correction or addition, feel free to open a PR on the repository.

@@ -37,10 +37,7 @@ languages:
       series: series
     menu:
       main:
-        - name: Search
-          url: search/
-          weight: 10
-        - name: Public Talks and Publications
+        - name: Talks & Publications
           url: public/
           weight: 10
         - name: About
