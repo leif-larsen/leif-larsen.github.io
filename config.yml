@@ -2,7 +2,7 @@ baseURL: "https://www.leiflarsen.org/"
 title: "Leif Larsen"
 copyright: "© 2026 - Leif Larsen"
 pagination: 
-  pagerSize: 5
+  pagerSize: 8
 theme: [blog-theme]
 
 enableInlineShortcodes: true
