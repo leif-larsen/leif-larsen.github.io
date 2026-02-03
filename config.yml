@@ -43,9 +43,6 @@ languages:
         - name: About
           url: about/
           weight: 15
-        - name: Privacy
-          url: privacy/
-          weight: 20
 
 outputs:
   home:

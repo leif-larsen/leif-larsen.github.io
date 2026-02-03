@@ -1,0 +1,50 @@
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <div class="footer-title">{{ site.Title }}</div>
+      {{ with site.Params.description }}
+        <p class="footer-text">{{ . }}</p>
+      {{ end }}
+    </div>
+    <div class="footer-links">
+      <div class="footer-heading">Quick Links</div>
+      <ul>
+        {{ with .OutputFormats.Get "RSS" }}
+          <li>
+            <a href="{{ .RelPermalink }}" class="footer-link">
+              {{ partial "icon.html" (dict "name" "rss") }}
+              RSS Feed
+            </a>
+          </li>
+        {{ end }}
+        {{ with site.GetPage "archives" }}
+          <li><a href="{{ .RelPermalink }}" class="footer-link">Archive</a></li>
+        {{ end }}
+        <li><a href="{{ "sitemap.xml" | relURL }}" class="footer-link">Sitemap</a></li>
+        {{ with site.GetPage "privacy" }}
+          <li><a href="{{ .RelPermalink }}" class="footer-link">Privacy</a></li>
+        {{ end }}
+        {{ with site.Params.newsletterUrl }}
+          <li><a href="{{ . }}" class="footer-link">Newsletter</a></li>
+        {{ end }}
+      </ul>
+    </div>
+    <div class="footer-connect">
+      <div class="footer-heading">Connect</div>
+      <div class="social-links">
+        {{ range site.Params.socialIcons }}
+          <a class="social-link" href="{{ .url }}" title="{{ .title }}" aria-label="{{ .title }}">
+            {{ partial "icon.html" (dict "name" .name) }}
+          </a>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+  <div class="footer-legal">
+    {{ with site.Copyright }}
+      {{ . }}
+    {{ else }}
+      &copy; {{ now.Year }} {{ site.Title }}. All rights reserved.
+    {{ end }}
+  </div>
+</footer>
