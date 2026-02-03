@@ -53,8 +53,9 @@
           {{ partial "icon.html" (dict "name" "buymeacoffee") }}
         </a>
       {{ end }}
-      <button class="icon-button" type="button" aria-label="Toggle theme" data-theme-toggle>
-        {{ partial "icon.html" (dict "name" "sun") }}
+      <button class="icon-button" type="button" aria-label="Switch to light mode" data-theme-toggle>
+        <span class="theme-icon theme-icon--sun">{{ partial "icon.html" (dict "name" "sun") }}</span>
+        <span class="theme-icon theme-icon--moon">{{ partial "icon.html" (dict "name" "moon") }}</span>
       </button>
     </div>
   </div>
@@ -72,5 +73,64 @@
       var isOpen = header.classList.toggle("is-open");
       toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
     });
+  })();
+</script>
+<script>
+  (function () {
+    var themeToggle = document.querySelector("[data-theme-toggle]");
+    var root = document.documentElement;
+    var storageKey = "theme-preference";
+    var media = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
+
+    function resolveTheme() {
+      var stored = null;
+      try {
+        stored = window.localStorage.getItem(storageKey);
+      } catch (e) {
+        stored = null;
+      }
+      if (stored === "light" || stored === "dark") return stored;
+      if (media && media.matches) return "dark";
+      return "light";
+    }
+
+    function updateToggleLabel(theme) {
+      if (!themeToggle) return;
+      var next = theme === "light" ? "dark" : "light";
+      themeToggle.setAttribute("aria-label", "Switch to " + next + " mode");
+      themeToggle.setAttribute("title", "Switch to " + next + " mode");
+    }
+
+    function applyTheme(theme, persist) {
+      root.setAttribute("data-theme", theme);
+      if (persist) {
+        try {
+          window.localStorage.setItem(storageKey, theme);
+        } catch (e) {}
+      }
+      updateToggleLabel(theme);
+    }
+
+    if (themeToggle) {
+      applyTheme(resolveTheme(), false);
+      themeToggle.addEventListener("click", function () {
+        var current = root.getAttribute("data-theme") || resolveTheme();
+        var next = current === "light" ? "dark" : "light";
+        applyTheme(next, true);
+      });
+    }
+
+    if (media && media.addEventListener) {
+      media.addEventListener("change", function () {
+        var stored = null;
+        try {
+          stored = window.localStorage.getItem(storageKey);
+        } catch (e) {
+          stored = null;
+        }
+        if (stored === "light" || stored === "dark") return;
+        applyTheme(media.matches ? "dark" : "light", false);
+      });
+    }
   })();
 </script>
