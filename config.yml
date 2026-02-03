@@ -3,7 +3,7 @@ title: "Leif Larsen"
 copyright: "© 2025 - Leif Larsen"
 pagination: 
   pagerSize: 5
-theme: [hugo-PaperMod]
+theme: [blog-theme]
 
 enableInlineShortcodes: true
 enableRobotsTXT: false
@@ -37,9 +37,6 @@ languages:
       series: series
     menu:
       main:
-        - name: Archive
-          url: archives
-          weight: 5
         - name: Search
           url: search/
           weight: 10

@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="{{ site.Language.Lang | default "en" }}">
+  <head>
+    {{ partial "head.html" . }}
+  </head>
+  <body class="{{ if .IsHome }}is-home{{ end }}">
+    <div class="page-bg" aria-hidden="true"></div>
+    {{ partial "site-header.html" . }}
+    <main class="site-main">
+      {{ block "main" . }}{{ end }}
+    </main>
+    {{ partial "site-footer.html" . }}
+    {{ partial "extend_head.html" . }}
+  </body>
+</html>

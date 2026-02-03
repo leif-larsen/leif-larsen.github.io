@@ -1,0 +1,79 @@
+{{ $page := .page }}
+{{ $scratch := newScratch }}
+{{ with $page.Params.image }}
+  {{ $scratch.Set "image" . }}
+{{ end }}
+{{ if not ($scratch.Get "image") }}
+  {{ with $page.Params.images }}
+    {{ if gt (len .) 0 }}
+      {{ $scratch.Set "image" (index . 0) }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{ if not ($scratch.Get "image") }}
+  {{ with $page.Params.cover }}
+    {{ if .image }}
+      {{ $scratch.Set "image" .image }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{ if and (not ($scratch.Get "image")) $page.File }}
+  {{ $year := $page.Date.Format "2006" }}
+  {{ $base := $page.File.ContentBaseName }}
+  {{ $candidates := slice
+    (printf "images/%s/%s.jpg" $year $base)
+    (printf "images/%s/%s.jpeg" $year $base)
+    (printf "images/%s/%s.png" $year $base)
+    (printf "images/%s/%s.webp" $year $base)
+  }}
+  {{ range $candidates }}
+    {{ if not ($scratch.Get "image") }}
+      {{ if fileExists (printf "static/%s" .) }}
+        {{ $scratch.Set "image" . }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{ $image := $scratch.Get "image" }}
+{{ if $image }}
+  {{ if not (strings.HasPrefix $image "http") }}
+    {{ $image = $image | relURL }}
+  {{ end }}
+{{ end }}
+{{ $summary := "" }}
+{{ if $page.Params.description }}
+  {{ $summary = $page.Params.description }}
+{{ else }}
+  {{ $summary = $page.Summary | plainify }}
+{{ end }}
+{{ $summary = $summary | truncate 140 }}
+{{ $tags := $page.Params.tags | default (slice) }}
+<article class="post-card {{ if $image }}has-image{{ else }}no-image{{ end }}">
+  {{ if $image }}
+    <a class="card-media" href="{{ $page.RelPermalink }}">
+      <img src="{{ $image }}" alt="" loading="lazy">
+    </a>
+  {{ end }}
+  <div class="card-body">
+    <div class="card-meta">
+      <span class="meta-date">{{ $page.Date.Format "January 2, 2006" }}</span>
+    </div>
+    <h3 class="card-title">
+      <a href="{{ $page.RelPermalink }}">{{ $page.Title }}</a>
+    </h3>
+    <p class="card-excerpt">{{ $summary }}</p>
+    {{ if gt (len $tags) 0 }}
+      <div class="card-tags">
+        {{ range first 3 $tags }}
+          <span class="tag">{{ . }}</span>
+        {{ end }}
+      </div>
+    {{ end }}
+    <div class="card-footer">
+      <span class="read-time">{{ $page.ReadingTime }} min read</span>
+      <a class="card-arrow" href="{{ $page.RelPermalink }}" aria-label="Read {{ $page.Title }}">
+        &rarr;
+      </a>
+    </div>
+  </div>
+</article>

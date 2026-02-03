@@ -1,0 +1,115 @@
+{{ define "main" }}
+{{ $scratch := newScratch }}
+{{ with .Params.image }}
+  {{ $scratch.Set "image" . }}
+{{ end }}
+{{ if not ($scratch.Get "image") }}
+  {{ with .Params.images }}
+    {{ if gt (len .) 0 }}
+      {{ $scratch.Set "image" (index . 0) }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{ if not ($scratch.Get "image") }}
+  {{ with .Params.cover }}
+    {{ if .image }}
+      {{ $scratch.Set "image" .image }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{ if and (not ($scratch.Get "image")) .File }}
+  {{ $year := .Date.Format "2006" }}
+  {{ $base := .File.ContentBaseName }}
+  {{ $candidates := slice
+    (printf "images/%s/%s.jpg" $year $base)
+    (printf "images/%s/%s.jpeg" $year $base)
+    (printf "images/%s/%s.png" $year $base)
+    (printf "images/%s/%s.webp" $year $base)
+  }}
+  {{ range $candidates }}
+    {{ if not ($scratch.Get "image") }}
+      {{ if fileExists (printf "static/%s" .) }}
+        {{ $scratch.Set "image" . }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{ $image := $scratch.Get "image" }}
+{{ if $image }}
+  {{ if not (strings.HasPrefix $image "http") }}
+    {{ $image = $image | relURL }}
+  {{ end }}
+{{ end }}
+{{ $likes := .Params.likes | default 0 }}
+<article class="article">
+  <div class="container article-inner">
+    <a class="back-link" href="{{ "/posts/" | relURL }}">&larr; Back to all posts</a>
+    <div class="article-meta">
+      <span>{{ .Date.Format "January 2, 2006" }}</span>
+      <span class="meta-sep">•</span>
+      <span>{{ .ReadingTime }} min read</span>
+    </div>
+    <header class="article-header">
+      <h1 class="article-title">{{ .Title }}</h1>
+    </header>
+    {{ if $image }}
+      <div class="article-cover">
+        <img src="{{ $image }}" alt="" loading="lazy">
+      </div>
+    {{ end }}
+    <div class="article-content">
+      {{ .Content }}
+    </div>
+    {{ if .Params.tags }}
+      <div class="article-tags">
+        {{ range .Params.tags }}
+          <span class="tag">#{{ . }}</span>
+        {{ end }}
+      </div>
+    {{ end }}
+    <div class="article-actions">
+      <button class="action-button like-button" type="button" aria-label="Likes">
+        {{ partial "icon.html" (dict "name" "like") }}
+        <span class="action-count">{{ $likes }}</span>
+      </button>
+      <button class="action-button share-button" type="button" data-share-url="{{ .Permalink }}" data-share-title="{{ .Title }}">
+        {{ partial "icon.html" (dict "name" "share") }}
+        Share
+      </button>
+    </div>
+  </div>
+</article>
+<script>
+  (function () {
+    var button = document.querySelector(".share-button");
+    if (!button) return;
+    button.addEventListener("click", function () {
+      var url = button.getAttribute("data-share-url");
+      var title = button.getAttribute("data-share-title") || document.title;
+      if (navigator.share) {
+        navigator.share({ title: title, url: url }).catch(function () {});
+        return;
+      }
+      if (navigator.clipboard && url) {
+        navigator.clipboard.writeText(url).then(function () {
+          button.classList.add("is-copied");
+          setTimeout(function () {
+            button.classList.remove("is-copied");
+          }, 2000);
+        });
+        return;
+      }
+      if (url) {
+        window.open(
+          "https://twitter.com/intent/tweet?url=" +
+            encodeURIComponent(url) +
+            "&text=" +
+            encodeURIComponent(title),
+          "_blank",
+          "noopener,noreferrer"
+        );
+      }
+    });
+  })();
+</script>
+{{ end }}

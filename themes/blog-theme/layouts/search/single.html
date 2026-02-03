@@ -1,0 +1,20 @@
+{{ define "main" }}
+<section class="section-hero">
+  <div class="container">
+    <h1 class="section-title">{{ .Title }}</h1>
+    {{ with .Params.placeholder }}
+      <p class="section-subtitle">{{ . }}</p>
+    {{ end }}
+  </div>
+</section>
+
+<section class="search-panel">
+  <div class="container">
+    <div class="search-box">
+      <input type="search" placeholder="{{ .Params.placeholder | default "Search the site" }}" aria-label="Search">
+      <button type="button" class="search-button">Search</button>
+    </div>
+    <p class="search-note">Search is not wired yet in this theme.</p>
+  </div>
+</section>
+{{ end }}
