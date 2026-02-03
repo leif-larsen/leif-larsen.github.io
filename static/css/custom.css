@@ -153,3 +153,63 @@
 .icon-button--coffee:focus-visible {
   color: #ffdd00;
 }
+
+.codeblock {
+  position: relative;
+  margin: 1.5rem 0;
+}
+
+.codeblock pre {
+  background: #0d1117;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 1.6rem 1.2rem 1rem;
+  overflow-x: auto;
+  margin: 0;
+  color: #e6e9ef;
+}
+
+.codeblock code {
+  font-family: "SFMono-Regular", "Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", monospace;
+  font-size: 0.9rem;
+}
+
+.code-copy {
+  position: absolute;
+  top: 0.65rem;
+  right: 0.65rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35rem 0.6rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(13, 17, 23, 0.92);
+  color: #e6e9ef;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  opacity: 0;
+  transform: translateY(-4px);
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.code-copy:hover,
+.code-copy:focus-visible {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.3);
+  outline: none;
+}
+
+.code-copy.is-copied {
+  background: rgba(120, 255, 210, 0.2);
+  border-color: rgba(120, 255, 210, 0.45);
+  color: #eafff7;
+}
+
+.codeblock:hover .code-copy {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}

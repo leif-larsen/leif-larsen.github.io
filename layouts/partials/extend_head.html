@@ -157,3 +157,70 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 </script>
+
+<script>
+(function () {
+    function setButtonState(button, copied) {
+        if (!button) return;
+        const label = button.querySelector(".code-copy-label");
+        const nextLabel = copied ? "Copied" : "Copy";
+        if (copied) {
+            button.classList.add("is-copied");
+            button.setAttribute("data-copied", "true");
+        } else {
+            button.classList.remove("is-copied");
+            button.removeAttribute("data-copied");
+        }
+        if (label) {
+            label.textContent = nextLabel;
+        }
+    }
+
+    function copyText(button, text) {
+        if (!text) return;
+
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(text).then(function () {
+                setButtonState(button, true);
+                setTimeout(function () {
+                    setButtonState(button, false);
+                }, 2000);
+            }).catch(function () {
+                window.prompt("Copy this code:", text);
+            });
+            return;
+        }
+
+        try {
+            const tempInput = document.createElement("textarea");
+            tempInput.value = text;
+            tempInput.setAttribute("readonly", "true");
+            tempInput.style.position = "absolute";
+            tempInput.style.left = "-9999px";
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+            setButtonState(button, true);
+            setTimeout(function () {
+                setButtonState(button, false);
+            }, 2000);
+        } catch (error) {
+            window.prompt("Copy this code:", text);
+        }
+    }
+
+    document.addEventListener("click", function (event) {
+        const button = event.target.closest("[data-code-copy]");
+        if (!button) return;
+
+        const block = button.closest("[data-code-block]");
+        if (!block) return;
+
+        const code = block.querySelector("code");
+        if (!code) return;
+
+        copyText(button, code.textContent || "");
+    });
+})();
+</script>

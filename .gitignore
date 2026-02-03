@@ -4,3 +4,4 @@ resources/
 .hugo_build.lock
 .DS_STORE
 newdesign/
+node_modules/
