@@ -13,17 +13,17 @@ We want to start with doing a few things in Visual Studio. This is to ensure tha
 [![Screen shot Windows Phone Emulator](/img/2016/01/ScreenShots-300x266.png?fit=300%2C266)](/img/2016/01/ScreenShots.png)
 
 Next we want to do some initial testing, which will make the submission a bit quicker, because we then have already verified some parts of the app. Start by opening the Windows Phone Store Tester Kit (select the project you want to test, open the “Project” menu and select “Open Store Tester Kit”).  
-[![](/images/StoreTestKit2.png)![Store Test Kit image 2](/img/2016/01/StoreTestKit2-300x73.png?fit=300%2C73)](/img/2016/01/StoreTestKit.png)
+[![](/images/2016/StoreTestKit2.png)![Store Test Kit image 2](/img/2016/01/StoreTestKit2-300x73.png?fit=300%2C73)](/img/2016/01/StoreTestKit.png)
 
 In the “Application Details” tab you’ll need to input store tile image, screen shots for WVGA, WXGA and 720p. In the “Automated Test” tab you’ll need to run the automated tests. These will evaluate the app against the submission requirements. If everything passes, you’re good to go. You can also run the application analysis tool to optimize the app as well as manual tests. There is a lot of the manual tests though, and not all will be relevant for your app.
 
 Next we want to go [Windows Dev Center](https://dev.windows.com/en-us). For the sake of length (and also the fact that I registered a long time ago, and can’t remember the procedure) I’ll assume you’re already registered here. Anyway, you’ll want to go to the dashboard, and register a new app. When you’re in your dashboard, you’ll want to click on “Create a new app” under “My apps” on the left side. Then you register the name of the app (make sure you check the availability for the name). This step may be wise to do when you start development, if you have a common name for the app.
 
-[![](/images/NewApp2.png)![New app submission](/img/2016/01/NewApp2-300x129.png?fit=300%2C129)](/img/2016/01/NewApp1.png)
+[![](/images/2016/NewApp2.png)![New app submission](/img/2016/01/NewApp2-300x129.png?fit=300%2C129)](/img/2016/01/NewApp1.png)
 
 When this is done it’s time to start the submission process. Under “App overview” click on “Start your submission”. This will take you to a submission page, which has a few steps you need to finish before you can submit the app. These are all steps that can be saved, and you can come back to this later. Say you input some description early, but need to wait for testing before you upload the app package. When you have finished all steps, you can click on “Submit to the store” to start the submission process.
 
-[![](/images/Submission2.png)![App submission page](/img/2016/01/Submission2-300x170.png?fit=300%2C170)](/img/2016/01/Submission1.png)
+[![](/images/2016/Submission2.png)![App submission page](/img/2016/01/Submission2-300x170.png?fit=300%2C170)](/img/2016/01/Submission1.png)
 
 So as you see the first option is “Pricing and availability”. This is where you decide the price (or if it is for free), as well as which countries it should be available in. Note, if you are taking a fee for the app, you’ll need to fill in some additional information for Microsoft, so you can receive payments legally. This is not something I’ll be covering in this post. On this page you can also decide if you want to have sales, decide visibility in the store, volume licensing for organizations and the release date. When it comes to the release date you can choose to automatically release it when it passes certification (which is the default), release it manually after it has passed certification or the last one no sooner than a given date.
 

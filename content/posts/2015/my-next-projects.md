@@ -19,7 +19,7 @@ This is an idea I’ve had a few years, however I have not done any work on it f
 
 **A project involving IoT**
 
-![IoT illustration](/images/network-782707_1280.png)
+![IoT illustration](/images/2015/network-782707_1280.png)
 
 IoT (Internet of Things) is a subject that have had my interest for a while. Seeing as I haven’t found any use for it, I haven’t worked with it though. Now that we have moved to a new apartment, I have seen an opportunity to use it for home automation. Our new apartment have been refurbished recently, and as a part of that, the previous owner installed wireless lights. My first thought was to use some sort of transmitter to control the lights by a webapp (or mobile app) in our local network, and from there new ideas came to my head.
 

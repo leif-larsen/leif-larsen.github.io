@@ -7,41 +7,41 @@ Last year an official touch display for Raspberry Pi [was released](https://www.
 
 In this post I will walk you through how to mount the display properly and getting started with it. I know I had some issues when setting it up, probably mostly due to the fact that I haven’t explored how to mount ribbon cables on the Pi enough. The end result will look like this:
 
-![IMG_0851](/images/IMG_0851-300x225.jpg)
+![IMG_0851](/images/2016/IMG_0851-300x225.jpg)
 
 As you may note, I have Windows 10 IoT installed here. As of today this does not include support for touch functionality. I know there are some libraries out there, which gives this support, so I will explore this later, and report on this later. For now, if you need touch support I would suggest you get the latest version of Raspbian OS. Also you should know you need at least Windows 10 IoT version 10.0.10556, from the Windows Insider Preview. You can find information and downloads at [Windows Dev Center](https://ms-iot.github.io/content/en-US/Downloads.htm).
 
 The display looks like this when it’s straight out of the box:
 
-![IMG_0862](/images/IMG_0862-300x225.jpg) ![IMG_0861](/images/IMG_0861-300x225.jpg)
+![IMG_0862](/images/2016/IMG_0862-300x225.jpg) ![IMG_0861](/images/2016/IMG_0861-300x225.jpg)
 
 A nice feature that followed along was a stand for it. Mounting this was quite easy, you just add layer on layer, following the instructions given. The result should look like this:
 
-![IMG_0866](/images/IMG_0866-300x225.jpg)
+![IMG_0866](/images/2016/IMG_0866-300x225.jpg)
 
 There was an adapter board included, naturally. This was the next thing to attach. Before placing it though, it is smart to connect the display ribbon cable to the back of the adapter board.
 
-![IMG_0860](/images/IMG_0860-300x225.jpg)
+![IMG_0860](/images/2016/IMG_0860-300x225.jpg)
 
 I struggled a bit here, since I didn’t realize that the black bar needed to be pulled out, and pushed back in when the cable was attached. Also I found that you really need to ensure that is properly attached, as the screen won’t display anything if it is loose.
 
 When this is done, you can attach the adapter board to the back of the screen, and attach the smaller touch ribbon cable in the slot called J4.
 
-![IMG_0859](/images/IMG_0859-300x225.jpg)
+![IMG_0859](/images/2016/IMG_0859-300x225.jpg)
 
 Next it is time to attach the DSI ribbon cable, which will be connected to the Pi, to the adapter board.
 
-![IMG_0857](/images/IMG_0857-300x225.jpg)
+![IMG_0857](/images/2016/IMG_0857-300x225.jpg)
 
 Moving on to the Pi itself. This should be placed with the pins facing upwards (I don’t actually think there is room the other way). Attach it so that you can attach the DSI ribbon cable to the port called “DISPLAY”. It should look like this:
 
-![IMG_0855](/images/IMG_0855-300x225.jpg)
+![IMG_0855](/images/2016/IMG_0855-300x225.jpg)
 
 When this is done it should be possible to power up the Pi and the display, and see something on the screen. There are a few ways to power both the Pi and the screen. You can either connect jumper wires from the Pi and to the display, and power the adapter board with a 2Amp power supply. Another option is to use the USB connection from the adapter board to power the Pi from that. That is what I’m currently doing.
 
 All in all the finished mount should look something like this (note: I have not attached power to the Pi in any ways here):
 
-![IMG_0854](/images/IMG_0854-300x225.jpg)
+![IMG_0854](/images/2016/IMG_0854-300x225.jpg)
 
 Once this is mounted you can power up, and you should be able to see something on the display. If not, you should check the ribbon cables. If you’re using Windows 10 IoT you will need to connect an external mouse/keyboard as well (at least until Microsoft adds support for touch, or you find a third-party library which does it). If you use Raspbian OS you will need to add some updates to be able to use the touch functionality. These are:
 

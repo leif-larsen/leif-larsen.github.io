@@ -16,7 +16,7 @@ So your app is thoroughly tested and you’re ready to release it, what do you d
 ![Create new app listing in Google Play Store](/img/2016/02/Skjermbilde-2016-01-16-kl.-12.58.10-300x166.png?fit=300%2C166)Head over to [Google Play Store](https://play.google.com/apps/publish) and click the “Add new app” in the top right corner. This will open a window for you to fill in the title of your app, and select the default language of the app. They also ask what you want to start to do, and you want to start with “Prepare app listing”.
 
 With this done you will see a few steps you need to execute before you can release the app. On the page that is open by default you need to fill in app title, a short description and a complete description. You need to upload at least two screenshots of your app, and a maximum of 8. You will also need to upload an icon and a promotion picture. You can also add more promotional pictures if you’d like. At last you need to select the type of app, the category and content rating. You will also need to fill in at least an e-mail you may be contacted on, as well as a link to some privacy policy if you have that.  
-[![](/images/AppListing2.png)![](/images/AppListing3.png)![App listing contact info and content rating](/img/2016/02/AppListing3-150x150.png?resize=150%2C90)](/img/2016/02/AppListing1.png)
+[![](/images/2016/AppListing2.png)![](/images/2016/AppListing3.png)![App listing contact info and content rating](/img/2016/02/AppListing3-150x150.png?resize=150%2C90)](/img/2016/02/AppListing1.png)
 
  
 

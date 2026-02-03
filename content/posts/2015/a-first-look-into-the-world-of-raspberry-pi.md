@@ -6,10 +6,10 @@ date: "2015-08-30"
 A few days ago I went to a local electronic store and bought myself a Raspberry Pi 2 Model B. I’ve read a bit about Windows 10 IoT Core, so I decided I wanted to try that, specifically for my home automation project I am slowly easing into.
 
 The Pi comes in a small box, that looks like this:  
-![Raspberry Pi Box](/images/RaspberryPiBox.jpg)
+![Raspberry Pi Box](/images/2015/RaspberryPiBox.jpg)
 
 And the Pi itself looks like this:  
-![Raspberry Pi 2 Model B](/images/RaspberryPiProfile.jpg)
+![Raspberry Pi 2 Model B](/images/2015/RaspberryPiProfile.jpg)
 
 To be able to install Windows 10 IoT you need a class 10 micro SD card. It needs to be at least 8 GB big.
 

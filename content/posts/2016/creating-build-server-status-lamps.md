@@ -11,7 +11,7 @@ Setting up the Core to do as wanted was pretty straight forward. In the document
 
 To be able to control the LEDs it's a matter of calling the right URL with the right parameters. Using Particle Core this is quite easy, as it is a cloud connected device. To automate the process, I decided to try [Zapier](https://zapier.com). Using this it was quite easy to create a Zap that is triggered when a build is completed. This then triggers a web hook action, which calls the correct URL, with the parameters I specify. I just use the free plan for Zapier, as I usually use [IFTTT](https://ifttt.com/), so I'll have to consider it when I see how it is in the long term. The reason for using Zapier over IFTTT for this, is that IFTTT didn't have any channels for Visual Studio Online, which Zapier did.
 
-The end result looks like this: ![Failing build](/images/IMG_1241.JPG) ![Successful build](/images/IMG_1242-1.JPG) ![Build status](/images/SucceededBuild.PNG)
+The end result looks like this: ![Failing build](/images/2016/IMG_1241.JPG) ![Successful build](/images/2016/IMG_1242-1.JPG) ![Build status](/images/2016/SucceededBuild.PNG)
 
 As you can see from the first image the build has failed, and in the next image it has succeeded. This also correlates to the build status in the last image.
 

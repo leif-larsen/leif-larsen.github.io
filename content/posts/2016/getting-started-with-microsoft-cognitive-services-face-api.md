@@ -51,7 +51,7 @@ All the code for this post can be found at [GitHub](https://github.com/leif-lars
 
 ##Getting API keys The first thing you want to do is to sign up for the service, which you can do over at [Microsoft's site](https://www.microsoft.com/cognitive-services/en-us/sign-up). It should be a free subscription there, and the steps you need to do is explained in the link. Once you've signed up, you can request trials for the different API's included, and you'll want to select "Face".
 
-When this is done, you should take a note of the subscription keys, as shown in the image below. ![API Keys](/images/Keys.PNG)
+When this is done, you should take a note of the subscription keys, as shown in the image below. ![API Keys](/images/2016/Keys.PNG)
 
 You can also purchase the same subscription on Azure, by clicking the button to the right. I guess that ultimately Microsoft wants everybody to move over there, but for now this preview works. As for pricing in Azure, it costs $1,50 per 1,000 transactions, and as you may see this preview allows for 30,000 transactions a month, so the value is great.
 
@@ -174,11 +174,11 @@ private async Task<FaceRectangle[]> UploadAndDetectFaces()
 
 As you may see it is not very complex. It is a method triggered on button click, which calls another method, UploadAndDetectFaces. This method in turn opens a stream for the image, and calls the _Face API_ client, which detects _face(s)_ in the image. This is returned to the click handler, which calls on the next method to draw a green rectangle around the _face(s)_. I won't bother to post that part of the code, as it is not interesting for what we're trying to achieve here, other than the fact that we use the result from our detect faces query to position the rectangle(s).
 
-The end result looks like this: ![Face before detection](/images/ImageLoaded.PNG)
+The end result looks like this: ![Face before detection](/images/2016/ImageLoaded.PNG)
 
-![Face detected](/images/FoundFace.PNG)
+![Face detected](/images/2016/FoundFace.PNG)
 
-![Face not detected](/images/NoImageDetected.PNG)
+![Face not detected](/images/2016/NoImageDetected.PNG)
 
 ##Summary In this post we've looked into the basics of Face API from Microsoft Cognitive Services. We've seen how to get connected to the API by signing up. Further on we've talked about how our app will turn out in the end, and we started working with the Face API with a very basic example for marking a face in an image.
 

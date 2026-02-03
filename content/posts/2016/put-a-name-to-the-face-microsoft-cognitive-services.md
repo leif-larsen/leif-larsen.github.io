@@ -126,9 +126,9 @@ using (Stream s = await _imageFile.OpenStreamForReadAsync())
 
 What you see is that the results from our identification process can contain several hits, which basically is the faces from the image. These faces contain candidates of who they may be. The array with candidates is sorted by confidence of how certain the service is of the result. Assuming the first entry is the correct one, we use that to get a person, which contains the name and other information of that person. This is then shown in the text field below the buttons.
 
-The final result of the app, so far, looks like this: ![Successfully identified two persons](/images/IdentifiedPersons.PNG)
+The final result of the app, so far, looks like this: ![Successfully identified two persons](/images/2016/IdentifiedPersons.PNG)
 
-![Failed to identify any persons](/images/NoIdentifiedPersons.PNG)
+![Failed to identify any persons](/images/2016/NoIdentifiedPersons.PNG)
 
 To improve this, you may want to add a square around each face, and a label for each face, stating their name. We won't be doing that here, but I'll leave that as a challenge for you to extend the app with!
 

@@ -5,7 +5,7 @@ date: "2015-03-28"
 
 This Friday I released my first iOS app! It’s called “Parker gratis” (“Park for free”), and it is an app for the Norwegian market for now.
 
-\[![Parker gratis main screen](/images/4.7-inch-iPhone-6-Screenshot-1.jpg)
+\[![Parker gratis main screen](/images/2015/4.7-inch-iPhone-6-Screenshot-1.jpg)
 
 A friend of me came up with the idea for the app. We were talking one day when he said that it would be nice to have an app where you could locate free parking spots nearby your location. I liked the thought of the idea, and decided to go on to create the app. I did some research on the app store, and found that there were some apps like this, but not for the Norwegian market.
 

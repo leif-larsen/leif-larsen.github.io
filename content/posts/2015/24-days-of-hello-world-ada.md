@@ -2,7 +2,7 @@
 title: "24 Days of Hello World   Ada"
 date: "2015-12-19"
 cover:
-    image: "/images/network-782707_1280.png"
+    image: "/images/2015/network-782707_1280.png"
     alt: "24 Days of Hello World"
     relative: false
 ---

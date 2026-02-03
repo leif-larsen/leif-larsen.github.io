@@ -9,7 +9,7 @@ tags:
   - "powertoys"
   - "recommendation"
   - "tools"
-coverImage: "PT-hero-image.png"
+coverImage: "/images/2020/PT-hero-image.png"
 ---
 
 A few months back, I came across a tool from Microsoft called PowerToys. Since I've been using it and finding it useful, I thought I'd share it with others as well.

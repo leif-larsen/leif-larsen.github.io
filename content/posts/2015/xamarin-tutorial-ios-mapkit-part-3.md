@@ -89,6 +89,6 @@ View.AddSubview (_searchBar);
 We create a new object of the `UISearchBar` type, and specify the frame of it. We also specify a few parameters as well. Then we set the style to be default. We then go on to create the search display controller, and set its delegate and search result source to the classes we created earlier.
 
 With all that in place, the result should look like this:  
-![Search bar added to Map view](/images/iOS-Simulator-Screen-Shot-30.-mai-2015-11.33.14.png)
+![Search bar added to Map view](/images/2015/iOS-Simulator-Screen-Shot-30.-mai-2015-11.33.14.png)
 
 And that concludes this tutorial on the iOS MapKit with Xamarin. Hope you have learnt something, and are able to use some of this for your ideas. Seeing as this is my first tutorial series I would really appreciate some feedback on the format. Ideas for other tutorials is also appreciated!

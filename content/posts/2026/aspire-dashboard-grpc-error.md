@@ -46,9 +46,9 @@ These days, working with AI, I naturally let both GitHub Copilot (with various m
 It occurred to me that I’m using [Freedom](https://freedom.to) to avoid distractions when I’m working, and this actually uses a proxy to block web sites and all. So to solve the exceptions, and get Aspire working again, I needed to add localhost as an exception to the proxy. 
 
 On MacOS, this is as simple as clicking the Freedom icon, and “Enable website Exceptions”.
-![Screen shot of Freedom menu options](/images/Skjermbilde%202026-02-02%20kl.%2006.28.05.png)
+![Screen shot of Freedom menu options](/images/2026/Skjermbilde%202026-02-02%20kl.%2006.28.05.png)
 
 Next you will also need to add the actual exception, which can be done by clicking the same icon, and then click “Manage website exceptions”. This will open a popup window, where you can add localhost and 127.0.0.1. (SCREENSHOT HERE) 
-![Screen shot of Freedom add exception websites](/images/Skjermbilde%202026-02-02%20kl.%2006.29.01.png)
+![Screen shot of Freedom add exception websites](/images/2026/Skjermbilde%202026-02-02%20kl.%2006.29.01.png)
 
 Keep in mind that this will only be available to edit outside of a focus session.

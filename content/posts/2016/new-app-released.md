@@ -9,7 +9,7 @@ Today I am officially announcing that my second app, “Din Lokale Dyrlege” (
 
 The app aims to provide information on veterinarians from all over Norway. Information like telephone number, e-mail address, visiting address, opening hours, expertise etc. This is all stuff that is available online today, so why did I create an app for it?
 
-![Entry page "Din Lokale Dyrlege"](/images/0x0ss-169x300.jpg)![Search results "Din Lokale Dyrlege"](/images/0x0ss-1-169x300.jpg)![Vet details "Din Lokale Dyrlege"](/images/0x0ss-2-169x300.jpg)
+![Entry page "Din Lokale Dyrlege"](/images/2016/0x0ss-169x300.jpg)![Search results "Din Lokale Dyrlege"](/images/2016/0x0ss-1-169x300.jpg)![Vet details "Din Lokale Dyrlege"](/images/2016/0x0ss-2-169x300.jpg)
 
 There are primarily two reasons for this. First and foremost it is to have a list available easily. Say you are on vacation somewhere, and your dog (which you off course brought along!) gets ill. How do you find a veterinarian in the place you are? You could naturally search for it on the web, but I believe that it is more convenient to be able to look up that information in an app. In addition you have the possibility to see whether or not there are more veterinarians in the area or no. Maybe the place you’re at have three different vets, all with different opening hours, maybe one has emergency service. Not all have good websites online, or have done a poor job with SEO, so you might not find them.
 

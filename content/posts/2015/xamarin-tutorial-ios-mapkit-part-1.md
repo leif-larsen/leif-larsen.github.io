@@ -11,7 +11,7 @@ To keep this tutorial readable I have decided to split into several posts, where
 
 A lot of tutorials just dive straight into code, however I want to show off how the final output is, so here you can see how the final app will look:
 
-![iOS Simulator with the finished app result.](/images/iOS-Simulator-Screen-Shot-26.-apr.-2015-19.32.06.png)
+![iOS Simulator with the finished app result.](/images/2015/iOS-Simulator-Screen-Shot-26.-apr.-2015-19.32.06.png)
 
 As you may see this is a simple app, with a map, your current location and some clickable annotations in the area around you.
 
@@ -19,7 +19,7 @@ Also I have made all the code available on [GitHub](https://github.com/leif-lars
 
 The first thing you want to do is to start a new Xamarin iOS project. For the purpose of this tutorial I have created an empty project, to start without any unnecessary files. The project structure should look something like this:
 
-![Xamarin iOS project structure](/images/Skjermbilde-2015-03-21-kl.-17.18.47.png)
+![Xamarin iOS project structure](/images/2015/Skjermbilde-2015-03-21-kl.-17.18.47.png)
 
 Open the Appdelegate.cs file. This is where the window is instantiated, when the app is ready, and where you set up the initial view and navigation controller. Appdelegate.cs is not to big, and from the example code it should be fairly easy to see what’s going on. Basically we create a window, a navigation controller and a view controller (I will come back to this one in a bit). The one thing I do want to point out is the following lines:
 
