@@ -144,3 +144,12 @@
   background: rgba(255, 255, 255, 0.03);
   color: var(--muted);
 }
+
+.icon-button--coffee {
+  color: #ffdd00;
+}
+
+.icon-button--coffee:hover,
+.icon-button--coffee:focus-visible {
+  color: #ffdd00;
+}

@@ -37,10 +37,13 @@ languages:
       series: series
     menu:
       main:
-        - name: Talks & Publications
+        - name: Writing
+          url: posts/
+          weight: 5
+        - name: Speaking
           url: public/
           weight: 10
-        - name: About
+        - name: Meet Leif
           url: about/
           weight: 15
 

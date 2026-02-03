@@ -1,5 +1,5 @@
 ---
-title: "Talks & Publications"
+title: "Speaking"
 description: "Public speaking engagements, workshops, and published work."
 date: "2026-02-03"
 cta_title: "Interested in Having Me Speak?"

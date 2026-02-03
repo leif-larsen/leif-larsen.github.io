@@ -1,5 +1,5 @@
 ---
-title: "About me"
+title: "Meet Leif"
 date: "2021-03-09"
 layout: "about"
 description: "Technology advisor with 14+ years of experience in software development and cloud architecture."

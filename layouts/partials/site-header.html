@@ -21,9 +21,9 @@
     </button>
     <nav class="main-nav">
       <div class="nav-links" id="site-menu">
-        <a class="nav-link {{ if .IsHome }}is-active{{ end }}" href="{{ "/" | relURL }}">Home</a>
+        {{ $currentPage := . }}
         {{ range site.Menus.main }}
-          <a class="nav-link" href="{{ .URL | relURL }}">{{ .Name }}</a>
+          <a class="nav-link {{ if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }}is-active{{ end }}" href="{{ .URL | relURL }}">{{ .Name }}</a>
         {{ end }}
       </div>
     </nav>
@@ -39,6 +39,20 @@
       >
         {{ partial "icon.html" (dict "name" "search") }}
       </a>
+      {{ with (where site.Params.socialIcons "name" "buymeacoffee") }}
+        {{ $coffee := index . 0 }}
+        {{ $coffeeTitle := $coffee.title | default "Buy me a coffee" }}
+        <a
+          class="icon-button icon-button--coffee"
+          href="{{ $coffee.url }}"
+          title="{{ $coffeeTitle }}"
+          aria-label="{{ $coffeeTitle }}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {{ partial "icon.html" (dict "name" "buymeacoffee") }}
+        </a>
+      {{ end }}
       <button class="icon-button" type="button" aria-label="Toggle theme" data-theme-toggle>
         {{ partial "icon.html" (dict "name" "sun") }}
       </button>
