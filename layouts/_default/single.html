@@ -1,0 +1,230 @@
+{{ define "main" }}
+{{ $scratch := newScratch }}
+{{ with .Params.image }}
+  {{ $scratch.Set "image" . }}
+{{ end }}
+{{ if not ($scratch.Get "image") }}
+  {{ with .Params.images }}
+    {{ if gt (len .) 0 }}
+      {{ $scratch.Set "image" (index . 0) }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{ if not ($scratch.Get "image") }}
+  {{ with .Params.cover }}
+    {{ if .image }}
+      {{ $scratch.Set "image" .image }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{ if and (not ($scratch.Get "image")) .File }}
+  {{ $year := .Date.Format "2006" }}
+  {{ $base := .File.ContentBaseName }}
+  {{ $candidates := slice
+    (printf "images/%s/%s.jpg" $year $base)
+    (printf "images/%s/%s.jpeg" $year $base)
+    (printf "images/%s/%s.png" $year $base)
+    (printf "images/%s/%s.webp" $year $base)
+  }}
+  {{ range $candidates }}
+    {{ if not ($scratch.Get "image") }}
+      {{ if fileExists (printf "static/%s" .) }}
+        {{ $scratch.Set "image" . }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{ $image := $scratch.Get "image" }}
+{{ if $image }}
+  {{ if not (strings.HasPrefix $image "http") }}
+    {{ $image = $image | relURL }}
+  {{ end }}
+{{ end }}
+{{ $likes := .Params.likes | default 0 }}
+{{ $shareURL := .Permalink }}
+{{ $shareTitle := .Title }}
+{{ $shareURLQuery := $shareURL | urlquery }}
+{{ $shareTitleQuery := $shareTitle | urlquery }}
+{{ $shareMenuID := printf "share-menu-%s" (md5 $shareURL) }}
+<article class="article">
+  <div class="container article-inner">
+    <a class="back-link" href="{{ "/posts/" | relURL }}">&larr; Back to all posts</a>
+    <div class="article-meta">
+      <span>{{ .Date.Format "January 2, 2006" }}</span>
+      <span class="meta-sep">•</span>
+      <span>{{ .ReadingTime }} min read</span>
+    </div>
+    <header class="article-header">
+      <h1 class="article-title">{{ .Title }}</h1>
+    </header>
+    {{ if $image }}
+      <div class="article-cover">
+        <img src="{{ $image }}" alt="" loading="lazy">
+      </div>
+    {{ end }}
+    <div class="article-content">
+      {{ .Content }}
+    </div>
+    {{ if .Params.tags }}
+      <div class="article-tags">
+        {{ range .Params.tags }}
+          <span class="tag">#{{ . }}</span>
+        {{ end }}
+      </div>
+    {{ end }}
+    <div class="article-actions">
+      <button class="action-button like-button" type="button" aria-label="Likes">
+        {{ partial "icon.html" (dict "name" "like") }}
+        <span class="action-count">{{ $likes }}</span>
+      </button>
+      <div class="share-menu" data-share-menu>
+        <button class="action-button share-trigger" type="button" aria-expanded="false" aria-haspopup="menu" aria-controls="{{ $shareMenuID }}" data-share-url="{{ $shareURL }}" data-share-title="{{ $shareTitle }}">
+          {{ partial "icon.html" (dict "name" "share") }}
+          Share
+        </button>
+        <div class="share-panel" id="{{ $shareMenuID }}" role="menu" aria-label="Share this post" aria-hidden="true">
+          <a class="share-item" role="menuitem" href="https://twitter.com/intent/tweet?url={{ $shareURLQuery }}&text={{ $shareTitleQuery }}" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53A4.48 4.48 0 0 0 16.5 3c-2.5 0-4.5 2.1-4.5 4.7 0 .36.03.7.1 1.03A12.9 12.9 0 0 1 1.64 3.16a4.7 4.7 0 0 0-.6 2.35c0 1.63.8 3.07 2.02 3.92A4.4 4.4 0 0 1 .96 8v.06c0 2.28 1.56 4.2 3.63 4.64a4.3 4.3 0 0 1-2.02.08c.57 1.85 2.23 3.19 4.2 3.22A9 9 0 0 1 0 19.6 12.7 12.7 0 0 0 6.92 21c8.3 0 12.84-7.18 12.84-13.4 0-.2 0-.41-.01-.61A9.3 9.3 0 0 0 23 3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            <span class="share-label">Twitter</span>
+          </a>
+          <a class="share-item" role="menuitem" href="https://www.linkedin.com/sharing/share-offsite/?url={{ $shareURLQuery }}" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M4.9 3.5a2.2 2.2 0 1 0 0 4.4 2.2 2.2 0 0 0 0-4.4zM3 9h3.9v12H3zM10.2 9h3.7v1.6h.1c.5-.9 1.8-1.9 3.7-1.9 4 0 4.7 2.6 4.7 6v6.3h-3.9v-5.6c0-1.3 0-3-1.8-3-1.8 0-2.1 1.4-2.1 2.9v5.7h-3.9V9z" fill="currentColor"></path>
+            </svg>
+            <span class="share-label">LinkedIn</span>
+          </a>
+          <a class="share-item" role="menuitem" href="https://www.facebook.com/sharer/sharer.php?u={{ $shareURLQuery }}" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M14 8h3V5h-3c-2.2 0-4 1.8-4 4v3H7v3h3v6h3v-6h3l1-3h-4V9c0-.6.4-1 1-1z" fill="currentColor"></path>
+            </svg>
+            <span class="share-label">Facebook</span>
+          </a>
+          <button class="share-item share-copy" type="button" role="menuitem" data-share-copy>
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M10 13a5 5 0 0 1 0-7l1.5-1.5a5 5 0 0 1 7 7L17 13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+              <path d="M14 11a5 5 0 0 1 0 7L12.5 19.5a5 5 0 0 1-7-7L7 11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            <span class="share-label">Copy link</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+<script>
+  (function () {
+    var menus = document.querySelectorAll("[data-share-menu]");
+    if (!menus.length) return;
+
+    function closeMenu(menu) {
+      menu.classList.remove("is-open");
+      var trigger = menu.querySelector(".share-trigger");
+      var panel = menu.querySelector(".share-panel");
+      if (trigger) trigger.setAttribute("aria-expanded", "false");
+      if (panel) panel.setAttribute("aria-hidden", "true");
+    }
+
+    function openMenu(menu) {
+      menu.classList.add("is-open");
+      var trigger = menu.querySelector(".share-trigger");
+      var panel = menu.querySelector(".share-panel");
+      if (trigger) trigger.setAttribute("aria-expanded", "true");
+      if (panel) panel.setAttribute("aria-hidden", "false");
+    }
+
+    function closeAll(except) {
+      menus.forEach(function (menu) {
+        if (menu !== except) closeMenu(menu);
+      });
+    }
+
+    menus.forEach(function (menu) {
+      var trigger = menu.querySelector(".share-trigger");
+      var panel = menu.querySelector(".share-panel");
+      var copyButton = menu.querySelector("[data-share-copy]");
+
+      if (!trigger || !panel) return;
+
+      var url = trigger.getAttribute("data-share-url") || window.location.href;
+
+      trigger.addEventListener("click", function (event) {
+        event.preventDefault();
+        var isOpen = menu.classList.contains("is-open");
+        if (isOpen) {
+          closeMenu(menu);
+        } else {
+          closeAll(menu);
+          openMenu(menu);
+        }
+      });
+
+      trigger.addEventListener("keydown", function (event) {
+        if (event.key === "ArrowDown") {
+          event.preventDefault();
+          openMenu(menu);
+          var firstItem = panel.querySelector(".share-item");
+          if (firstItem) firstItem.focus();
+        }
+      });
+
+      if (copyButton) {
+        var copyLabel = copyButton.querySelector(".share-label");
+        var defaultLabel = copyLabel ? copyLabel.textContent : "Copy link";
+        var copyTimeout;
+
+        copyButton.addEventListener("click", function (event) {
+          event.preventDefault();
+          if (!url) return;
+
+          function showCopied() {
+            copyButton.classList.add("is-copied");
+            if (copyLabel) copyLabel.textContent = "Copied";
+            clearTimeout(copyTimeout);
+            copyTimeout = setTimeout(function () {
+              copyButton.classList.remove("is-copied");
+              if (copyLabel) copyLabel.textContent = defaultLabel;
+            }, 2000);
+          }
+
+          if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(url).then(showCopied).catch(function () {
+              window.prompt("Copy this link:", url);
+            });
+            return;
+          }
+
+          try {
+            var tempInput = document.createElement("input");
+            tempInput.value = url;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+            showCopied();
+          } catch (error) {
+            window.prompt("Copy this link:", url);
+          }
+        });
+      }
+    });
+
+    document.addEventListener("click", function (event) {
+      menus.forEach(function (menu) {
+        if (!menu.contains(event.target)) {
+          closeMenu(menu);
+        }
+      });
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") {
+        menus.forEach(function (menu) {
+          closeMenu(menu);
+        });
+      }
+    });
+  })();
+</script>
+{{ end }}

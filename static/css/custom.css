@@ -1,0 +1,92 @@
+.share-menu {
+  position: relative;
+  display: inline-flex;
+}
+
+.share-trigger {
+  gap: 0.65rem;
+  padding: 0.5rem 1.1rem;
+  border-radius: 14px;
+  background: rgba(10, 10, 12, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.share-trigger svg {
+  width: 18px;
+  height: 18px;
+}
+
+.share-trigger:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.share-menu.is-open .share-trigger {
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+}
+
+.share-panel {
+  position: absolute;
+  top: calc(100% + 0.65rem);
+  right: 0;
+  min-width: 220px;
+  background: rgba(8, 8, 10, 0.98);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 0.5rem;
+  display: none;
+  flex-direction: column;
+  gap: 0.3rem;
+  z-index: 30;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(8px);
+}
+
+.share-menu.is-open .share-panel {
+  display: flex;
+}
+
+.share-item {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 0.8rem;
+  border-radius: 12px;
+  color: #f6f7fb;
+  background: transparent;
+  border: 1px solid transparent;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+}
+
+.share-item svg {
+  width: 18px;
+  height: 18px;
+}
+
+.share-item:hover,
+.share-item:focus {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.12);
+  outline: none;
+}
+
+.share-item.is-copied {
+  background: rgba(120, 255, 210, 0.18);
+  border-color: rgba(120, 255, 210, 0.45);
+}
+
+@media (max-width: 640px) {
+  .share-panel {
+    left: 0;
+    right: auto;
+    min-width: 200px;
+  }
+}
