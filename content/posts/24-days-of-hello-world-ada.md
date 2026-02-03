@@ -1,6 +1,10 @@
 ---
 title: "24 Days of Hello World   Ada"
 date: "2015-12-19"
+cover:
+    image: "/images/network-782707_1280.png"
+    alt: "24 Days of Hello World"
+    relative: false
 ---
 
 Today I’ll present the language named in honor of Ada Lovelace, Ada. This is a structured, statically typed, imperative language. It is object-oriented, and high-level, which is extended from [Pascal](http://leiflarsen.org/2015/24-days-of-hello-world-pascal), amongst others. By using the compiler to find errors it improves code safety and maintainability.
