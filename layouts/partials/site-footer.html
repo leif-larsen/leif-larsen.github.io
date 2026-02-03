@@ -9,14 +9,6 @@
     <div class="footer-links">
       <div class="footer-heading">Quick Links</div>
       <ul>
-        {{ with .OutputFormats.Get "RSS" }}
-          <li>
-            <a href="{{ .RelPermalink }}" class="footer-link">
-              {{ partial "icon.html" (dict "name" "rss") }}
-              RSS Feed
-            </a>
-          </li>
-        {{ end }}
         {{ with site.GetPage "archives" }}
           <li><a href="{{ .RelPermalink }}" class="footer-link">Archive</a></li>
         {{ end }}
