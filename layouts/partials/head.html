@@ -1,0 +1,23 @@
+{{ $title := "" }}
+{{ if .IsHome }}
+  {{ $title = site.Title }}
+{{ else }}
+  {{ $title = printf "%s | %s" .Title site.Title }}
+{{ end }}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ $title }}</title>
+{{ with .Description }}
+<meta name="description" content="{{ . }}">
+{{ else }}
+  {{ with site.Params.description }}
+<meta name="description" content="{{ . }}">
+  {{ end }}
+{{ end }}
+<link rel="stylesheet" href="{{ "css/theme.css" | relURL }}">
+<link rel="stylesheet" href="{{ "css/search-dialog.css" | relURL }}">
+{{ with .OutputFormats.Get "RSS" }}
+<link rel="alternate" type="application/rss+xml" title="{{ site.Title }}" href="{{ .RelPermalink }}">
+{{ end }}
+{{ partial "templates/twitter_cards.html" . }}
+{{ partial "templates/schema_json.html" . }}
