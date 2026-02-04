@@ -1,12 +1,13 @@
 ---
 title: "Privacy Policy"
-layout: "post"
+layout: "privacy"
 date: "2025-10-07"
+lastmod: "2026-02-02"
 ---
 
 # Privacy Policy
 
-Last updated: October 7, 2025
+Last updated: February 2, 2026
 
 ## Overview
 

@@ -1,58 +1,163 @@
 {{ define "main" }}
-<article class="public-archive">
-  <h1>{{ .Title }}</h1>
-  {{ with .Content }}<div class="page-intro">{{ . | markdownify }}</div>{{ end }}
-
-  {{/* Collect and merge items from data files */}}
-  {{ $items := slice }}
-  {{ with site.Data.speaking }}
-    {{ range . }}
-      {{ $items = $items | append (dict "kind" "speaking" "title" .title "url" .url "description" .description "date" .date) }}
-    {{ end }}
-  {{ end }}
-  {{ with site.Data.publications }}
-    {{ range . }}
-      {{ $items = $items | append (dict "kind" "publication" "title" .title "url" .url "description" .description "date" .date) }}
-    {{ end }}
-  {{ end }}
-
-  {{/* Sort descending by date (string YYYY-MM-DD works lexicographically) */}}
-  {{ $sorted := sort $items "date" "desc" }}
-
-  <div class="public-table-wrapper">
-    <table class="public-table">
-      <thead>
-        <tr>
-          <th style="white-space:nowrap;">Date</th>
-          <th>Title</th>
-          <th>Description</th>
-          <th style="white-space:nowrap;">Type</th>
-        </tr>
-      </thead>
-      <tbody>
-      {{ range $sorted }}
-        <tr>
-          <td>{{ with .date }}{{ dateFormat "Jan 2006" (time .) }}{{ end }}</td>
-          <td>
-            {{ if .url }}<a href="{{ .url }}" target="_blank" rel="noopener">{{ .title }}</a>{{ else }}{{ .title }}{{ end }}
-          </td>
-          <td>{{ .description }}</td>
-          <td>{{ cond (eq .kind "speaking") "Talk" "Publication" }}</td>
-        </tr>
-      {{ end }}
-      </tbody>
-    </table>
+<section class="section-hero public-hero">
+  <div class="container">
+    <h1 class="section-title">{{ .Title }}</h1>
+    {{ with .Description }}<p class="section-subtitle">{{ . }}</p>{{ end }}
+    {{ with .Content }}<div class="public-intro">{{ . | markdownify }}</div>{{ end }}
   </div>
-</article>
+</section>
 
-<style>
-  .public-table-wrapper { overflow-x:auto; margin-top:2rem; margin-bottom:2rem; }
-  .public-table { width:100%; border-collapse:collapse; font-size:0.95rem; }
-  .public-table th, .public-table td { padding:0.5rem 0.6rem; border-bottom:1px solid var(--border-color, #ccc); vertical-align:top; }
-  .public-table th { text-align:left; }
-  .public-table tbody tr:hover { background:rgba(0,0,0,0.03); }
-  .speaking-list, .publications-list { line-height:1.4; }
-  .speaking-list li, .publications-list li { margin-bottom:0.4rem; }
-  @media (max-width:700px){ .public-table td:nth-child(3){ font-size:0.85rem; } }
-</style>
+{{ $talks := site.Data.speaking | default (slice) }}
+{{ $publications := site.Data.publications | default (slice) }}
+{{ $items := slice }}
+{{ range $talks }}
+  {{ $items = $items | append (dict "kind" "talk" "title" .title "type" .type "event" .event "date" .date "location" .location "description" .description "slides_url" .slides_url "recording_url" .recording_url) }}
+{{ end }}
+{{ range $publications }}
+  {{ $items = $items | append (dict "kind" "publication" "title" .title "type" .type "date" .date "description" .description "url" .url) }}
+{{ end }}
+{{ $sorted := sort $items "date" "desc" }}
+{{ $totalTalks := len $talks }}
+{{ $workshops := len (where $talks "type" "workshop") }}
+{{ $pubCount := len $publications }}
+
+<section class="public-stats">
+  <div class="container public-stats-grid">
+    <div class="public-stat-card">
+      <div class="public-stat-value">{{ $totalTalks }}</div>
+      <div class="public-stat-label">Total Talks</div>
+    </div>
+    <div class="public-stat-card">
+      <div class="public-stat-value">{{ $workshops }}</div>
+      <div class="public-stat-label">Workshops</div>
+    </div>
+    <div class="public-stat-card">
+      <div class="public-stat-value">{{ $pubCount }}</div>
+      <div class="public-stat-label">Publications</div>
+    </div>
+  </div>
+</section>
+
+<section class="public-list">
+  <div class="container public-card-grid">
+    {{ range $sorted }}
+      {{ if eq .kind "talk" }}
+        {{ $type := lower (default "talk" .type) }}
+        <article class="public-card">
+          <div class="public-card-header">
+            <span class="public-badge type-{{ $type }}">
+              <span class="public-badge-icon">
+                {{ if eq $type "keynote" }}
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M4 20h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+                    <rect x="6" y="9" width="4" height="8" fill="none" stroke="currentColor" stroke-width="2"></rect>
+                    <rect x="14" y="6" width="4" height="11" fill="none" stroke="currentColor" stroke-width="2"></rect>
+                  </svg>
+                {{ else if eq $type "workshop" }}
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M8 6L4 10l4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M16 6l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M10 18l4-12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+                  </svg>
+                {{ else }}
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <rect x="3" y="6" width="18" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2"></rect>
+                    <path d="M10 9l5 3-5 3z" fill="currentColor"></path>
+                  </svg>
+                {{ end }}
+              </span>
+              {{ humanize $type }}
+            </span>
+          </div>
+          <h3 class="public-card-title">{{ .title }}</h3>
+          {{ with .description }}<p class="public-card-summary">{{ . }}</p>{{ end }}
+          <ul class="public-meta">
+            {{ with .event }}
+              <li>
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="M7 3h7l5 5v11a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"></path>
+                  <path d="M14 3v5h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"></path>
+                </svg>
+                <span>{{ . }}</span>
+              </li>
+            {{ end }}
+            {{ with .date }}
+              <li>
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <rect x="3" y="5" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="2"></rect>
+                  <path d="M8 3v4M16 3v4M3 10h18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+                </svg>
+                <span>{{ dateFormat "January 2, 2006" (time .) }}</span>
+              </li>
+            {{ end }}
+            {{ with .location }}
+              <li>
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z" fill="none" stroke="currentColor" stroke-width="2"></path>
+                  <circle cx="12" cy="10" r="2.5" fill="none" stroke="currentColor" stroke-width="2"></circle>
+                </svg>
+                <span>{{ . }}</span>
+              </li>
+            {{ end }}
+          </ul>
+          {{ if or .slides_url .recording_url }}
+            <div class="public-card-actions">
+              {{ with .slides_url }}<a class="public-button" href="{{ . }}" target="_blank" rel="noopener">View Slides</a>{{ end }}
+              {{ with .recording_url }}<a class="public-button is-primary" href="{{ . }}" target="_blank" rel="noopener">Watch Recording</a>{{ end }}
+            </div>
+          {{ end }}
+        </article>
+      {{ else }}
+        {{ $pubLabel := humanize (default "publication" .type) }}
+        <article class="public-card">
+          <div class="public-card-header">
+            <span class="public-badge type-publication">
+              <span class="public-badge-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="M4 6.5c0-1.4 1.1-2.5 2.5-2.5H19v15H7c-1.7 0-3 1.3-3 3V6.5z" fill="none" stroke="currentColor" stroke-width="2"></path>
+                  <path d="M7 4h12v15" fill="none" stroke="currentColor" stroke-width="2"></path>
+                </svg>
+              </span>
+              {{ $pubLabel }}
+            </span>
+          </div>
+          <h3 class="public-card-title">{{ .title }}</h3>
+          {{ with .description }}<p class="public-card-summary">{{ . }}</p>{{ end }}
+          <ul class="public-meta">
+            {{ with .date }}
+              <li>
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <rect x="3" y="5" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="2"></rect>
+                  <path d="M8 3v4M16 3v4M3 10h18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+                </svg>
+                <span>{{ dateFormat "January 2, 2006" (time .) }}</span>
+              </li>
+            {{ end }}
+          </ul>
+          {{ with .url }}
+            <div class="public-card-actions">
+              <a class="public-button is-primary" href="{{ . }}" target="_blank" rel="noopener">View Publication</a>
+            </div>
+          {{ end }}
+        </article>
+      {{ end }}
+    {{ end }}
+  </div>
+</section>
+
+{{ $ctaTitle := .Params.cta_title }}
+{{ $ctaText := .Params.cta_text }}
+{{ $ctaLabel := default "Get in touch" .Params.cta_button_label }}
+{{ $ctaUrl := .Params.cta_button_url }}
+{{ if or $ctaTitle $ctaText $ctaUrl }}
+<section class="public-cta">
+  <div class="container">
+    <div class="public-cta-card">
+      {{ if $ctaTitle }}<h3>{{ $ctaTitle }}</h3>{{ end }}
+      {{ if $ctaText }}<p>{{ $ctaText }}</p>{{ end }}
+      {{ if $ctaUrl }}<a class="public-button is-primary" href="{{ $ctaUrl }}">{{ $ctaLabel }}</a>{{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}
 {{ end }}

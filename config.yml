@@ -1,9 +1,9 @@
 baseURL: "https://www.leiflarsen.org/"
 title: "Leif Larsen"
-copyright: "© 2025 - Leif Larsen"
+copyright: "© 2026 - Leif Larsen"
 pagination: 
-  pagerSize: 5
-theme: [hugo-PaperMod]
+  pagerSize: 8
+theme: [blog-theme]
 
 enableInlineShortcodes: true
 enableRobotsTXT: false
@@ -12,7 +12,7 @@ buildFuture: false
 buildExpired: false
 enableEmoji: true
 pygmentsUseClasses: true
-mainsections: ["posts", "papermod"]
+mainsections: ["posts"]
 #searchHidden: true
 
 # Google Analytics
@@ -37,21 +37,15 @@ languages:
       series: series
     menu:
       main:
-        - name: Archive
-          url: archives
+        - name: Writing
+          url: posts/
           weight: 5
-        - name: Search
-          url: search/
-          weight: 10
-        - name: Public Talks and Publications
+        - name: Speaking
           url: public/
           weight: 10
-        - name: About
+        - name: Meet Leif
           url: about/
           weight: 15
-        - name: Privacy
-          url: privacy/
-          weight: 20
 
 outputs:
   home:
@@ -78,11 +72,11 @@ params:
   ShowPageNums: false
   ShowToc: true
   # comments: true
-  images: ["images/papermod-cover.png"]
+  # images: []
 
   # profileMode:
   #   enabled: false
-  #   title: PaperMod
+  #
   #   imageUrl: "#"
   #   imageTitle: my image
   #   # imageWidth: 120
@@ -106,6 +100,40 @@ params:
       I write about the things that interest me—sometimes technical, sometimes practical, and occasionally just observations from everyday life. 
       If you enjoy learning, improving workflows, or thinking about how technology shapes the way we work, I hope you’ll find something useful.
 
+  about:
+    subtitle: "Technology advisor, cloud architect, and writer"
+    introHeading: "Hi, I'm Leif 👋"
+    expertiseTitle: "Areas of Expertise"
+    expertise:
+      - title: "Cloud & Platform Architecture"
+        description: "Designing and evolving Azure-based platforms with a focus on structure, security, and long-term operability in complex environments."
+        icon: code
+      - title: "Cost-Aware Design"
+        description: "Helping organizations reduce complexity and cloud costs through better architectural choices, standardization, and clear ownership."
+        icon: writing
+      - title: "Technical Leadership"
+        description: "Supporting teams by setting clear architectural direction, improving collaboration between platform and development, and enabling sustainable delivery over time."
+        icon: mentorship
+    technologiesTitle: "Technologies I Work With"
+    technologies:
+      - Azure
+      - CI/CD
+      - Git
+      - GitHub
+      - GitHub Actions
+      - Azure DevOps
+      - Bicep
+      - Azure API Management
+      - Azure Service Bus
+      - Azure Key Vault
+      - Infrastructure as Code
+      - .NET
+      - PostgreSQL
+      - Docker
+
+    connectTitle: "Let's Connect"
+    connectText: "I'm always happy to chat about technology, collaborate on projects, or help with technical challenges. Feel free to reach out!"
+
   socialIcons:
       - name: linkedin
         title: Connect on LinkedIn
@@ -113,6 +141,9 @@ params:
       - name: github
         title: View Source on Github
         url: "https://github.com/leif-larsen"
+      - name: mail
+        title: Email Leif
+        url: "mailto:me@leiflarsen.org"
       - name: buymeacoffee
         title: Buy Me a Coffee :)
         url: "https://buymeacoffee.com/leiflarsen"

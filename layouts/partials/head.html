@@ -1,0 +1,36 @@
+{{ $title := "" }}
+{{ if .IsHome }}
+  {{ $title = site.Title }}
+{{ else }}
+  {{ $title = printf "%s | %s" .Title site.Title }}
+{{ end }}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ $title }}</title>
+{{ with .Description }}
+<meta name="description" content="{{ . }}">
+{{ else }}
+  {{ with site.Params.description }}
+<meta name="description" content="{{ . }}">
+  {{ end }}
+{{ end }}
+<script>
+  (function () {
+    try {
+      var stored = window.localStorage.getItem("theme-preference");
+      var theme = stored === "light" || stored === "dark" ? stored : null;
+      if (!theme) {
+        var prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+        theme = prefersDark ? "dark" : "light";
+      }
+      document.documentElement.setAttribute("data-theme", theme);
+    } catch (e) {
+      document.documentElement.setAttribute("data-theme", "dark");
+    }
+  })();
+</script>
+<link rel="stylesheet" href="{{ "css/theme.css" | relURL }}">
+<link rel="stylesheet" href="{{ "css/search-dialog.css" | relURL }}">
+<link rel="stylesheet" href="{{ "css/custom.css" | relURL }}">
+{{ partial "templates/twitter_cards.html" . }}
+{{ partial "templates/schema_json.html" . }}

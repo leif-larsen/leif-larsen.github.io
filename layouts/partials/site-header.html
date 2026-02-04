@@ -1,0 +1,136 @@
+{{ $title := site.Title | plainify }}
+{{ $parts := split $title " " }}
+{{ $scratch := newScratch }}
+{{ range $parts }}
+  {{ $part := trim . " " }}
+  {{ if gt (len $part) 0 }}
+    {{ $scratch.Add "initials" (upper (substr $part 0 1)) }}
+  {{ end }}
+{{ end }}
+{{ $initials := $scratch.Get "initials" | default "LL" }}
+<header class="site-header">
+  <div class="container nav-inner">
+    <a class="brand" href="{{ "/" | relURL }}">
+      <span class="brand-mark">{{ $initials }}</span>
+      <span class="brand-text">{{ site.Title }}</span>
+    </a>
+    <button class="menu-toggle" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="site-menu" data-menu-toggle>
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <nav class="main-nav">
+      <div class="nav-links" id="site-menu">
+        {{ $currentPage := . }}
+        {{ range site.Menus.main }}
+          <a class="nav-link {{ if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }}is-active{{ end }}" href="{{ .URL | relURL }}">{{ .Name }}</a>
+        {{ end }}
+      </div>
+    </nav>
+    <div class="nav-actions">
+      <a
+        class="icon-button"
+        href="{{ "search/" | relURL }}"
+        aria-label="Search"
+        aria-haspopup="dialog"
+        aria-controls="search-dialog"
+        aria-expanded="false"
+        data-search-open
+      >
+        {{ partial "icon.html" (dict "name" "search") }}
+      </a>
+      {{ with (where site.Params.socialIcons "name" "buymeacoffee") }}
+        {{ $coffee := index . 0 }}
+        {{ $coffeeTitle := $coffee.title | default "Buy me a coffee" }}
+        <a
+          class="icon-button icon-button--coffee"
+          href="{{ $coffee.url }}"
+          title="{{ $coffeeTitle }}"
+          aria-label="{{ $coffeeTitle }}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {{ partial "icon.html" (dict "name" "buymeacoffee") }}
+        </a>
+      {{ end }}
+      <button class="icon-button" type="button" aria-label="Switch to light mode" data-theme-toggle>
+        <span class="theme-icon theme-icon--sun">{{ partial "icon.html" (dict "name" "sun") }}</span>
+        <span class="theme-icon theme-icon--moon">{{ partial "icon.html" (dict "name" "moon") }}</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+{{ partial "search-dialog.html" . }}
+
+<script>
+  (function () {
+    var toggle = document.querySelector("[data-menu-toggle]");
+    var header = document.querySelector(".site-header");
+    var menu = document.getElementById("site-menu");
+    if (!toggle || !header || !menu) return;
+    toggle.addEventListener("click", function () {
+      var isOpen = header.classList.toggle("is-open");
+      toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    });
+  })();
+</script>
+<script>
+  (function () {
+    var themeToggle = document.querySelector("[data-theme-toggle]");
+    var root = document.documentElement;
+    var storageKey = "theme-preference";
+    var media = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
+
+    function resolveTheme() {
+      var stored = null;
+      try {
+        stored = window.localStorage.getItem(storageKey);
+      } catch (e) {
+        stored = null;
+      }
+      if (stored === "light" || stored === "dark") return stored;
+      if (media && media.matches) return "dark";
+      return "light";
+    }
+
+    function updateToggleLabel(theme) {
+      if (!themeToggle) return;
+      var next = theme === "light" ? "dark" : "light";
+      themeToggle.setAttribute("aria-label", "Switch to " + next + " mode");
+      themeToggle.setAttribute("title", "Switch to " + next + " mode");
+    }
+
+    function applyTheme(theme, persist) {
+      root.setAttribute("data-theme", theme);
+      if (persist) {
+        try {
+          window.localStorage.setItem(storageKey, theme);
+        } catch (e) {}
+      }
+      updateToggleLabel(theme);
+    }
+
+    if (themeToggle) {
+      applyTheme(resolveTheme(), false);
+      themeToggle.addEventListener("click", function () {
+        var current = root.getAttribute("data-theme") || resolveTheme();
+        var next = current === "light" ? "dark" : "light";
+        applyTheme(next, true);
+      });
+    }
+
+    if (media && media.addEventListener) {
+      media.addEventListener("change", function () {
+        var stored = null;
+        try {
+          stored = window.localStorage.getItem(storageKey);
+        } catch (e) {
+          stored = null;
+        }
+        if (stored === "light" || stored === "dark") return;
+        applyTheme(media.matches ? "dark" : "light", false);
+      });
+    }
+  })();
+</script>

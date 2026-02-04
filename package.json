@@ -1,0 +1,13 @@
+{
+  "name": "leif-larsen-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "postbuild": "node scripts/shiki-postprocess.mjs"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.12",
+    "fast-glob": "^3.3.2",
+    "shiki": "^3.0.0"
+  }
+}

@@ -1,0 +1,79 @@
+{{ define "main" }}
+{{ $about := site.Params.about | default dict }}
+{{ $subtitle := .Params.subtitle | default $about.subtitle }}
+{{ $introHeading := .Params.intro_heading | default $about.introHeading | default "Hi, I'm Leif 👋" }}
+{{ $avatar := .Params.avatar | default $about.avatar }}
+{{ $avatarAlt := .Params.avatar_alt | default site.Params.author | default .Title }}
+{{ $connectTitle := $about.connectTitle | default "Let's Connect" }}
+{{ $connectText := $about.connectText | default "I'm always happy to chat about technology, collaborate on projects, or help with technical challenges. Feel free to reach out!" }}
+<section class="about-page">
+  <div class="container about-inner">
+    <header class="about-hero">
+      {{ if $avatar }}
+        {{ $avatarUrl := $avatar }}
+        {{ if not (strings.HasPrefix $avatar "http") }}
+          {{ $avatarUrl = $avatar | relURL }}
+        {{ end }}
+        <div class="about-avatar">
+          <img src="{{ $avatarUrl }}" alt="Portrait of {{ $avatarAlt }}" loading="lazy">
+        </div>
+      {{ end }}
+      <h1 class="about-title">{{ .Title }}</h1>
+      {{ with $subtitle }}
+        <p class="about-subtitle">{{ . }}</p>
+      {{ end }}
+    </header>
+
+    <section class="about-intro">
+      <h2 class="about-section-title">{{ $introHeading }}</h2>
+      <div class="about-text">
+        {{ .Content }}
+      </div>
+    </section>
+
+    {{ with $about.expertise }}
+      <section class="about-section">
+        <h2 class="about-section-title">{{ $about.expertiseTitle | default "Areas of Expertise" }}</h2>
+        <div class="about-grid">
+          {{ range . }}
+            <article class="about-card">
+              {{ with .icon }}
+                <div class="about-card-icon">
+                  {{ partial "icon.html" (dict "name" .) }}
+                </div>
+              {{ end }}
+              <h3 class="about-card-title">{{ .title }}</h3>
+              <p class="about-card-text">{{ .description }}</p>
+            </article>
+          {{ end }}
+        </div>
+      </section>
+    {{ end }}
+
+    {{ with $about.technologies }}
+      <section class="about-section">
+        <h2 class="about-section-title">{{ $about.technologiesTitle | default "Technologies I Work With" }}</h2>
+        <div class="about-tags">
+          {{ range . }}
+            <span class="about-tag">{{ . }}</span>
+          {{ end }}
+        </div>
+      </section>
+    {{ end }}
+
+    <section class="about-section">
+      <div class="about-connect">
+        <h2 class="about-connect-title">{{ $connectTitle }}</h2>
+        <p class="about-connect-text">{{ $connectText }}</p>
+        <div class="about-socials">
+          {{ range site.Params.socialIcons }}
+            <a class="about-social" href="{{ .url }}" title="{{ .title }}" aria-label="{{ .title }}">
+              {{ partial "icon.html" (dict "name" .name) }}
+            </a>
+          {{ end }}
+        </div>
+      </div>
+    </section>
+  </div>
+</section>
+{{ end }}

@@ -1,0 +1,247 @@
+<dialog class="search-dialog" id="search-dialog" aria-label="Search posts">
+  <div class="search-dialog__inner">
+    <div class="search-dialog__header">
+      <span class="search-dialog__icon" aria-hidden="true">
+        {{ partial "icon.html" (dict "name" "search") }}
+      </span>
+      <input
+        class="search-dialog__input"
+        type="search"
+        placeholder="Search posts..."
+        aria-label="Search posts"
+        autocomplete="off"
+        data-search-input
+      >
+      <button class="search-dialog__close" type="button" aria-label="Close search" data-search-close>
+        &times;
+      </button>
+    </div>
+    <div class="search-dialog__body">
+      <p class="search-dialog__status" data-search-status role="status">
+        Start typing to search posts...
+      </p>
+      <ul class="search-results" data-search-results hidden></ul>
+    </div>
+  </div>
+</dialog>
+
+<script>
+  (function () {
+    var dialog = document.getElementById("search-dialog");
+    if (!dialog) return;
+
+    var openButtons = document.querySelectorAll("[data-search-open]");
+    if (!openButtons.length) return;
+
+    var input = dialog.querySelector("[data-search-input]");
+    var results = dialog.querySelector("[data-search-results]");
+    var status = dialog.querySelector("[data-search-status]");
+    var closeButton = dialog.querySelector("[data-search-close]");
+
+    if (!input || !results || !status || !closeButton) return;
+
+    var indexCache = null;
+    var indexPromise = null;
+    var lastQuery = "";
+    var indexUrl = "{{ "index.json" | relURL }}";
+    var maxResults = 5;
+
+    function setStatus(message) {
+      status.textContent = message;
+      status.hidden = !message;
+    }
+
+    function setOpenState(isOpen) {
+      document.documentElement.classList.toggle("search-open", isOpen);
+      openButtons.forEach(function (button) {
+        button.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      });
+    }
+
+    function showDialog() {
+      if (dialog.open) return;
+      if (typeof dialog.showModal === "function") {
+        dialog.showModal();
+      } else {
+        dialog.setAttribute("open", "");
+      }
+      setOpenState(true);
+      input.focus();
+      input.select();
+      updateResults();
+    }
+
+    function hideDialog() {
+      if (dialog.open && typeof dialog.close === "function") {
+        dialog.close();
+      } else {
+        dialog.removeAttribute("open");
+        setOpenState(false);
+      }
+    }
+
+    function ensureIndex() {
+      if (indexCache) return Promise.resolve(indexCache);
+      if (indexPromise) return indexPromise;
+
+      setStatus("Loading posts...");
+      indexPromise = fetch(indexUrl, { cache: "force-cache" })
+        .then(function (response) {
+          if (!response.ok) throw new Error("Index request failed");
+          return response.json();
+        })
+        .then(function (data) {
+          indexCache = Array.isArray(data) ? data : [];
+          return indexCache;
+        })
+        .catch(function () {
+          setStatus("Unable to load search index.");
+          return [];
+        });
+
+      return indexPromise;
+    }
+
+    function normalize(value) {
+      return (value || "").toLowerCase();
+    }
+
+    function scoreItem(item, tokens) {
+      var title = normalize(item.title);
+      var summary = normalize(item.summary);
+      var tags = normalize((item.tags || []).join(" "));
+      var score = 0;
+
+      tokens.forEach(function (token) {
+        if (!token) return;
+        if (title.indexOf(token) !== -1) score += 8;
+        if (tags.indexOf(token) !== -1) score += 4;
+        if (summary.indexOf(token) !== -1) score += 2;
+      });
+
+      return score;
+    }
+
+    function renderResults(items, query) {
+      results.innerHTML = "";
+
+      if (!items.length) {
+        results.hidden = true;
+        setStatus("No results for \"" + query + "\".");
+        return;
+      }
+
+      setStatus("");
+      results.hidden = false;
+
+      items.slice(0, maxResults).forEach(function (item) {
+        var listItem = document.createElement("li");
+        var link = document.createElement("a");
+        link.className = "search-result";
+        link.href = item.url || "#";
+
+        var title = document.createElement("div");
+        title.className = "search-result-title";
+        title.textContent = item.title || "Untitled";
+
+        var summaryText = (item.summary || "").trim();
+        if (summaryText.length > 160) {
+          summaryText = summaryText.slice(0, 157) + "...";
+        }
+
+        var summary = document.createElement("div");
+        summary.className = "search-result-summary";
+        summary.textContent = summaryText;
+
+        var metaParts = [];
+        if (item.date) metaParts.push(item.date);
+        if (item.tags && item.tags.length) metaParts.push(item.tags.join(", "));
+
+        var meta = document.createElement("div");
+        meta.className = "search-result-meta";
+        meta.textContent = metaParts.join(" | ");
+
+        link.appendChild(title);
+        if (summaryText) link.appendChild(summary);
+        if (meta.textContent) link.appendChild(meta);
+
+        listItem.appendChild(link);
+        results.appendChild(listItem);
+      });
+    }
+
+    function updateResults() {
+      var query = input.value.trim().toLowerCase();
+      lastQuery = query;
+
+      if (!query) {
+        results.hidden = true;
+        results.innerHTML = "";
+        setStatus("Start typing to search posts...");
+        return;
+      }
+
+      ensureIndex().then(function (items) {
+        if (query !== lastQuery) return;
+
+        var tokens = query.split(/\s+/).filter(Boolean);
+        var matches = items
+          .map(function (item) {
+            var score = scoreItem(item, tokens);
+            return { item: item, score: score };
+          })
+          .filter(function (entry) {
+            return entry.score > 0;
+          })
+          .sort(function (a, b) {
+            if (b.score !== a.score) return b.score - a.score;
+            return (b.item.date || "").localeCompare(a.item.date || "");
+          })
+          .map(function (entry) {
+            return entry.item;
+          });
+
+        renderResults(matches, query);
+      });
+    }
+
+    openButtons.forEach(function (button) {
+      button.addEventListener("click", function (event) {
+        event.preventDefault();
+        showDialog();
+      });
+    });
+
+    closeButton.addEventListener("click", function () {
+      hideDialog();
+    });
+
+    dialog.addEventListener("click", function (event) {
+      if (event.target === dialog) hideDialog();
+    });
+
+    dialog.addEventListener("close", function () {
+      setOpenState(false);
+      input.value = "";
+      results.innerHTML = "";
+      results.hidden = true;
+      setStatus("Start typing to search posts...");
+    });
+
+    input.addEventListener("input", updateResults);
+
+    input.addEventListener("keydown", function (event) {
+      if (event.key !== "Enter") return;
+      var firstResult = results.querySelector("a");
+      if (!firstResult) return;
+      event.preventDefault();
+      hideDialog();
+      window.location.href = firstResult.href;
+    });
+
+    results.addEventListener("click", function (event) {
+      var link = event.target.closest("a");
+      if (link) hideDialog();
+    });
+  })();
+</script>

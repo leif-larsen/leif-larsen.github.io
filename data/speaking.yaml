@@ -1,18 +1,29 @@
 # Speaking engagements data
-# Add new entries at the bottom. Date must be full ISO (YYYY-MM-01) so we can format Month Year.
+# Add new entries at the bottom. Date must be full ISO (YYYY-MM-DD).
 # Fields:
 # - title (string, required)
-# - date (YYYY-MM-01, required)
-# - description (short text, required)
-# - url (optional)
+# - type (talk|keynote|workshop, required)
+# - event (string, required)
+# - date (YYYY-MM-DD, required)
+# - location (string, optional)
+# - description (short text, optional)
+# - slides_url (optional)
+# - recording_url (optional)
 
-- title: "From 100 applications to 1 platform - TDC 2024"
+- title: "From 100 applications to 1 platform"
+  type: "talk"
+  event: "TDC 2024"
   date: "2024-10-01"
+  location: "Trondheim, Norway"
   description: "Talk at TDC 2024 about consolidating numerous applications into a unified platform to enhance maintainability and user experience."
-  url: "https://www.youtube.com/watch?v=J6-exfl_C2s&t=2s"
+  slides_url: ""
+  recording_url: "https://www.youtube.com/watch?v=J6-exfl_C2s&t=2s"
 
-- title: "Keeping our tech skills & mental health up-to-date - JavaZone 2022"
+- title: "Keeping our tech skills & mental health up-to-date"
+  type: "talk"
+  event: "JavaZone 2022"
   date: "2022-09-01"
+  location: "Oslo, Norway"
   description: "Talk at JavaZone 2022 about the importance of keeping your mental health in check while working in tech."
-  url: "https://vimeo.com/748031641?share=copy"
-
+  slides_url: ""
+  recording_url: "https://vimeo.com/748031641?share=copy"

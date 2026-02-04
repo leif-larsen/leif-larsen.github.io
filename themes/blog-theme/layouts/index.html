@@ -1,0 +1,43 @@
+{{ define "main" }}
+{{ $heroTitle := site.Params.heroTitle | default site.Params.title | default site.Title }}
+{{ $heroSubtitle := site.Params.heroSubtitle | default site.Params.description }}
+<section class="hero">
+  <div class="container hero-inner">
+    <h1 class="hero-title">{{ $heroTitle }}</h1>
+    {{ with $heroSubtitle }}
+      <p class="hero-subtitle">{{ . }}</p>
+    {{ end }}
+  </div>
+</section>
+
+<section class="latest-posts">
+  <div class="container section-header">
+    <h2>Latest Posts</h2>
+  </div>
+  <div class="container post-grid">
+    {{ $posts := where site.RegularPages "Section" "posts" }}
+    {{ $paginator := .Paginate ($posts.ByDate.Reverse) }}
+    {{ range $paginator.Pages }}
+      {{ partial "post-card.html" (dict "page" .) }}
+    {{ end }}
+  </div>
+  {{ if gt $paginator.TotalPages 1 }}
+    <nav class="pagination" aria-label="Pagination">
+      {{ with $paginator.Prev }}
+        <a class="page-btn" href="{{ .URL }}" aria-label="Previous page">&lsaquo;</a>
+      {{ end }}
+      {{ $current := $paginator.PageNumber }}
+      {{ $min := sub $current 1 }}
+      {{ $max := add $current 1 }}
+      {{ range $paginator.Pagers }}
+        {{ if and (ge .PageNumber $min) (le .PageNumber $max) }}
+          <a class="page-btn {{ if eq . $paginator }}is-active{{ end }}" href="{{ .URL }}">{{ .PageNumber }}</a>
+        {{ end }}
+      {{ end }}
+      {{ with $paginator.Next }}
+        <a class="page-btn" href="{{ .URL }}" aria-label="Next page">&rsaquo;</a>
+      {{ end }}
+    </nav>
+  {{ end }}
+</section>
+{{ end }}

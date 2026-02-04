@@ -1,0 +1,12 @@
+name = "blog-theme"
+license = "MIT"
+licenselink = ""
+description = "Custom theme for Leif Larsen blog."
+homepage = ""
+tags = ["blog", "dark", "custom"]
+features = ["responsive", "posts", "pagination"]
+min_version = "0.150.1"
+
+[author]
+  name = "Leif Larsen"
+  homepage = ""
