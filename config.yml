@@ -105,27 +105,32 @@ params:
     introHeading: "Hi, I'm Leif 👋"
     expertiseTitle: "Areas of Expertise"
     expertise:
-      - title: "Cloud Architecture"
-        description: "Designing scalable, secure platforms and cloud-native systems for mission-critical workloads."
+      - title: "Cloud & Platform Architecture"
+        description: "Designing and evolving Azure-based platforms with a focus on structure, security, and long-term operability in complex environments."
         icon: code
-      - title: "Technical Writing"
-        description: "Translating complex concepts into practical guidance, tutorials, and strategy docs."
+      - title: "Cost-Aware Design"
+        description: "Helping organizations reduce complexity and cloud costs through better architectural choices, standardization, and clear ownership."
         icon: writing
-      - title: "Mentorship"
-        description: "Helping teams build sustainable engineering practices and grow their technical leadership."
+      - title: "Technical Leadership"
+        description: "Supporting teams by setting clear architectural direction, improving collaboration between platform and development, and enabling sustainable delivery over time."
         icon: mentorship
     technologiesTitle: "Technologies I Work With"
     technologies:
       - Azure
-      - Kubernetes
-      - Terraform
-      - TypeScript
-      - Go
-      - Python
-      - Docker
-      - PostgreSQL
+      - CI/CD
+      - Git
+      - GitHub
       - GitHub Actions
-      - Observability
+      - Azure DevOps
+      - Bicep
+      - Azure API Management
+      - Azure Service Bus
+      - Azure Key Vault
+      - Infrastructure as Code
+      - .NET
+      - PostgreSQL
+      - Docker
+
     connectTitle: "Let's Connect"
     connectText: "I'm always happy to chat about technology, collaborate on projects, or help with technical challenges. Feel free to reach out!"
 

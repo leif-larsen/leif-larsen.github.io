@@ -2,13 +2,13 @@
 title: "Meet Leif"
 date: "2021-03-09"
 layout: "about"
-description: "Technology advisor with 14+ years of experience in software development and cloud architecture."
+description: "Technology advisor with 15+ years of experience in software development and cloud architecture."
 subtitle: "Technology advisor, cloud architect, and writer"
 intro_heading: "Hi, I'm Leif 👋"
 avatar: "/images/me.jpg"
 ---
 
-I’m a technology advisor with over 14 years of experience in software development and cloud architecture. I help organizations design and build scalable, secure, and efficient solutions — always with a focus on creating real business value.
+I’m a technology advisor with 15+ years of experience in software development and cloud architecture. I help organizations design and build scalable, secure, and efficient solutions — always with a focus on creating real business value.
 
 In recent years, I worked as a Cloud Solution Architect at Microsoft, where I supported customers in delivering large-scale digital transformation projects and building resilient solutions on the Azure platform. Before that, I led the development and architecture of mission-critical systems for organizations such as NHO, focusing on cloud-native solutions and enterprise transformation.
 
