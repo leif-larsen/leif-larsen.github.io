@@ -27,10 +27,12 @@
       <div class="public-stat-value">{{ $totalTalks }}</div>
       <div class="public-stat-label">Total Talks</div>
     </div>
+    {{ if gt $workshops 0 }}
     <div class="public-stat-card">
       <div class="public-stat-value">{{ $workshops }}</div>
       <div class="public-stat-label">Workshops</div>
     </div>
+    {{ end }}
     <div class="public-stat-card">
       <div class="public-stat-value">{{ $pubCount }}</div>
       <div class="public-stat-label">Publications</div>

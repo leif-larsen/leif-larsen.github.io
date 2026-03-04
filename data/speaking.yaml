@@ -10,6 +10,15 @@
 # - slides_url (optional)
 # - recording_url (optional)
 
+- title: "Når bør du bygge AI-agenter, og når bør du la være"
+  type: "talk"
+  event: "Novanet Tech Pulse"
+  date: "2026-03-04"
+  location: "Oslo, Norway"
+  description: "A practical framework for deciding when AI agents are truly worth the added complexity — and when a simpler solution is the smarter choice."
+  slides_url: ""
+  recording_url: ""
+
 - title: "From 100 applications to 1 platform"
   type: "talk"
   event: "TDC 2024"
