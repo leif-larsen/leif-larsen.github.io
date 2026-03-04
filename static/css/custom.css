@@ -254,6 +254,12 @@ html[data-theme="light"] .site-header {
   border-bottom: 1px solid var(--border);
 }
 
+html[data-theme="light"] .brand-mark {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  border-color: rgba(37, 99, 235, 0.2);
+  color: #ffffff;
+}
+
 html[data-theme="light"] .menu-toggle,
 html[data-theme="light"] .icon-button {
   border: 1px solid rgba(15, 23, 42, 0.12);
