@@ -1,0 +1,111 @@
+{{ define "main" }}
+{{/*
+  Talk landing page. Reusable for any talk: create content/<slug>.md with
+  `type: talk` and the front matter documented in archetypes/talk.md.
+  Pages are unlisted (build.list: never), so they stay out of the menu,
+  post lists, RSS and search, and are reached by direct URL or QR code.
+*/}}
+{{ $p := .Params }}
+{{ $social := dict }}
+{{ range site.Params.socialIcons }}{{ $social = merge $social (dict .name .url) }}{{ end }}
+{{ $linkedin := index $social "linkedin" }}
+{{ $github := index $social "github" }}
+
+<section class="section-hero talk-hero">
+  <div class="container talk-inner">
+    <span class="public-badge type-talk">{{ humanize (default "talk" $p.talk_type) }}{{ with $p.event }} at {{ . }}{{ end }}</span>
+    <h1 class="section-title talk-title">{{ .Title }}</h1>
+    <ul class="public-meta talk-meta">
+      {{ with .Date }}
+        <li>
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <rect x="3" y="5" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="2"></rect>
+            <path d="M8 3v4M16 3v4M3 10h18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+          </svg>
+          <span>{{ .Format "January 2, 2006" }}{{ with $p.time }}, {{ . }}{{ end }}</span>
+        </li>
+      {{ end }}
+      {{ with $p.location }}
+        <li>
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z" fill="none" stroke="currentColor" stroke-width="2"></path>
+            <circle cx="12" cy="10" r="2.5" fill="none" stroke="currentColor" stroke-width="2"></circle>
+          </svg>
+          <span>{{ . }}</span>
+        </li>
+      {{ end }}
+    </ul>
+  </div>
+</section>
+
+<div class="container talk-inner talk-body">
+  {{ with .Content }}
+    <section class="talk-section talk-thanks article-content">{{ . }}</section>
+  {{ end }}
+
+  <section class="talk-section talk-grid">
+    <div class="public-card talk-card">
+      <h2 class="talk-h2">Slides</h2>
+      {{ with $p.slides_pdf }}
+        <p class="public-card-summary">The full deck as a PDF, including the sources slide.</p>
+        <a class="public-button is-primary" href="{{ . | relURL }}" target="_blank" rel="noopener">Download slides (PDF)</a>
+      {{ else }}
+        <p class="public-card-summary">{{ default "The slides will be posted here as a PDF." $p.slides_pending }}</p>
+      {{ end }}
+    </div>
+    <div class="public-card talk-card">
+      <h2 class="talk-h2">Recording</h2>
+      {{ with $p.video_url }}
+        <p class="public-card-summary">Watch the talk as it was recorded.</p>
+        <a class="public-button is-primary" href="{{ . }}" target="_blank" rel="noopener">Watch the recording</a>
+      {{ else }}
+        <p class="public-card-summary">{{ default "The recording will be linked here once it is published." $p.video_pending }}</p>
+      {{ end }}
+    </div>
+  </section>
+
+  {{ with $p.abstract }}
+    <section class="talk-section">
+      <h2 class="talk-h2">About the talk</h2>
+      <div class="article-content talk-abstract">{{ . | markdownify }}</div>
+    </section>
+  {{ end }}
+
+  {{ with $p.sources }}
+    <section class="talk-section talk-sources">
+      <h2 class="talk-h2">Sources</h2>
+      {{ with $p.sources_note }}<p class="talk-note">{{ . | markdownify }}</p>{{ end }}
+      {{ range . }}
+        <div class="talk-source-group">
+          <h3 class="talk-h3">{{ .group }}</h3>
+          <ul class="talk-source-list">
+            {{ range .items }}
+              <li>
+                <span class="talk-source-case">{{ .case }}{{ with .date }}<span class="talk-source-date">{{ . }}</span>{{ end }}</span>
+                <ul class="talk-source-links">
+                  {{ range .sources }}
+                    <li>
+                      <a href="{{ .url }}" target="_blank" rel="noopener">{{ .title }}</a>
+                      <span class="talk-source-meta">{{ .publisher }}{{ with .date }}, {{ . }}{{ end }}{{ with .kind }}{{ if ne . "first-party" }} <span class="talk-press">{{ . }}</span>{{ end }}{{ end }}</span>
+                    </li>
+                  {{ end }}
+                </ul>
+              </li>
+            {{ end }}
+          </ul>
+        </div>
+      {{ end }}
+    </section>
+  {{ end }}
+
+  <section class="talk-section public-cta-card talk-feedback">
+    <h2 class="talk-h2">{{ default "Got any feedback?" $p.feedback_title }}</h2>
+    <p>{{ default "Reach me on LinkedIn." $p.feedback_text }}</p>
+    <div class="public-card-actions talk-actions">
+      {{ with $linkedin }}<a class="public-button is-primary" href="{{ . }}" target="_blank" rel="noopener">LinkedIn</a>{{ end }}
+      {{ with $github }}<a class="public-button" href="{{ . }}" target="_blank" rel="noopener">GitHub</a>{{ end }}
+      <a class="public-button" href="{{ "/" | relURL }}">leiflarsen.org</a>
+    </div>
+  </section>
+</div>
+{{ end }}
