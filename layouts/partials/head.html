@@ -29,8 +29,9 @@
     }
   })();
 </script>
-<link rel="stylesheet" href="{{ "css/theme.css" | relURL }}">
-<link rel="stylesheet" href="{{ "css/search-dialog.css" | relURL }}">
-<link rel="stylesheet" href="{{ "css/custom.css" | relURL }}">
+{{- /* ?v= is a content hash, so browsers fetch a stylesheet again only when it changes. */ -}}
+<link rel="stylesheet" href="{{ "css/theme.css" | relURL }}?v={{ os.ReadFile "themes/blog-theme/static/css/theme.css" | md5 | strings.Truncate 8 "" }}">
+<link rel="stylesheet" href="{{ "css/search-dialog.css" | relURL }}?v={{ os.ReadFile "static/css/search-dialog.css" | md5 | strings.Truncate 8 "" }}">
+<link rel="stylesheet" href="{{ "css/custom.css" | relURL }}?v={{ os.ReadFile "static/css/custom.css" | md5 | strings.Truncate 8 "" }}">
 {{ partial "templates/twitter_cards.html" . }}
 {{ partial "templates/schema_json.html" . }}
