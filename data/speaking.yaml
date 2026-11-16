@@ -10,6 +10,24 @@
 # - slides_url (optional)
 # - recording_url (optional)
 
+- title: "Alltid på. Om AI, tempo og å være menneske på jobb"
+  type: "talk"
+  event: "Nova Dialog 2026"
+  date: "2026-10-29"
+  location: "Oslo, Norway"
+  description: "On AI, pace and being human at work: what an always-on toolset does to the people who use it."
+  slides_url: ""
+  recording_url: ""
+
+- title: "Your AI Agent Is a Liability. Prove Me Wrong."
+  type: "talk"
+  event: "Hello Stavanger 2026"
+  date: "2026-10-21"
+  location: "Stavanger, Norway"
+  description: "Why autonomous agents are often the wrong default, and a framework for deciding when an agent is actually justified over a simpler, deterministic design."
+  slides_url: ""
+  recording_url: "https://www.youtube.com/watch?v=hQpPLNbOoCw"
+
 - title: "Når bør du bygge AI-agenter, og når bør du la være"
   type: "talk"
   event: "Novanet Tech Pulse"
