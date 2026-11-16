@@ -10,6 +10,7 @@
 {{ range site.Params.socialIcons }}{{ $social = merge $social (dict .name .url) }}{{ end }}
 {{ $linkedin := index $social "linkedin" }}
 {{ $github := index $social "github" }}
+{{ $mail := index $social "mail" }}
 
 <section class="section-hero talk-hero">
   <div class="container talk-inner">
@@ -43,6 +44,13 @@
     <section class="talk-section talk-thanks article-content">{{ . }}</section>
   {{ end }}
 
+  {{ with $p.abstract }}
+    <section class="talk-section">
+      <h2 class="talk-h2">About the talk</h2>
+      <div class="article-content talk-abstract">{{ . | markdownify }}</div>
+    </section>
+  {{ end }}
+
   <section class="talk-section talk-grid">
     <div class="public-card talk-card">
       <h2 class="talk-h2">Slides</h2>
@@ -64,12 +72,15 @@
     </div>
   </section>
 
-  {{ with $p.abstract }}
-    <section class="talk-section">
-      <h2 class="talk-h2">About the talk</h2>
-      <div class="article-content talk-abstract">{{ . | markdownify }}</div>
-    </section>
-  {{ end }}
+  <section class="talk-section public-cta-card talk-feedback">
+    <h2 class="talk-h2">{{ default "Got any feedback?" $p.feedback_title }}</h2>
+    <p>{{ default "Reach me on LinkedIn." $p.feedback_text }}</p>
+    <div class="talk-actions">
+      {{ with $linkedin }}<a class="public-button talk-social is-primary" href="{{ . }}" target="_blank" rel="noopener">{{ partial "icon.html" (dict "name" "linkedin") }}<span>LinkedIn</span></a>{{ end }}
+      {{ with $github }}<a class="public-button talk-social" href="{{ . }}" target="_blank" rel="noopener">{{ partial "icon.html" (dict "name" "github") }}<span>GitHub</span></a>{{ end }}
+      {{ with $mail }}<a class="public-button talk-social" href="{{ . }}">{{ partial "icon.html" (dict "name" "mail") }}<span>{{ strings.TrimPrefix "mailto:" . }}</span></a>{{ end }}
+    </div>
+  </section>
 
   {{ with $p.sources }}
     <section class="talk-section talk-sources">
@@ -98,14 +109,5 @@
     </section>
   {{ end }}
 
-  <section class="talk-section public-cta-card talk-feedback">
-    <h2 class="talk-h2">{{ default "Got any feedback?" $p.feedback_title }}</h2>
-    <p>{{ default "Reach me on LinkedIn." $p.feedback_text }}</p>
-    <div class="public-card-actions talk-actions">
-      {{ with $linkedin }}<a class="public-button is-primary" href="{{ . }}" target="_blank" rel="noopener">LinkedIn</a>{{ end }}
-      {{ with $github }}<a class="public-button" href="{{ . }}" target="_blank" rel="noopener">GitHub</a>{{ end }}
-      <a class="public-button" href="{{ "/" | relURL }}">leiflarsen.org</a>
-    </div>
-  </section>
 </div>
 {{ end }}

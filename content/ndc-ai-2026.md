@@ -27,7 +27,7 @@ video_url: ""
 video_pending: "The recording will be linked here once NDC publishes it."
 
 feedback_title: "Got any feedback?"
-feedback_text: "Agree, disagree, or running agents in production? Reach me on LinkedIn."
+feedback_text: "Agree, disagree, or running agents in production? Reach me on LinkedIn or by email."
 
 sources_note: "Each case links to the affected party's own account or an independent investigator's report where one exists. Press coverage is marked."
 sources:

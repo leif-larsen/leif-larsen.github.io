@@ -717,7 +717,22 @@ html[data-theme="dark"] .chroma .w { color:#6e7681; }
 }
 
 .talk-actions {
+  display: flex;
+  flex-wrap: wrap;
   justify-content: center;
+  gap: 0.6rem;
+}
+
+.talk-social {
+  gap: 0.5rem;
+  padding: 0.55rem 1.05rem;
+  font-size: 0.9rem;
+}
+
+.talk-social svg {
+  width: 18px;
+  height: 18px;
+  flex: none;
 }
 
 html[data-theme="light"] .public-cta-card.talk-feedback {
